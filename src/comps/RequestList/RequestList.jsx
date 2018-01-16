@@ -30,7 +30,7 @@ class RequestList extends Component {
         const request = this.state.requestArr.map(request => {
             return(
                 <div>
-                    This is a test 
+                    Faye need a ride to Walgreens less a mile away! 
                     <button>View Details</button>
                     <button>I will help</button>
                 </div>
@@ -38,7 +38,8 @@ class RequestList extends Component {
         })
         return (
             <div>
-                <Map/> 
+                <Map/>
+                 
                 <section>People Need Help!</section>
                 <section>{request}</section>
                 

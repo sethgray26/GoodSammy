@@ -12,8 +12,10 @@ class CreateRequest extends Component {
 
         let generated = {
             category: this.refs.category.value,
-            decription: this.refs.description.value
+            decription: this.refs.description.value,
+            location: 'Location of User'
         }
+
         axios.put('./makerequest', generated)
         //test #1
     }
@@ -40,7 +42,7 @@ class CreateRequest extends Component {
                     </div>
                 </section>
                 <br/>
-                <section>
+                <section className='request-description'>
                     <span>Please tell Faye your a brief description of your woes</span>
                     <textarea 
                     name="Request Description"
@@ -55,6 +57,9 @@ class CreateRequest extends Component {
                     <a href="http://">
                         <button className='Cancel-request'>Cancel</button>
                     </a>
+                </section>
+                <section>
+                    <input type="range" min='1' max='5' className='rating-slider' />
                 </section>
             </div>
         );
