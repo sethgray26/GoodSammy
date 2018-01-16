@@ -26,7 +26,6 @@ export function setLocation(lat,lng) {
 
 //Reducer
 export default function reducer(state = initialState, action) {
-    console.log('map reducer:', action)
     switch (action.type) {
         //Get Profile Data
         case SET_LOCATION: //test
