@@ -1,0 +1,27 @@
+.generate-request-body{
+    padding: 3%;
+    display: flex;
+    flex-direction: column;
+    height:100vh
+}
+
+
+.Request-help-button{
+    border-radius: 10px;
+    background-color: green;
+    border: none;
+    /* width: 30% */
+
+}
+.Cancel-request{
+    border-radius: 10px;
+    background-color: red;
+    border: none;
+    /* width: 0% */
+
+}
+.buttons{
+    display: flex;
+    justify-content: space-around;
+    
+}
