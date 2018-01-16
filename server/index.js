@@ -22,4 +22,4 @@ massive(process.env.DB_CONNECTION).then( db => {
 
 // app.use( express.static( __dirname + '/../build' ))
 
-app.listen( process.env.SERVER_PORT, () => {console.log('listening on port 3005')})
+app.listen( process.env.SERVER_PORT, () => {console.log(`listening on port ${3005}`)})
