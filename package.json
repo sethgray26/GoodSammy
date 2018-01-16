@@ -10,11 +10,14 @@
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "massive": "^4.6.3",
+    "material-ui": "^0.20.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
+    "redux": "^3.7.2",
+    "redux-promise-middleware": "^5.0.0",
     "semantic-ui": "^2.2.13",
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.77.2"
@@ -25,7 +28,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy":"http://localhost:3005",
-  "main":"server/index.jsx"
-
+  "proxy": "http://localhost:3005",
+  "main": "server/index.jsx"
 }
