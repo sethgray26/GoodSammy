@@ -16,7 +16,7 @@ class CreateRequest extends Component {
             location: 'Location of User'
         }
 
-        axios.put('./makerequest', generated)
+        axios.put('/makerequest', generated)
         //test #1
     }
         render() {
@@ -54,7 +54,7 @@ class CreateRequest extends Component {
                 <br/>
                 <section className='buttons' >
                     <button className='Request-help-button' onClick= {this.requestCreator} >Request Help</button>
-                    <a href="http://">
+                    <a href="http://google.com">
                         <button className='Cancel-request'>Cancel</button>
                     </a>
                 </section>

@@ -95,4 +95,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { setLocation })(Map)
-
