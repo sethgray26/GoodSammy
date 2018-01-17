@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './CreateRequest.css'
 import axios from 'axios'
 import { setLocationState } from '../../ducks/reducers/maps';
-import { createRequest } from '../../ducks/reducers/request';
+import { createRequest } from '../../ducks/reducers/requests';
 import { connect } from 'react-redux';
 import Map from '../Map/Map';
 
@@ -45,12 +45,13 @@ class CreateRequest extends Component {
         let generated = {
             user_id:2,
             category_id: this.refs.category.value,
-            decription: this.refs.description.value,
+            description: this.refs.description.value,
             lat: this.props.lat,
             lng: this.props.lng
         }
+
         console.log(generated)
-        this.props.CreateRequest(generated)
+        this.props.createRequest(generated)
     }
 
     render() {

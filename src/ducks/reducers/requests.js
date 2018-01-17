@@ -10,15 +10,15 @@ const initialState = {
 const CREATE_REQUEST = 'CREATE_REQUEST'
 
 //Action Creators
-export function createRequest(user_id,category_id,desc, lat,lng) {
-    console.log('action creator', user_id,category_id,desc, lat,lng)
+export function createRequest(obj) {
+
     return {
         type: CREATE_REQUEST,
-        payload: axios.post(`/createRequest`,{user_id: user_id, category_id: category_id,desc:desc,lat:lat,lng:lng})
+        payload: axios.post('/createRequest',obj)
             .then(res => {
-                console.log('then', res.data)
+                console.log('res', res.data)
                 return res.data
-            })
+            }).catch(err => {console.log(err)})
     }
 }
 
