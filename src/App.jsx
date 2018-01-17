@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
-import Map from './comps/Map/Map';
+import CreateRequest from './comps/CreateRequest/CreateRequest'; 
+import RequestList from './comps/RequestList/RequestList';   
+// import Map from './comps/Map/Map';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Map/>
+            <CreateRequest/>
+        
       </div>
     );
   }

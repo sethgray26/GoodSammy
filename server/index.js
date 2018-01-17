@@ -23,3 +23,36 @@ massive(process.env.DB_CONNECTION).then( db => {
 // app.use( express.static( __dirname + '/../build' ))
 
 app.listen( process.env.SERVER_PORT, () => {console.log(`listening on port ${3005}`)})
+
+
+
+
+// ========== MIDDLEWARE ========== //
+
+// ===== TOP LEVEL MIDDLEWARE ===== //
+
+
+
+// ===== CUSTOM MIDDLEWARE ===== //
+
+
+
+// ========== ENDPOINTS ========== //
+
+// === GET REQUESTS === //
+// tests #3
+app.get('request', )
+
+
+
+// === PUT REQUESTS === //
+
+
+
+// === POST REQUESTS === //
+// test #4 
+app.get('/request', )
+
+
+// === DELETE REQUESTS === //
+
