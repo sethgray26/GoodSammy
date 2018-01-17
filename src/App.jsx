@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <HashRouter>
         <div className="App">
-          <Route exact path='/' component={ Landing }/>
+          <Route exact path='/' component={ Chat }/>
           <Route path='/createreq' component={ CreateRequest }/>
           
         </div>
