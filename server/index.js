@@ -6,6 +6,8 @@ const express = require('express')
 
       require('dotenv').config()
 
+const users_controller = require('./controllers/users_controller.jsx')
+
 const app = express()
 app.use(bodyParser.json() )
 app.use(cors())
@@ -16,43 +18,14 @@ massive(process.env.DB_CONNECTION).then( db => {
 
 // app.use( session({
 //     secret: process.env.SESSION_SECRET,
-//     saveUninitialized: true,
+//     saveUninitialized: true, 
 //     resave: false
 // }))
 
 // app.use( express.static( __dirname + '/../build' ))
 
-app.listen( process.env.SERVER_PORT, () => {console.log(`listening on port ${3005}`)})
+
+app.post('/createUser',users_controller.createUsers )
 
 
-
-
-// ========== MIDDLEWARE ========== //
-
-// ===== TOP LEVEL MIDDLEWARE ===== //
-
-
-
-// ===== CUSTOM MIDDLEWARE ===== //
-
-
-
-// ========== ENDPOINTS ========== //
-
-// === GET REQUESTS === //
-// tests #3
-app.get('request', )
-
-
-
-// === PUT REQUESTS === //
-
-
-
-// === POST REQUESTS === //
-// test #4 
-app.get('/request', )
-
-
-// === DELETE REQUESTS === //
-
+app.listen( process.env.SERVER_PORT, () => {console.log('listening on port 3005')})
