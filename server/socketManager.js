@@ -12,7 +12,9 @@ massive(process.env.DB_CONNECTION).then( db => {
 module.exports = (socket)=> {
     console.log('socket id: '+ socket.id)
     socket.on('emit message', input => {
+        console.log('---> ',socket)
         db = app.get('db')
+
         db.create_message(1, input, 'time stamp here')
         db.get_messages_by_conv_id(1).then(response=>{
             socket.emit('generate response', response)
@@ -22,6 +24,3 @@ module.exports = (socket)=> {
 
     })    
 }
-
-
-//req.app.get(db) = db
