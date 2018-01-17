@@ -2,7 +2,8 @@ const express = require('express')
       bodyParser = require('body-parser')
       cors = require('cors')
       session = require('express-session')
-      massive = require('massive')
+      massive = require('massive'),
+      controllers = require('./controllers')
 
       require('dotenv').config()
 
@@ -11,6 +12,7 @@ app.use(bodyParser.json() )
 app.use(cors())
 
 massive(process.env.DB_CONNECTION).then( db => {
+    console.log('andrew', db)
     app.set( 'db', db)
 })
 
@@ -41,7 +43,7 @@ app.listen( process.env.SERVER_PORT, () => {console.log(`listening on port ${300
 
 // === GET REQUESTS === //
 // tests #3
-app.get('request', )
+app.get('/request', controllers.get_Request )
 
 
 
@@ -51,7 +53,7 @@ app.get('request', )
 
 // === POST REQUESTS === //
 // test #4 
-app.get('/request', )
+app.post('/request', )
 
 
 // === DELETE REQUESTS === //

@@ -13,10 +13,10 @@ class CreateRequest extends Component {
         let generated = {
             category: this.refs.category.value,
             decription: this.refs.description.value,
-            location: 'Location of User'
+            userId: 'something'
         }
 
-        axios.put('/makerequest', generated)
+        axios.post('/makerequest', generated)
         //test #1
     }
         render() {
