@@ -9,34 +9,14 @@ class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lat: '',
-      lng: '',
       isMarkerShown: false,
     }
   }
 
   componentDidMount() {
-    if (navigator.geolocation) {
-      console.log('supported in browser')
-      navigator.geolocation.getCurrentPosition((position) => {
-        const lat = position.coords.latitude;
-        const lng = position.coords.longitude;
-        this.props.setLocation(lat, lng)
-      })
-    }
-    else {
-      console.log('not supported in browser')
-    }
     this.delayedShowMarker()
   }
-
-  componentWillReceiveProps(nextprops) {
-    let newState = {}
-    newState['lat'] = Number(nextprops.lat)
-    newState['lng'] = Number(nextprops.lng)
-    this.setState(newState)
-  }
-
+    
   delayedShowMarker = () => {
     setTimeout(() => {
       this.setState({ isMarkerShown: true })
@@ -54,7 +34,7 @@ class Map extends Component {
       withProps({
         googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyCIIg2weQK6p4wUTy6nXrCj4-hPGgA40xI&v=3.exp&libraries=geometry,drawing,places",
         loadingElement: <div style={{ height: `100%` }} />,
-        containerElement: <div style={{ height: `400px` }} />,
+        containerElement: <div style={{ height: `200px` }} />,
         mapElement: <div style={{ height: `100%` }} />,
       }),
       withScriptjs,
@@ -62,19 +42,17 @@ class Map extends Component {
     )((props) =>
       <GoogleMap
         defaultZoom={8}
-        defaultCenter={{ lat: this.state.lat, lng: this.state.lng }}
+        defaultCenter={{ lat: this.props.lat, lng: this.props.lng }}
       >
-        {props.isMarkerShown && <Marker position={{ lat: this.state.lat, lng: this.state.lng }} onClick={props.onMarkerClick} />}
+        {props.isMarkerShown && <Marker position={{ lat: this.props.lat, lng: this.props.lng }} onClick={props.onMarkerClick} />}
       </GoogleMap>
       )
 
     return (
 
       <div className="Map">
-        {this.state.lat && this.state.lng ?
+        {this.props.lat && this.props.lng ?
           <div>
-            {/* <h1>lat: {this.state.lat}</h1>
-            <h1>lng: {this.state.lng}</h1> */}
             <MyMapComponent
               isMarkerShown={this.state.isMarkerShown}
               onMarkerClick={this.handleMarkerClick}
@@ -87,11 +65,4 @@ class Map extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    lat: state.maps.lat,
-    lng: state.maps.lng
-  };
-}
-
-export default connect(mapStateToProps, { setLocation })(Map)
+export default Map
