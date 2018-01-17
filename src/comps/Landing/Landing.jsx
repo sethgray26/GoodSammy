@@ -8,6 +8,7 @@ import blue_hand from'./blueHand.png'
 
 import { Dialog, TextField, RaisedButton } from 'material-ui'
 import { lightGreen500, blue500 } from 'material-ui/styles/colors';
+import { lightBlue500 } from 'material-ui/styles/colors';
 
 
 class Landing extends Component {
@@ -83,8 +84,8 @@ class Landing extends Component {
                 </div>
 
                 <div className='landing_body'>
-                    <RaisedButton label='Need Help?' primary={true} style={ styles.needHelp }  />
-                    <RaisedButton label='Help Someone' backgroundColor={ lightGreen500 } style={ styles.helpsomeone }/>
+                    <RaisedButton label='Need Help?' primary={true} buttonStyle={{ borderRadius: 25 }} style={ styles.needHelp }  />
+                    <RaisedButton label='Help Someone' backgroundColor={ lightGreen500 } buttonStyle={{ borderRadius: 25 }} style={ styles.helpsomeone }/>
                 </div>
 
                 <div className='landing_footer'>
@@ -114,8 +115,8 @@ class Landing extends Component {
                         floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                     /><br />
 
-                    <RaisedButton label='LOGIN' backgroundColor={ lightGreen500 } />
-                    <RaisedButton label='SIGN UP' onClick={this.handleOpen}/>
+                    <RaisedButton label='LOGIN' backgroundColor={ lightGreen500 } style={ styles.logandsign }/>
+                    <RaisedButton label='SIGN UP' backgroundColor={ lightBlue500 } style={ styles.logandsign }onClick={this.handleOpen}/>
 
                     <Dialog
                         title='SIGN UP!'
@@ -193,19 +194,26 @@ export default connect( mapStateToProps, { createUsers }) ( Landing )
 const styles = {
     needHelp: {
         margin: 12,
-        marginTop: 50,
+        marginTop: 30,
         height: 150,
-        width: 250
+        width: 250,
+        borderRadius: 25
+        
     },
     helpsomeone: {
         height: 150,
-        width: 250
+        width: 250,
+        borderRadius: 25
+    },
+
+    logandsign: {
+        margin: 12
     },
     underlineStyle: {
         borderColor: blue500,
       },
     floatingLabelStyle: {
-        color: blue500,
+        color: blue500
       },
     floatingLabelFocusStyle: {
         color: blue500,
