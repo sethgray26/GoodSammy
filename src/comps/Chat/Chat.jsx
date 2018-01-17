@@ -13,7 +13,8 @@ export default class Chat extends Component{
             response:[]
         }
         socket.on('generate response', response=>{
-            this.setState({response})
+            console.log(response)
+            this.setState({response: response})
         
         })       
     }
@@ -58,7 +59,7 @@ export default class Chat extends Component{
                 </form>
             </div>
             {this.state.response.map((item, index)=>(
-                <div key={index}>{item}</div>
+                <div key={index}>{item.body}</div>
             ))}
             
             </div>

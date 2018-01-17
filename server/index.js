@@ -10,8 +10,9 @@ const express = require('express')
 require('dotenv').config()
 
 const app = module.exports = express()
+const PORT = process.env.SERVER_PORT
 
-const io = socket(app.listen(3005, ()=> console.log('listening on port 3005')))
+const io = socket(app.listen(PORT, ()=> console.log(`listening on port: ${PORT}`)))
 app.use(bodyParser.json() )
 app.use(cors())
 
@@ -27,5 +28,8 @@ massive(process.env.DB_CONNECTION).then( db => {
 
 // app.use( express.static( __dirname + '/../build' ))
 
-io.on('connection', socketManager);
+
+const chat = io.on('connection', (socket) => {
+    socketManager.respond(chat, socket, app);
+})
 
