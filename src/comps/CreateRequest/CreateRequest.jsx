@@ -16,7 +16,7 @@ class CreateRequest extends Component {
             userId: 'something'
         }
 
-        axios.post('/makerequest', generated)
+        axios.post('/createRequest', generated)
         //test #1
     }
         render() {

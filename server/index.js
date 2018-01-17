@@ -16,7 +16,6 @@ app.use(bodyParser.json() )
 app.use(cors())
 
 massive(process.env.DB_CONNECTION).then( db => {
-    console.log('andrew', db)
     app.set( 'db', db)
 })
 
@@ -32,7 +31,6 @@ const io = socket(app.listen( process.env.SERVER_PORT, () => {console.log('liste
 
 
 
-app.post('/createUser',users_controller.createUsers )
 
 // ========== ENDPOINTS ========== //
 
@@ -40,19 +38,14 @@ app.post('/createUser',users_controller.createUsers )
 // tests #3
 app.get('/request', controllers.get_Request )
 
-
-
 // === PUT REQUESTS === //
 
-
-
 // === POST REQUESTS === //
+app.post('/createUser', users_controller.createUsers )
 // test #4 
-app.post('/request', )
 
 
 // === DELETE REQUESTS === //
 const chat= io.on('connection', (socket)=>{
     socketManager.respond(chat, socket, app);
 })
-
