@@ -1,18 +1,12 @@
 const express = require('express')
-    , bodyParser = require('body-parser')
-    , cors = require('cors')
-    , session = require('express-session')
-    , massive = require('massive')
-    , socketManager = require('./socketManager.js')
-    , socket = require('socket.io');
-    
+      bodyParser = require('body-parser')
+      cors = require('cors')
+      session = require('express-session')
+      massive = require('massive')
 
-require('dotenv').config()
+      require('dotenv').config()
 
-const app = module.exports = express()
-const PORT = process.env.SERVER_PORT
-
-const io = socket(app.listen(PORT, ()=> console.log(`listening on port: ${PORT}`)))
+const app = express()
 app.use(bodyParser.json() )
 app.use(cors())
 
@@ -28,8 +22,37 @@ massive(process.env.DB_CONNECTION).then( db => {
 
 // app.use( express.static( __dirname + '/../build' ))
 
+app.listen( process.env.SERVER_PORT, () => {console.log(`listening on port ${3005}`)})
 
-const chat = io.on('connection', (socket) => {
-    socketManager.respond(chat, socket, app);
-})
+
+
+
+// ========== MIDDLEWARE ========== //
+
+// ===== TOP LEVEL MIDDLEWARE ===== //
+
+
+
+// ===== CUSTOM MIDDLEWARE ===== //
+
+
+
+// ========== ENDPOINTS ========== //
+
+// === GET REQUESTS === //
+// tests #3
+app.get('request', )
+
+
+
+// === PUT REQUESTS === //
+
+
+
+// === POST REQUESTS === //
+// test #4 
+app.get('/request', )
+
+
+// === DELETE REQUESTS === //
 
