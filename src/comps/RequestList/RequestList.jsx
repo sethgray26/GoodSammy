@@ -30,7 +30,7 @@ class RequestList extends Component {
     render() {
         const request = this.state.requestArr.map(request => {
             return(
-                <div>
+                <div key = {requestArr.id}>
                     Faye need a ride to Walgreens {this.state.distance} away! 
                     <button>View Details</button>
                     <button>I will help</button>
