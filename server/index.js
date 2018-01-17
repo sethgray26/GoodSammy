@@ -3,6 +3,8 @@ const express = require('express')
       cors = require('cors')
       session = require('express-session')
       massive = require('massive')
+      socketManager = require('./socketManager')
+      const socket=require('socket.io')
 
       require('dotenv').config()
 
@@ -16,6 +18,8 @@ massive(process.env.DB_CONNECTION).then( db => {
     app.set( 'db', db)
 })
 
+const io = socket(app.listen( process.env.SERVER_PORT, () => {console.log('listening on port 3005')}));
+
 // app.use( session({
 //     secret: process.env.SESSION_SECRET,
 //     saveUninitialized: true, 
@@ -25,7 +29,10 @@ massive(process.env.DB_CONNECTION).then( db => {
 // app.use( express.static( __dirname + '/../build' ))
 
 
+
 app.post('/createUser',users_controller.createUsers )
 
+const chat= io.on('connection', (socket)=>{
+    socketManager.respond(chat, socket, app);
+})
 
-app.listen( process.env.SERVER_PORT, () => {console.log('listening on port 3005')})
