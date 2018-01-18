@@ -15,6 +15,7 @@ class App extends Component {
         <div className="App">
           <Route exact path='/' component={ Chat }/>
           <Route path='/createreq' component={ CreateRequest }/>
+          <Route path='/testroute/chat' component={ Chat }/>
           
         </div>
       </HashRouter>

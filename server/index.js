@@ -4,7 +4,8 @@ const express = require('express')
       session = require('express-session')
       massive = require('massive')
       socketManager = require('./socketManager')
-      const socket=require('socket.io')
+      socket=require('socket.io')
+      chat_controller = require('./controllers/chat_controller')
 
       require('dotenv').config()
 
@@ -30,7 +31,9 @@ const io = socket(app.listen( process.env.SERVER_PORT, () => {console.log('liste
 
 
 
-app.post('/createUser',users_controller.createUsers )
+app.post('/createUser', users_controller.createUsers )
+app.post('/newchat', chat_controller.createChatSession )
+app.post('/chat/socketID', chat_controller.updateSocketID)
 
 const chat= io.on('connection', (socket)=>{
     socketManager.respond(chat, socket, app);
