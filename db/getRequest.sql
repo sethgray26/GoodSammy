@@ -1,1 +1,1 @@
-select * from request ORDER BY id DESC
+select * from users JOIN request on request.user_id = users.id ORDER BY request.id DESC

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Map from '../Map/Map';  
 import RepeatedRequest from './../RepeatedList/repeatedList';  
-import axios from 'axios'
 import repeatedList from './../RepeatedList/repeatedList';
+import Map from '../Map/Map';  
+import axios from 'axios'
 
 
 class RequestList extends Component {
@@ -37,7 +37,7 @@ class RequestList extends Component {
                     description = {request.description}
                     distance = {this.state.distance}
                     category = {request.category}
-                    username = {request.user_id}
+                    username = {request.username}
                     requestID = {request.id}
                 />
             )

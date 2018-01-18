@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 
 class RepeatedRequest extends Component {
     render() {
-        console.log(this.props)
         return (
             <div>
                 <Card>
