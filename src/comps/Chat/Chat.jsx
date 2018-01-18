@@ -72,9 +72,9 @@ export default class Chat extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        const {conversationID, messageInput} = this.state;
+        const {conversationID, messageInput, userID} = this.state;
         console.log( 'cid, mid: ',conversationID, ' ', messageInput)
-        socket.emit('emit message', {conversationID, messageInput});
+        socket.emit('emit message', {conversationID, messageInput, userID});
 
         this.setState({ messageInput: '' })
 
@@ -96,7 +96,7 @@ export default class Chat extends Component {
                         
                         this.state.response.map((item, index)=>(
                             <div key={index}>
-                            <div style={{ color: "gray", fontSize: ".8em" }}>user 1 | timestamp</div>
+                            <div style={{ color: "gray", fontSize: ".8em" }}>name placeholder | timestamp</div>
                             <Message text={item.body}/>
                             </div>
                         ))

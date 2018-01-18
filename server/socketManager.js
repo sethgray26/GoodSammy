@@ -14,7 +14,7 @@ module.exports.respond =  (io, socket, app)=> {
     socket.on('emit message', data => { // TODO refactor this to be async ? ? 
         db = app.get('db')
 
-        db.create_message_and_get_all(data.conversationID, data.messageInput).then(response=>{
+        db.create_message_and_get_all(data.conversationID, data.messageInput, data.userID).then(response=>{
             socket.emit('convo messages', response)
         })
     })  
