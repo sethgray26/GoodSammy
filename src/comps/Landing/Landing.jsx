@@ -12,6 +12,7 @@ import blue_hand from'./blueHand.png'
 import { Dialog, TextField, RaisedButton } from 'material-ui'
 import { lightGreen500, blue500 } from 'material-ui/styles/colors';
 import { lightBlue500 } from 'material-ui/styles/colors';
+import Chat from './../Chat/Chat.jsx'
 
 
 class Landing extends Component {
@@ -124,6 +125,7 @@ class Landing extends Component {
                 </div>*/}
 
                 <div className='landing_footer'>
+                    <Chat/>
 
                     <TextField
                         name='username'

@@ -38,6 +38,11 @@ export default class Chat extends Component {
             console.log(response)
             this.setState({ response: response })
         })
+        
+    }
+
+    componentWillMount() {
+        // const {requestId, requesterId, helperId} = this.props
         socket.on('socket id', id=>{
             console.log('socket id: ', id)
             this.setState({socketID: id})
@@ -56,11 +61,8 @@ export default class Chat extends Component {
 
 
         })
-    }
-
-    componentWillMount() {
-        // const {requestId, requesterId, helperId} = this.props
-        socket.emit('get messages');
+        
+        
         // alert('conversationid, socketid: ', this.state.conversationID, ' ', this.state.socketID)
         // axios.post('http://localhost:3005/newchat', { requestId: 1, requesterId: 1, helperId: 2 }) // passed in through props
     }
@@ -78,6 +80,7 @@ export default class Chat extends Component {
 
     }
     render() {
+        
         const { messageInput, socket } = this.state;
         console.log('response: ', this.state.response)
         return (
