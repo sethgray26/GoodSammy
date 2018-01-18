@@ -21,6 +21,13 @@ massive(process.env.DB_CONNECTION).then( db => {
     app.set( 'db', db)
 })
 
+app.use( session({
+    secret: process.env.SESSION_SECRET,
+    saveUninitialized: true, 
+    resave: false
+}))
+
+
 const io = socket(app.listen( process.env.SERVER_PORT, () => {console.log('listening on port 3005')}));
 
 // app.use( session({
@@ -39,6 +46,9 @@ app.put('/setLocation/:id',maps_controller.setLocation)
 //Requests
 app.post('/createRequest',request_controller.createRequest)
 
+app.post('/createUser',users_controller.createUsers )
+app.put('/checkLogin/:username',users_controller.checkLogin)
+app.get('/logout',users_controller.logOut)
 
 // ========== ENDPOINTS ========== //
 
