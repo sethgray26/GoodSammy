@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import './CreateRequest.css'
-import axios from 'axios'
 import { setLocationState } from '../../ducks/reducers/maps';
 import { createRequest } from '../../ducks/reducers/requests';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Map from '../Map/Map';
+import './CreateRequest.css'
+import axios from 'axios'
 
 class CreateRequest extends Component {
     constructor(props){

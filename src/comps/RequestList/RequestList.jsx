@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import RepeatedRequest from './../RepeatedList/repeatedList';  
 import repeatedList from './../RepeatedList/repeatedList';
 import Map from './../Map/Map'
+import './RequstList.css'
 import axios from 'axios'
 
 
@@ -43,8 +44,12 @@ class RequestList extends Component {
             )
         })
         return (
-            <div>
-                <Map/>
+            <div className='body-content' >
+                <Map
+                // long and lat needs to be from users on session not from request  
+                    lng = {request.long}
+                    lat = {request.lat}
+                />
                 <strong>People Need help!</strong>
 
                 <section>{request}</section>

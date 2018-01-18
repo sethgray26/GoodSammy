@@ -13,7 +13,7 @@ export default class Chat extends Component{
             response:[]
         }
         socket.on('generate response', response=>{
-            console.log(response)
+            // console.log(response)
             this.setState({response: response})
         
         })       
