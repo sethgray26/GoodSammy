@@ -8,8 +8,8 @@ import store from './store.jsx';
 import './index.css';
 import './reset.css';
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 ReactDOM.render(
     <Provider store = { store }>
@@ -20,3 +20,11 @@ ReactDOM.render(
     
 document.getElementById('root'));
 
+ReactDOM.render(
+    <Provider store = { store }>
+        <MuiThemeProvider>
+            <App />
+        </MuiThemeProvider>
+    </Provider>,
+    
+document.getElementById('root'));
