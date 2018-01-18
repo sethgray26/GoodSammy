@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './CreateRequest.css'
 import axios from 'axios'
 
@@ -54,9 +55,7 @@ class CreateRequest extends Component {
                 <br/>
                 <section className='buttons' >
                     <button className='Request-help-button' onClick= {this.requestCreator} >Request Help</button>
-                    <a href="http://google.com">
-                        <button className='Cancel-request'>Cancel</button>
-                    </a>
+                        <Link to='/Home'><button className='Cancel-request'>Cancel</button></Link>
                 </section>
                 <section>
                     <input type="range" min='1' max='5' className='rating-slider' />
