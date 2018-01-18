@@ -6,9 +6,8 @@ import Home from './comps/Home/Home.jsx'
 import Chat from './comps/Chat/Chat';
 import CreateRequest from './comps/CreateRequest/CreateRequest'; 
 import RequestList from './comps/RequestList/RequestList';   
-import Landing from './comps/Landing/Landing';
+import Landing from './comps/Landing/Landing';  
 // import Map from './comps/Map/Map';
-
 
 class App extends Component {
   render() {
