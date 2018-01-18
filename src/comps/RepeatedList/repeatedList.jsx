@@ -4,7 +4,11 @@ class RepeatedRequest extends Component {
     render() {
         return (
             <div>
-                {/* make custom card */}
+               {this.props.username} needs help {this.props.distance} away! 
+                <p>
+                {this.props.description} 
+                {/* {this.props.description} is the toggled portion. Will add in accordion shortly */}
+                </p>
             </div>
         );
     }

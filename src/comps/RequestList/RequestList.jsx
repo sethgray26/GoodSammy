@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Map from '../Map/Map';  
+import RepeatedRequest from './../RepeatedList/repeatedList';  
 import axios from 'axios'
+import repeatedList from './../RepeatedList/repeatedList';
 
 
 class RequestList extends Component {
@@ -30,17 +32,21 @@ class RequestList extends Component {
     render() {
         const request = this.state.requestArr.map(request => {
             return(
-                <div key = {requestArr.id}>
-                    Faye need a ride to Walgreens {this.state.distance} away! 
-                    <button>View Details</button>
-                    <button>I will help</button>
-                </div>
+                <RepeatedRequest
+                 key = {request.id}
+                 description = {request.description}
+                 category = {request.category}
+                 distance = {this.state.distance}
+                 username = {request.user_id}
+
+                />
             )
         })
         return (
             <div>
                 <Map/>
                 <section>People Need Help!</section>
+                <br/>
                 <section>{request}</section>
                 
             </div>
