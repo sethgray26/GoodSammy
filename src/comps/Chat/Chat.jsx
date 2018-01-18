@@ -34,7 +34,6 @@ export default class Chat extends Component{
     }
     render(){
         const { messageInput, socket } = this.state;
-        console.log('response: ', this.state.response)
         return(
             <div className="chat-container">
                 <div className="message-box">

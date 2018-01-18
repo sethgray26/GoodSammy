@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import RepeatedRequest from './../RepeatedList/repeatedList';  
 import repeatedList from './../RepeatedList/repeatedList';
-import Map from '../Map/Map';  
+import Map from './../Map/Map'
 import axios from 'axios'
 
 

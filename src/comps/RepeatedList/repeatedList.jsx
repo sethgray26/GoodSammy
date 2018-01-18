@@ -18,9 +18,11 @@ class RepeatedRequest extends Component {
                     />
                     <CardText expandable = {true} >
                         {this.props.description}
-                    <CardActions>
-                        <Link to ={`/request/${this.props.requestID}`} ><RaisedButton label = "View Details" primary ={true}/> </Link>
-                    </CardActions>
+                        <CardActions>
+                            <Link to ={`/request/${this.props.requestID}`} >
+                                <RaisedButton label = "View Details" primary ={true}/>
+                            </Link>
+                        </CardActions>
                     </CardText>
                 </Card>
                     

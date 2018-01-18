@@ -42,24 +42,21 @@ class Landing extends Component {
 
     inputChange(e) {
         let { name, value } = e.target
-        console.log('name',name, 'val', value)
         let newState = {}
         newState[name] = value
         this.setState(newState)
     }s
 
     createUser(){
-        console.log('createuser state',this.state.username)
         let { username, password, confirmPassword, phone } = this.state
 
         if ( password === confirmPassword ){
-            console.log('username', username, 'password', password)
             this.props.createUsers({ username, password, phone })
             .then(res => {
                 this.handleClose()
             })
         }else {
-            return "Passwords do not maatch"
+            return "Passwords do not match"
         }
         
     }
@@ -68,19 +65,16 @@ class Landing extends Component {
         console.log('hit')
         axios.put(`/checkLogin/${this.state.username}`, { txtPassword: this.state.password })
         .then(res => {
-            console.log('res promise', res)
             if (res.data === true) {
                 //redirect to dashboard
                 this.props.history.push('/Home')
-                console.log('true')
             }
             else {
-                //stay on log in page
-                console.log('false')
+                //stay on log in p
                 alert('Incorrect username or password, please try again!')
             }
         }).catch(error => {
-            console.log('error', error)
+            
         });
     }
 
@@ -225,7 +219,7 @@ class Landing extends Component {
 }
 
 function mapStateToProps( state ){
-    console.log('map', state)
+    
     return {
         userData: state.users.userData
     }
