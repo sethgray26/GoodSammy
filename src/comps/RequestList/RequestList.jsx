@@ -51,15 +51,17 @@ class RequestList extends Component {
             let type = 'imperial'
             const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=${type}&origins=${lat1},${lon1}&destinations=${arr[i].lat},${arr[i].long}&key=AIzaSyCIIg2weQK6p4wUTy6nXrCj4-hPGgA40xI`
             console.log(url)
-            axios({
-                method: 'GET',
-                url: url,
-                headers: {
-                    'Access-Control-Allow-Credentials': true
-                }
-            }).then(res => {
-                console.log('res.data', res.data)
-                arr[i].distance = res.data.rows.elements.distance.text
+            // axios({
+            //     method: 'GET',
+            //     url: url,
+            //     headers: {
+            //         'Access-Control-Allow-Origin': '*'
+            //     }
+            axios.get(url)
+            .then(res => {
+                console.log('res.data', res.data.rows[0].elements[0].distance.text)
+                //set state
+                //arr[i].distance = res.data.rows[0].elements[0].distance.text
             })
         }
         console.log('loop done:', arr)
