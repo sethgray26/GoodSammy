@@ -33,20 +33,20 @@ class RequestList extends Component {
         const request = this.state.requestArr.map(request => {
             return(
                 <RepeatedRequest
-                 key = {request.id}
-                 description = {request.description}
-                 category = {request.category}
-                 distance = {this.state.distance}
-                 username = {request.user_id}
-
+                    key = {request.id}
+                    description = {request.description}
+                    distance = {this.state.distance}
+                    category = {request.category}
+                    username = {request.user_id}
+                    requestID = {request.id}
                 />
             )
         })
         return (
             <div>
                 <Map/>
-                <section>People Need Help!</section>
-                <br/>
+                <strong>People Need help!</strong>
+
                 <section>{request}</section>
                 
             </div>

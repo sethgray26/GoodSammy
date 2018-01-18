@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {Card, CardHeader, CardText, CardTitle, CardActions} from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
+import { Link } from 'react-router-dom'
 
 
 class RepeatedRequest extends Component {
     render() {
+        console.log(this.props)
         return (
             <div>
                 <Card>
@@ -18,8 +20,7 @@ class RepeatedRequest extends Component {
                     <CardText expandable = {true} >
                         {this.props.description}
                     <CardActions>
-                        <FlatButton label = "View Details"/>
-                        <FlatButton/>
+                        <Link to ={`/request/${this.props.requestID}`} ><RaisedButton label = "View Details" primary ={true}/> </Link>
                     </CardActions>
                     </CardText>
                 </Card>

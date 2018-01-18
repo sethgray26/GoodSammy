@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import {Route, HashRouter } from 'react-router-dom';
-import './App.css';
-
-import Home from './comps/Home/Home.jsx'
-import Chat from './comps/Chat/Chat';
 import CreateRequest from './comps/CreateRequest/CreateRequest'; 
 import RequestList from './comps/RequestList/RequestList';   
+import {Route, HashRouter } from 'react-router-dom';
 import Landing from './comps/Landing/Landing';  
-// import Map from './comps/Map/Map';
+import Home from './comps/Home/Home.jsx'
+import ViewRequest from './comps/ViewRequest/ViewRequest'
+import Chat from './comps/Chat/Chat';
+import './App.css';
 
 class App extends Component {
   render() {
@@ -18,6 +17,7 @@ class App extends Component {
           <Route exact path='/Home' component={ Home }/>
           <Route path='/createReq' component={ CreateRequest }/>
           <Route path='/reqList' component={ RequestList }/>
+          <Route path = '/request/:id' component={ViewRequest}/> 
         </div>
       </HashRouter>
     );
