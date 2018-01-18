@@ -11,8 +11,6 @@ export function createUsers( userData ){
     //action creatrot
     console.log('AC', userData)
 
-
-    
     let newUser = axios.post('/createUser', {username: userData.username, password: userData.password, phone: userData.phone })
     .then( res => res.data )
     return {
