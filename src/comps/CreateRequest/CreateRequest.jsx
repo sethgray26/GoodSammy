@@ -1,62 +1,99 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './CreateRequest.css'
 import axios from 'axios'
-
+import { setLocationState } from '../../ducks/reducers/maps';
+import { createRequest } from '../../ducks/reducers/requests';
+import { connect } from 'react-redux';
+import Map from '../Map/Map';
 
 class CreateRequest extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            lng: props.lng,
+            lat: props.lat,
+        }
+    }
 
+     componentDidMount() {
+        if (navigator.geolocation) {
+            console.log('supported in browser')
+            navigator.geolocation.getCurrentPosition((position) => {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+                this.props.setLocationState(lat,lng)
+                //this.props.setLocation(2, lat, lng)
+            })
+        }
+        else {
+            console.log('not supported in browser')
+        }
+        console.log('state after comp mount',this.state)
+    }
 
-     requestCreator = () => {
-         console.log(this.refs.category.value)
-         console.log(this.refs.description.value)
+    componentWillReceiveProps(nextprops) {
+        let newState = {}
+        newState['lat'] = Number(nextprops.lat)
+        newState['lng'] = Number(nextprops.lng)
+        this.setState(newState)
+      }
+
+    requestCreator = () => {
+        //Post request
+        //User_id, cat_id, desc, long, lat
 
         let generated = {
-            category: this.refs.category.value,
-            decription: this.refs.description.value,
-            location: 'Location of User'
+            user_id:2,
+            category_id: this.refs.category.value,
+            description: this.refs.description.value,
+            lat: this.props.lat,
+            lng: this.props.lng
         }
 
-        axios.put('/makerequest', generated)
-        //test #1
+        console.log(generated)
+        this.props.createRequest(generated)
     }
-        render() {
-            
+
+    render() {
+
         return (
             <div className='generate-request-body' >
-            <br/>
+                <br />
                 <section  >
                     <strong>What do you need help with?</strong>
                     <div>Select a category:
-                         <select name="Category selection" id="" ref = 'category' >
-                            <option value="Automotive" >Automotive</option>
-                            <option value="Life" >Life</option>
-                            <option value="">Spritual</option>
-                            <option value="">Money</option>
-                            <option value="">Moving</option>
-                            <option value="">Errands</option>
-                            <option value="">Love</option>
-                            <option value="">Coding</option>
-                            <option value="">Construction</option>
-                            <option value="">Baking</option>
-                    </select>
+                         <select name="Category selection" id="" ref='category' >
+                            <option value="1" >Automotive</option>
+                            <option value="2" >Life</option>
+                            <option value="3">Spritual</option>
+                            <option value="4">Money</option>
+                            <option value="5">Moving</option>
+                            <option value="6">Errands</option>
+                            <option value="7">Love</option>
+                            <option value="8">Coding</option>
+                            <option value="9">Construction</option>
+                            <option value="10">Baking</option>
+                        </select>
                     </div>
                 </section>
-                <br/>
+                <br />
                 <section className='request-description'>
                     <span>Please tell Faye your a brief description of your woes</span>
-                    <textarea 
-                    name="Request Description"
-                     id="" cols="40" rows="10"
-                     ref ='description'
-                     placeholder='I need help to change a tire!'
+                    <textarea
+                        name="Request Description"
+                        id="" cols="40" rows="10"
+                        ref='description'
+                        placeholder='I need help to change a tire!'
                     ></textarea>
                 </section>
-                <br/>
+                <br />
+                <div className="map">
+                    <Map lat={this.state.lat} lng={this.state.lng}/>
+                </div>
                 <section className='buttons' >
                     <button className='Request-help-button' onClick= {this.requestCreator} >Request Help</button>
-                    <a href="http://google.com">
-                        <button className='Cancel-request'>Cancel</button>
-                    </a>
+                        <Link to='/Home'><button className='Cancel-request'>Cancel</button></Link>
                 </section>
                 <section>
                     <input type="range" min='1' max='5' className='rating-slider' />
@@ -66,4 +103,11 @@ class CreateRequest extends Component {
     }
 }
 
-export default CreateRequest;
+function mapStateToProps(state) {
+    return {
+        lat: state.maps.lat,
+        lng: state.maps.lng
+    };
+  }
+  
+export default connect(mapStateToProps, { setLocationState, createRequest })(CreateRequest)
