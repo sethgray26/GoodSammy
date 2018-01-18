@@ -6,11 +6,6 @@ let connectedUsers = ['asdfasdf']
 let massive = require('massive')
 
 
-
-massive(process.env.DB_CONNECTION).then( db => {
-    app.set( 'db', db)
-})
-
 module.exports.respond =  (io, socket, app)=> {
     console.log('socket id: '+ socket.id)
     socket.on('emit message', input => {

@@ -45,7 +45,6 @@ app.put('/setLocation/:id',maps_controller.setLocation)
 
 //Requests
 app.post('/createRequest',request_controller.createRequest)
-
 app.post('/createUser',users_controller.createUsers )
 app.put('/checkLogin/:username',users_controller.checkLogin)
 app.get('/logout',users_controller.logOut)

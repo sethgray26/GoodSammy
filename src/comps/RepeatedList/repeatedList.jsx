@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import {Card, CardHeader, CardText, CardTitle, CardActions} from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 
-
 class RepeatedRequest extends Component {
+
+
     render() {
         return (
             <div>
@@ -29,4 +30,5 @@ class RepeatedRequest extends Component {
     }
 }
 
-export default RepeatedRequest;
+  
+export default RepeatedRequest
