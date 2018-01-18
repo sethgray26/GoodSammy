@@ -1,14 +1,29 @@
 import React, { Component } from 'react';
+import {Card, CardHeader, CardText, CardTitle, CardActions} from 'material-ui/Card'
+import FlatButton from 'material-ui/FlatButton'
+
 
 class RepeatedRequest extends Component {
     render() {
         return (
             <div>
-               {this.props.username} needs help {this.props.distance} away! 
-                <p>
-                {this.props.description} 
-                {/* {this.props.description} is the toggled portion. Will add in accordion shortly */}
-                </p>
+                <Card>
+                    <CardHeader 
+                        className = 'repeated-request'
+                        title = {this.props.category}
+                        subtitle = {this.props.username}
+                        actAsExpander = {true}
+                        showExpandableButton = {true}
+                    />
+                    <CardText expandable = {true} >
+                        {this.props.description}
+                    <CardActions>
+                        <FlatButton label = "View Details"/>
+                        <FlatButton/>
+                    </CardActions>
+                    </CardText>
+                </Card>
+                    
             </div>
         );
     }
