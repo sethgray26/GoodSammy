@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './CreateRequest.css'
 import axios from 'axios'
 import { setLocationState } from '../../ducks/reducers/maps';
@@ -91,10 +92,8 @@ class CreateRequest extends Component {
                     <Map lat={this.state.lat} lng={this.state.lng}/>
                 </div>
                 <section className='buttons' >
-                    <button className='Request-help-button' onClick={this.requestCreator} >Request Help</button>
-                    <a href="http://google.com">
-                        <button className='Cancel-request'>Cancel</button>
-                    </a>
+                    <button className='Request-help-button' onClick= {this.requestCreator} >Request Help</button>
+                        <Link to='/Home'><button className='Cancel-request'>Cancel</button></Link>
                 </section>
                 <section>
                     <input type="range" min='1' max='5' className='rating-slider' />
