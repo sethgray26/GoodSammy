@@ -45,15 +45,19 @@ class RequestList extends Component {
         })
         return (
             <div className='body-content' >
-                <Map
-                // long and lat needs to be from users on session not from request  
-                    lng = {request.long}
-                    lat = {request.lat}
-                />
-                <strong>People Need help!</strong>
-
-                <section>{request}</section>
-                
+                    {this.state.requestArr.length !== 0 ?
+                    <div>
+                        <Map
+                        // long and lat needs to be from users on session not from request  
+                        lng = {request.long}
+                        lat = {request.lat}
+                        />
+                        <br/>
+                    <strong>People Need help!</strong>
+                    <section>{request}</section>
+                    </div>
+                    :
+                    <div>Looks like no one needs help! </div>}
             </div>
         );
     }

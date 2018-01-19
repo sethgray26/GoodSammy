@@ -55,6 +55,7 @@ app.get('/logout',users_controller.logOut)
 // === GET REQUESTS === //
 // tests #3
 app.get('/request', controllers.get_Request )
+app.get('/request/:id', controller.get_one_request)
 
 // === PUT REQUESTS === //
 
