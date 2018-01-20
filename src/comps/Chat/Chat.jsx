@@ -14,7 +14,7 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 
 
-const socketUrl = 'http://192.168.0.126:3005';
+const socketUrl = 'http://192.168.122.208:3005'; 
 const socket = io(socketUrl);
 
 
@@ -27,10 +27,10 @@ export default class Chat extends Component {
 
         this.state = {
             messageInput: "",
-            socket: null,
+            socket: io('http://192.168.0.126:3005'),
             response: [],
             socketID: null,
-            userID: 3, // this will /later/ come from props from redux user object.
+            userID: 1, // this will /later/ come from props from redux user object.
             requestID: 22, // this will come from props
             conversationID: null
         }
@@ -39,6 +39,7 @@ export default class Chat extends Component {
             this.setState({ response: response })
         })
         
+        socket.emit('get messages', this.state.conversationID)
     }
 
     componentWillMount() {
