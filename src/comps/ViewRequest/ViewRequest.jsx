@@ -21,6 +21,7 @@ class ViewRequest extends Component {
             let userId = this.state.user_id
         })
     }
+
     render() {
         return (
             <div>
@@ -28,8 +29,8 @@ class ViewRequest extends Component {
                 <div>
                     {/* own view */}
                     <Map/>
-                    <span>request.description</span>
-                    <Chat  />
+                    <span>{this.request.description}</span>
+                    <Chat/>
 
 
                 </div>
@@ -38,7 +39,7 @@ class ViewRequest extends Component {
                     {/* other view */}
                     <Map/>
                     <span>request.description</span>
-                    <Chat  /> 
+                    <Chat/> 
                 </div>
             }
             </div>

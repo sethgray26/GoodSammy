@@ -11,7 +11,9 @@ class RequestList extends Component {
         super()
             this.state = {
                 requestArr: [],
-                distance: ''
+                distance: '', 
+                long: '',
+                lat: ''
             }
         
     }
@@ -19,6 +21,8 @@ class RequestList extends Component {
     componentDidMount(){
         axios.get('/request').then((res) => {
             //test #2
+            console.log(res.data, res.data.lat);
+            
             this.setState({
                 requestArr: res.data
             })
@@ -47,12 +51,6 @@ class RequestList extends Component {
             <div className='body-content' >
                     {this.state.requestArr.length !== 0 ?
                     <div>
-                        <Map
-                        // long and lat needs to be from users on session not from request  
-                        lng = {request.long}
-                        lat = {request.lat}
-                        />
-                        <br/>
                     <strong>People Need help!</strong>
                     <section>{request}</section>
                     </div>
