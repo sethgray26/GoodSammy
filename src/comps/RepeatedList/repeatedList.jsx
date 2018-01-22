@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import {Card, CardHeader, CardText, CardTitle, CardActions} from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 
-
 class RepeatedRequest extends Component {
+
+    componentWillReceiveProps(nextprops){
+        console.log('props',nextprops)
+    }
+
+
     render() {
         return (
             <div>
@@ -16,7 +21,8 @@ class RepeatedRequest extends Component {
                         showExpandableButton = {true}
                     />
                     <CardText expandable = {true} >
-                        {this.props.description}
+                        <p>Desc: {this.props.description}</p><br/>
+                        <p>Disance from you: {this.props.distance}</p>
                     <CardActions>
                         <FlatButton label = "View Details"/>
                         <FlatButton/>
@@ -29,4 +35,5 @@ class RepeatedRequest extends Component {
     }
 }
 
-export default RepeatedRequest;
+  
+export default RepeatedRequest
