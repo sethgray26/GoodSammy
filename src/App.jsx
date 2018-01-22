@@ -5,7 +5,6 @@ import {Route, HashRouter } from 'react-router-dom';
 import Landing from './comps/Landing/Landing';  
 import Home from './comps/Home/Home.jsx'
 import ViewRequest from './comps/ViewRequest/ViewRequest'
-import Chat from './comps/Chat/Chat';
 import './App.css';
 
 class App extends Component {

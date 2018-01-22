@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Card, CardHeader, CardText, CardTitle, CardActions} from 'material-ui/Card'
+import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 import { Link } from 'react-router-dom'
 

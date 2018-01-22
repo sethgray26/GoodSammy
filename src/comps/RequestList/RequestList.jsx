@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import RepeatedRequest from './../RepeatedList/repeatedList';  
-import repeatedList from './../RepeatedList/repeatedList';
-import Map from './../Map/Map'
 import './RequstList.css'
 import axios from 'axios'
 
