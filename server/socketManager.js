@@ -13,15 +13,17 @@ module.exports.respond =  (io, socket, app)=> {
     socket.emit('socket id', socket.id)
     socket.on('emit message', async data => { // TODO refactor this to be async ? ? 
         db = app.get('db')
-
+        console.log('data ====> ', data)
         // get userid and helper id
-        let helper_socket_id = await db.get_helper_socket_id.sql(data.conversationID)
-        let requester_socket_id = await db.get_requester_socketid.sql(data.conversationID)
-
+        let helper_socket_id = await db.get_helper_socket_id(data.conversationID)
+        let requester_socket_id = await db.get_requester_socketid(data.conversationID)
+        console.log('helpersockit, requester socketid==============>', helper_socket_id, ' ', requester_socket_id)
         db.create_message_and_get_all(data.conversationID, data.messageInput, data.userID).then(response=>{
+            // console.log('response =====> ', response)
             socket.emit('convo messages', response)
-            socket.to(helper_socket_id).emit('convo messages', response)
-            socket.to(requester_socket_id).emit('convo messages', response)
+            console.log('sending to======>',helper_socket_id[0].socket_id)
+            socket.to(helper_socket_id[0].socket_id).emit('convo messages', response)
+            socket.to(requester_socket_id[0].socket_id).emit('convo messages', response)
         })
     })  
 

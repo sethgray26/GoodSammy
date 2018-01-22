@@ -77,7 +77,7 @@ export default class Chat extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const {conversationID, messageInput, userID} = this.state;
-        console.log( 'cid, mid: ',conversationID, ' ', messageInput)
+        console.log( 'c-id, m-in: ',conversationID, ' ', messageInput)
         socket.emit('emit message', {conversationID, messageInput, userID});
 
         this.setState({ messageInput: '' })
@@ -86,7 +86,7 @@ export default class Chat extends Component {
     render() {
         
         const { messageInput, socket } = this.state;
-        console.log('response: ', this.state.response)
+        // console.log('response: ', this.state.response)
         return (
             <div className="chat-container" style={{ margin: "4vw", padding: "8px" }}>
                 
