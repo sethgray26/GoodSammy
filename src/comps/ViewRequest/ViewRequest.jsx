@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Map from '../Map/Map'
 import Chat from '../Chat/Chat'
 import axios from 'axios'
+import RaisedButton  from 'material-ui/RaisedButton';  
 
 
 class ViewRequest extends Component {
@@ -25,11 +26,15 @@ class ViewRequest extends Component {
     render() {
         return (
             <div>
+                {/* flase ternary placeholder, Redux to be implented */}
                 {this.state.request.user_id === this.state.help_id ?
                 <div>
                     {/* own view */}
                     <Map/>
-                    <span>{this.request.description}</span>
+                    <RaisedButton label ='Edit Description'/>
+                    
+                    <span>This is information</span>
+                    <RaisedButton label ='Edit Category'/>
                     <Chat/>
 
 
