@@ -14,7 +14,7 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 
 
-const socketUrl = 'http://192.168.122.208:3005'; 
+const socketUrl = 'http://192.168.0.126:3005'; 
 const socket = io(socketUrl);
 
 

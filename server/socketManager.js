@@ -11,11 +11,17 @@ let connectedUsers = ['asdfasdf']
 module.exports.respond =  (io, socket, app)=> {  
     console.log('connected.\nsocket id: '+ socket.id)
     socket.emit('socket id', socket.id)
-    socket.on('emit message', data => { // TODO refactor this to be async ? ? 
+    socket.on('emit message', async data => { // TODO refactor this to be async ? ? 
         db = app.get('db')
+
+        // get userid and helper id
+        let helper_socket_id = await db.get_helper_socket_id.sql(data.conversationID)
+        let requester_socket_id = await db.get_requester_socketid.sql(data.conversationID)
 
         db.create_message_and_get_all(data.conversationID, data.messageInput, data.userID).then(response=>{
             socket.emit('convo messages', response)
+            socket.to(helper_socket_id).emit('convo messages', response)
+            socket.to(requester_socket_id).emit('convo messages', response)
         })
     })  
 

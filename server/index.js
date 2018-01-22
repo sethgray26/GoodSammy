@@ -1,14 +1,15 @@
 const express = require('express')
-      bodyParser = require('body-parser')
-      cors = require('cors')
-      session = require('express-session')
-      controllers = require('./controllers')
-      massive = require('massive')
-      socketManager = require('./socketManager')
-      socket=require('socket.io')
-      chat_controller = require('./controllers/chat_controller')
+bodyParser = require('body-parser')
+cors = require('cors')
+session = require('express-session')
+controllers = require('./controllers')
+massive = require('massive')
+socketManager = require('./socketManager')
+socket=require('socket.io')
+chat_controller = require('./controllers/chat_controller')
 
-      require('dotenv').config()
+
+require('dotenv').config()
 
 // const users_controller = require('./controllers/users_controller.jsx')
 const maps_controller = require('./controllers/maps_controller.jsx')
@@ -28,8 +29,8 @@ app.use( session({
     resave: false
 }))
 
-
-const io = socket(app.listen( process.env.SERVER_PORT, () => {console.log('listening on port 3005')}));
+const io = socket(app.listen( process.env.SERVER_PORT, () => {
+    console.log('listening on port 3005')}) );
 
 // app.use( session({
 //     secret: process.env.SESSION_SECRET,
@@ -69,6 +70,15 @@ app.get('/request', controllers.get_Request )
 
 
 // === DELETE REQUESTS === //
+
+
+
 const chat= io.on('connection', (socket)=>{
     socketManager.respond(chat, socket, app);
 })
+
+
+
+// another way of doing this
+// const server=http.createServer(app)
+// server.listen(port, () => console.log(`Listening on port ${port}`));
