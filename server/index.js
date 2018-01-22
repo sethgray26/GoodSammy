@@ -48,11 +48,11 @@ app.put('/setLocation/:id',maps_controller.setLocation)
 //Requests
 app.post('/createRequest',request_controller.createRequest)
 
-// CHAT ENDPOINTS
-app.post('/newchat', chat_controller.createChatSession )
+// .=============. CHAT ENDPOINTS .=====================. //
 app.post('/chat/socketID', chat_controller.updateSocketID)
 app.post('/chat/usernames', chat_controller.getUsernames)
-// ------------- //
+// .===================================================. //
+
 // app.post('/createUser',users_controller.createUsers )
 // app.put('/checkLogin/:username',users_controller.checkLogin)
 // app.get('/logout',users_controller.logOut)
@@ -79,7 +79,3 @@ const chat= io.on('connection', (socket)=>{
 })
 
 
-
-// another way of doing this
-// const server=http.createServer(app)
-// server.listen(port, () => console.log(`Listening on port ${port}`));
