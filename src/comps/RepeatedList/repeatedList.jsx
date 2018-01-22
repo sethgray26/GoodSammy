@@ -21,8 +21,8 @@ class RepeatedRequest extends Component {
                         showExpandableButton = {true}
                     />
                     <CardText expandable = {true} >
-                        {this.props.description}
-                        {this.props.distance}
+                        <p>Desc: {this.props.description}</p><br/>
+                        <p>Disance from you: {this.props.distance}</p>
                     <CardActions>
                         <FlatButton label = "View Details"/>
                         <FlatButton/>

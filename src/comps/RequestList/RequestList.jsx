@@ -40,6 +40,7 @@ class RequestList extends Component {
         const lat = nextprops.lat
         const lng = nextprops.lng
         this.distance(lat, lng)
+        console.log('myLocation', lat, lng)
     }
 
     distance = (lat1, lon1) => {
@@ -47,9 +48,13 @@ class RequestList extends Component {
         console.log('arr', arr)
         let newArr = []
         for (var i = 0; i < arr.length; i++) {
+            console.log('req lat', arr[i].lat, 'req long',arr[i].long)
+            console.log('user lat', lat1, 'user long',lon1)
             let type = 'imperial'
             const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=${type}&origins=${lat1},${lon1}&destinations=${arr[i].lat},${arr[i].long}&key=AIzaSyCIIg2weQK6p4wUTy6nXrCj4-hPGgA40xI`
-            console.log(url)            
+            console.log(url)    
+            // axios.get(url).then( res => {
+            //     return console.log('res',res.data.rows[0].elements[0].distance.text)}) 
             newArr.push(axios.get(url))
         }
         console.log('array of promise:', newArr)
@@ -58,11 +63,11 @@ class RequestList extends Component {
             let newState = {}
             for (var j = 0; j < requestArr.length; j++) {
                 requestArr[j].distance = res[j].data.rows[0].elements[0].distance.text
-                //newState[requestArr[j].distance] = res[j].data.rows[0].elements[0].distance.text
                 console.log(`distance for index ${j}`,res[j].data.rows[0].elements[0].distance.text)
             }
             this.setState({requestArr})
         })
+
     }
 
     render() {
