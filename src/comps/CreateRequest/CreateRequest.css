@@ -1,18 +1,86 @@
-.generate-request-body{
-    padding: 3%;
+
+.create_req {
     display: flex;
     flex-direction: column;
-    height:100vh
+    justify-content: center;
+}
+.create_req_body{
+    /* padding: 3%; */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* height:100vh; */
+    /* border: 2px solid red; */
 }
 
-.request-description{
+.create_req_header {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: solid 2px red; */
+    width: 100%;
+    height: 15vh;
+}
 
+.create_req_header img {
+    height: 75px;
+    width: 75px;
+}
+
+.create_req_body {
+    height: auto;
+    /* height: 50vh; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    position: relative;
+    /* border: 2px solid blue; */
+}
+
+.create_req_body h1 {
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.create_req_category {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    /* border: 2px solid purple; */
+}
+
+.create_req_body h2 {
+    margin-bottom: 10px;
+}
+
+.create_req_desc {
+    display: flex;
+    flex-direction: column;
+    margin-right: 5%;
+    margin-left: 5%;
+    /* border: 2px solid purple; */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.map {
+    margin-right: 2%;
+    margin-left: 2%;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    /* border: 2px solid purple; */
+    
 }
 .Request-help-button{
     border-radius: 10px;
-    background-color: green;
+    /* background-color: green; */
     border: none;
     cursor: pointer;
 
@@ -31,10 +99,10 @@
 .buttons{
     display: flex;
     justify-content: space-around;
-    
+    /* border: 2px solid green; */
 }
 .rating-slider{
     width: 100%;
-    height: 25px;
-
+    height: 25px;  
+    border: 2px solid purple;
 }

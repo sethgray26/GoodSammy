@@ -11,7 +11,7 @@ const CREATE_REQUEST = 'CREATE_REQUEST'
 
 //Action Creators
 export function createRequest(obj) {
-
+console.log('ac', obj)
     return {
         type: CREATE_REQUEST,
         payload: axios.post('/createRequest',obj)
@@ -24,6 +24,7 @@ export function createRequest(obj) {
 
 //Reducer
 export default function reducer(state = initialState, action) {
+    // console.log("reducer", action.payload)
     switch (action.type) {
         case CREATE_REQUEST + '_PENDING':
             return Object.assign({}, state, { isLoading: true })
