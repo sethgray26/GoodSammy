@@ -51,6 +51,7 @@ app.post('/createRequest',request_controller.createRequest)
 // CHAT ENDPOINTS
 app.post('/newchat', chat_controller.createChatSession )
 app.post('/chat/socketID', chat_controller.updateSocketID)
+app.post('/chat/usernames', chat_controller.getUsernames)
 // ------------- //
 // app.post('/createUser',users_controller.createUsers )
 // app.put('/checkLogin/:username',users_controller.checkLogin)

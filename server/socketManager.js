@@ -18,7 +18,7 @@ module.exports.respond =  (io, socket, app)=> {
         let helper_socket_id = await db.get_helper_socket_id(data.conversationID)
         let requester_socket_id = await db.get_requester_socketid(data.conversationID)
         console.log('helpersockit, requester socketid==============>', helper_socket_id, ' ', requester_socket_id)
-        db.create_message_and_get_all(data.conversationID, data.messageInput, data.userID).then(response=>{
+        db.create_message_and_get_all(data.conversationID, data.messageInput, data.userID, data.timestamp).then(response=>{
             // console.log('response =====> ', response)
             socket.emit('convo messages', response)
             console.log('sending to======>',helper_socket_id[0].socket_id)
