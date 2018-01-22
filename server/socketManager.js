@@ -10,7 +10,10 @@ let connectedUsers = ['asdfasdf']
 
 module.exports.respond =  (io, socket, app)=> {  
     console.log('connected.\nsocket id: '+ socket.id)
-    socket.emit('socket id', socket.id)
+    socket.on('chat mounted', ()=>{
+        socket.emit('socket id', socket.id)
+    })
+    // socket.emit('socket id', socket.id)
     socket.on('emit message', async data => { // TODO refactor this to be async ? ? 
         db = app.get('db')
         console.log('data ====> ', data)

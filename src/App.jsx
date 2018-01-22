@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, HashRouter } from 'react-router-dom';
+import {Route, HashRouter, Link } from 'react-router-dom';
 import './App.css';
 
 import Home from './comps/Home/Home.jsx'
@@ -19,6 +19,8 @@ class App extends Component {
           <Route path='/createReq' component={ CreateRequest }/>
           <Route path='/reqList' component={ RequestList }/>
           <Route path='/testroute/chat' component={ Chat }/>
+          <Link to='/testroute/chat'> test link</Link>
+          <Link to='/'> home</Link>
         </div>
       </HashRouter>
     );

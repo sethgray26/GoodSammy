@@ -37,51 +37,51 @@ export default class Chat extends Component {
             requestDescription: null,
             username: {creator: null, helper: null}
         }
+        
         socket.on('convo messages', response => {
             console.log('response: ',response)
             this.setState({ response: response })
         })
         
-        socket.emit('get messages', this.state.conversationID)
+        
     }
 
     componentWillMount() {
-        // const {requestId, requesterId, helperId} = this.props
+        socket.emit('chat mounted');
+        
         socket.on('socket id', id=>{
             console.log('socket id: ', id)
-            this.setState({socketID: id})
             const {socketID, userID, requestID, creatorID, helperID } = this.state
             axios.post('http://localhost:3005/chat/socketID', 
                 {socketID: id, userID, requestID, creatorID, helperID})
                 .then(res=>{
                     const conversationID = res.data.id
                     const requestDescription = res.data.description
-                    this.setState({conversationID, requestDescription})
+                    this.setState({conversationID, requestDescription, socketID: id})
                     socket.emit('get messages', conversationID)
                 })
-            //update socket id on user db table. 
-            //create conversation
-
-
-            /// TODO get messages of proper conversation . . . store messages to proper conversaion
-
-
-        })
+            })
         // get usernames
         const { creatorID, helperID } = this.state;
         axios.post('http://localhost:3005/chat/usernames', {creatorID, helperID})
             .then(res=>{
-                console.log('usernames ===========> ',res.data)
                 this.setState({
                     username: {creator: res.data.sendMe.creator, helper: res.data.sendMe.helper}
                 })
             })
+
+            
 
         
         
         // alert('conversationid, socketid: ', this.state.conversationID, ' ', this.state.socketID)
         // axios.post('http://localhost:3005/newchat', { requestId: 1, requesterId: 1, helperId: 2 }) // passed in through props
     }
+    // componentDidMount(){
+    //     if(this.state.conversationID){
+    //     socket.emit('get messages', this.state.conversationID)
+    //     }
+    // }
     //time in hours/minutes/seconds
     getDateString = function(){
         let d = new Date()
