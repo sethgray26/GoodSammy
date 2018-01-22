@@ -4,6 +4,10 @@ import FlatButton from 'material-ui/FlatButton'
 
 class RepeatedRequest extends Component {
 
+    componentWillReceiveProps(nextprops){
+        console.log('props',nextprops)
+    }
+
 
     render() {
         return (
@@ -18,6 +22,7 @@ class RepeatedRequest extends Component {
                     />
                     <CardText expandable = {true} >
                         {this.props.description}
+                        {this.props.distance}
                     <CardActions>
                         <FlatButton label = "View Details"/>
                         <FlatButton/>

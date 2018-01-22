@@ -10,8 +10,7 @@ class RequestList extends Component {
     constructor() {
         super()
         this.state = {
-            requestArr: [],
-            distance: ''
+            requestArr: []
         }
 
     }
@@ -30,7 +29,6 @@ class RequestList extends Component {
             console.log('not supported in browser')
         }
         axios.get('/request').then((res) => {
-            //test #2
             this.setState({
                 requestArr: res.data
             })
@@ -47,24 +45,24 @@ class RequestList extends Component {
     distance = (lat1, lon1) => {
         let arr = this.state.requestArr
         console.log('arr', arr)
+        let newArr = []
         for (var i = 0; i < arr.length; i++) {
             let type = 'imperial'
             const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=${type}&origins=${lat1},${lon1}&destinations=${arr[i].lat},${arr[i].long}&key=AIzaSyCIIg2weQK6p4wUTy6nXrCj4-hPGgA40xI`
-            console.log(url)
-            // axios({
-            //     method: 'GET',
-            //     url: url,
-            //     headers: {
-            //         'Access-Control-Allow-Origin': '*'
-            //     }
-            axios.get(url)
-            .then(res => {
-                console.log('res.data', res.data.rows[0].elements[0].distance.text)
-                //set state
-                //arr[i].distance = res.data.rows[0].elements[0].distance.text
-            })
+            console.log(url)            
+            newArr.push(axios.get(url))
         }
-        console.log('loop done:', arr)
+        console.log('array of promise:', newArr)
+        Promise.all(newArr).then(res => {
+            let requestArr = this.state.requestArr
+            let newState = {}
+            for (var j = 0; j < requestArr.length; j++) {
+                requestArr[j].distance = res[j].data.rows[0].elements[0].distance.text
+                //newState[requestArr[j].distance] = res[j].data.rows[0].elements[0].distance.text
+                console.log(`distance for index ${j}`,res[j].data.rows[0].elements[0].distance.text)
+            }
+            this.setState({requestArr})
+        })
     }
 
     render() {
@@ -74,7 +72,7 @@ class RequestList extends Component {
                     key={request.id}
                     description={request.description}
                     category={request.category}
-                    distance={this.state.distance}
+                    distance={request.distance}
                     username={request.user_id}
                 />
             )
