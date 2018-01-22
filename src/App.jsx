@@ -18,6 +18,7 @@ class App extends Component {
           <Route exact path='/Home' component={ Home }/>
           <Route path='/createReq' component={ CreateRequest }/>
           <Route path='/reqList' component={ RequestList }/>
+          {/*<Route path='/reqDetail' component={ }/>*/}
         </div>
       </HashRouter>
     );
