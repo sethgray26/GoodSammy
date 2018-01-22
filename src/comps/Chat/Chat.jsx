@@ -29,9 +29,11 @@ export default class Chat extends Component {
             messageInput: "",
             socket: io('http://192.168.0.126:3005'),
             response: [],
-            socketID: null,
-            userID: 1, // this will /later/ come from props from redux user object.
-            requestID: 22, // this will come from props
+            socketID: null, // userID, creatorID, requesterID, requestID
+            creatorID: 4,
+            helperID: 2,
+            userID: 2, // this will /later/ come from props from redux user object.
+            requestID: 24, // this will come from props
             conversationID: null
         }
         socket.on('convo messages', response => {
@@ -47,8 +49,9 @@ export default class Chat extends Component {
         socket.on('socket id', id=>{
             console.log('socket id: ', id)
             this.setState({socketID: id})
+            const {socketID, userID, requestID, creatorID, helperID } = this.state
             axios.post('http://localhost:3005/chat/socketID', 
-                {socketID: id, userID: this.state.userID, requestID: this.state.requestID})
+                {socketID: id, userID, requestID, creatorID, helperID})
                 .then(res=>{
                     const conversationID = res.data
                     this.setState({conversationID})
