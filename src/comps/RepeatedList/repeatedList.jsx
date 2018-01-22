@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
+import FlatButton from 'material-ui/FlatButton'
 import { Link } from 'react-router-dom'
 
-
 class RepeatedRequest extends Component {
+
+    componentWillReceiveProps(nextprops){
+        console.log('props',nextprops)
+    }
+
+
     render() {
         return (
             <div>
@@ -17,10 +23,11 @@ class RepeatedRequest extends Component {
                         showExpandableButton = {true}
                     />
                     <CardText expandable = {true} >
-                        {this.props.description}
+                        <p>Desc: {this.props.description}</p><br/>
+                        <p>Disance from you: {this.props.distance}</p>
                         <CardActions>
-                            <Link to ={`/request/${this.props.requestID}`} >
-                                <RaisedButton label = "View Details" primary ={true}/>
+                            <Link to={`/request/${this.props.requestID}`} >
+                                <RaisedButton label="View Details" primary={true} />
                             </Link>
                         </CardActions>
                     </CardText>
@@ -31,4 +38,5 @@ class RepeatedRequest extends Component {
     }
 }
 
-export default RepeatedRequest;
+  
+export default RepeatedRequest
