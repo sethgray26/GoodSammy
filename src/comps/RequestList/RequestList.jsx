@@ -4,6 +4,8 @@ import RepeatedRequest from './../RepeatedList/repeatedList';
 import axios from 'axios'
 import repeatedList from './../RepeatedList/repeatedList';
 
+import blue_hand from './blueHand.png'
+
 
 class RequestList extends Component {
     constructor(){
@@ -44,6 +46,10 @@ class RequestList extends Component {
         })
         return (
             <div>
+                <div className="home_header">
+                    <img src={blue_hand} alt='blue_hand'/>
+                </div>
+
                 <Map/>
                 <section>People Need Help!</section>
                 <br/>
