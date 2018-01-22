@@ -4,6 +4,7 @@ import Chat from '../Chat/Chat'
 import axios from 'axios'
 import RaisedButton  from 'material-ui/RaisedButton';  
 import { RadioButton } from 'material-ui';
+// import {Link} from 'react-router-dom';  
 
 
 class ViewRequest extends Component {
@@ -61,7 +62,7 @@ class ViewRequest extends Component {
                     </select>
                     <RaisedButton label ='Save!' onClick={this.saveAndDisable} secondary={true} />
                     <Chat/>
-
+                    <RaisedButton label='Close Request'/>
 
                 </div>
                 :
@@ -69,6 +70,7 @@ class ViewRequest extends Component {
                     {/* other view */}
                     <Map/>
                     <span>request.description</span>
+                    <RaisedButton label='Commit to help'/>
                     <Chat/> 
                 </div>
             }
@@ -76,7 +78,8 @@ class ViewRequest extends Component {
         )
         :
              (
-                <div>Something went terribly wrong...</div>
+                <div>Uh oh! Looks like something went wrong!</div>
+                // <Link to='/'>Home</Link>
             )
         
     }
