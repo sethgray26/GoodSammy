@@ -9,31 +9,37 @@ class ViewRequest extends Component {
     constructor(){
         super()
             this.state = {
-                request: {}
+                request: []
             }
+            
     }
 
     componentDidMount(){
-        axios.get('/request').then((res) => {
-            console.log(res)
+        
+        axios.get(`/request/+${this.props.match.params.id}`).then((res) => {
+            // console.log(res)
             this.setState({
                 request: res.data
             })
             let userId = this.state.user_id
+            console.log(this.state.request[0]);
+            
         })
     }
 
     render() {
+        console.log(this.state.request);
+        
         return (
             <div>
-                {/* flase ternary placeholder, Redux to be implented */}
+                {/* false ternary placeholder, Redux to be implented */}
                 {this.state.request.user_id === this.state.help_id ?
                 <div>
                     {/* own view */}
                     <Map/>
                     <RaisedButton label ='Edit Description'/>
                     
-                    <span>This is information</span>
+                    <span>{this.state.request.description}</span>
                     <RaisedButton label ='Edit Category'/>
                     <Chat/>
 

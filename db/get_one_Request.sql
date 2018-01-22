@@ -1,1 +1,1 @@
-select * from request where user_id = $1
+select * from request where id = $1

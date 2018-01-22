@@ -11,9 +11,7 @@ class RequestList extends Component {
         super()
             this.state = {
                 requestArr: [],
-                distance: '', 
-                long: '',
-                lat: ''
+                distance: ''
             }
         
     }
