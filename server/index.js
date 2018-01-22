@@ -30,11 +30,6 @@ app.use( session({
 
 const io = socket(app.listen( process.env.SERVER_PORT, () => {console.log('listening on port 3005')}));
 
-// app.use( session({
-//     secret: process.env.SESSION_SECRET,
-//     saveUninitialized: true, 
-//     resave: false
-// }))
 
 // app.use( express.static( __dirname + '/../build' ))
 
@@ -45,6 +40,7 @@ app.put('/setLocation/:id',maps_controller.setLocation)
 
 //Requests
 app.post('/createRequest',request_controller.createRequest)
+app.get('/auth/me', users_controller.getUserId )
 app.post('/createUser',users_controller.createUsers )
 app.put('/checkLogin/:username',users_controller.checkLogin)
 app.get('/logout',users_controller.logOut)

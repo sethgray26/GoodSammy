@@ -1,4 +1,4 @@
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 const saltRounds = 10;
 const session = require('express-session')
 const express = require('express')
@@ -12,9 +12,9 @@ module.exports = {
             
             bcrypt.hash(req.body.password, salt, function (err, hash) {
                 // Store hash in your password DB.
-                console.log('hashed pw', hash)
+                // console.log('hashed pw', hash)
                 db.create_users(req.body.username, hash, req.body.phone ).then(user => {
-                    console.log('user', user)
+                    // console.log('user', user)
                     res.status(200).send(user);
                 })
             });
@@ -28,12 +28,12 @@ module.exports = {
         console.log('check login', req.session)
         //Get hashed password for this username
         db.find_user(req.params.username).then( user => {
-            console.log('userdata', user[0].password)
-            console.log('txtPassword', req.body.txtPassword, 'pw', user[0].password)
+            // console.log('userdata', user[0].password)
+            // console.log('txtPassword', req.body.txtPassword, 'pw', user[0].password)
             bcrypt.compare(req.body.txtPassword, user[0].password, function (err, res) {
                 if (res === true) {
                     //password match!
-                    req.session.user = user[0].username
+                    req.session.user = user[0].id
                     console.log('req',req.session)
                 }
                 else {
@@ -41,6 +41,7 @@ module.exports = {
                     console.log('password incorrect')
                 }
                 resp.status(200).send(res);
+                console.log('re', res)
             });
         }).catch(error => {
             console.log(error)
@@ -55,5 +56,9 @@ module.exports = {
         // console.log(res)
         res.redirect(process.env.AUTH_LANDING_REDIRECT)
         // console.log('did not redirect')
+    },
+
+    getUserId: (req, res ) => {
+        res.status(200).send(req.session)
     }
 }

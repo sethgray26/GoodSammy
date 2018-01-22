@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
+import './Home.css'
+
 import blue_hand from'./blueHand.png'
 
 
@@ -24,7 +26,7 @@ export default class Home extends Component {
 
         return (
             <div className='home'>
-                <div className="landing_header">
+                <div className="home_header">
                     <img src={blue_hand} alt='blue_hand'/>
                 </div>
 
@@ -41,14 +43,15 @@ export default class Home extends Component {
                         buttonStyle={{ borderRadius: 25 }} 
                         style={ styles.helpsomeone }
                     /></Link>
-                </div>
 
-                <div className='landing_footer'>
-                   <a href={process.env.REACT_APP_LOGOUT}><RaisedButton label='LOGOUT' 
+                    <a href={process.env.REACT_APP_LOGOUT}><RaisedButton label='LOGOUT' 
                         backgroundColor={ lightGreen500 } 
                         style={ styles.logandsign }
                     /></a>
+
                 </div>
+
+              
             </div>
         )
     }
@@ -70,7 +73,8 @@ const styles = {
     },
 
     logandsign: {
-        margin: 12
+        margin: 12,
+        marginTop: 18
     },
     underlineStyle: {
         borderColor: blue500,
