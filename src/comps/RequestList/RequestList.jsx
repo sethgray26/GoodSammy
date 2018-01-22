@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Map from '../Map/Map';
 import RepeatedRequest from './../RepeatedList/repeatedList';
-import repeatedList from './../RepeatedList/repeatedList';
 import { setLocationState } from '../../ducks/reducers/maps';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -74,21 +73,25 @@ class RequestList extends Component {
         const request = this.state.requestArr.map(request => {
             return (
                 <RepeatedRequest
-                    key={request.id}
-                    description={request.description}
-                    category={request.category}
+                    key = {request.id}
+                    description = {request.description}
+                    category = {request.category}
+                    username = {request.username}
+                    requestID = {request.id}
                     distance={request.distance}
-                    username={request.user_id}
+                    username={request.username}
                 />
             )
         })
         return (
-            <div>
-                <Map />
-                <section>People Need Help!</section>
-                <br />
-                <section>{request}</section>
-
+            <div className='body-content' >
+                    {this.state.requestArr.length !== 0 ?
+                    <div>
+                    <strong>People Need help!</strong>
+                    <section>{request}</section>
+                    </div>
+                    :
+                    <div>Looks like no one needs help! </div>}
             </div>
         );
     }

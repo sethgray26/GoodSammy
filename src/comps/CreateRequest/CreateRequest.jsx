@@ -14,6 +14,7 @@ import { blue500, lightGreen500, red400 } from 'material-ui/styles/colors';
 
 
 import Map from '../Map/Map';
+import './CreateRequest.css'
 
 class CreateRequest extends Component {
     constructor(props){

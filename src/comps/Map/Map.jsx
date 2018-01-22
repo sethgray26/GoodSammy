@@ -59,7 +59,7 @@ class Map extends Component {
             />
           </div>
           :
-          <div></div>}
+          <div> No position available </div>}
       </div>
     );
   }
