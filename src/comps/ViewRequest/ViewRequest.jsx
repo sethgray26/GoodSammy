@@ -47,7 +47,8 @@ class ViewRequest extends Component {
     }
 
     render() {
-        console.log('this.props: ',this.props)
+        console.log('state.request\n===========>',this.state.request)
+        console.log('props\n===========>',this.props)
         return this.state.request[0] ?
         (
             <div>
@@ -62,7 +63,8 @@ class ViewRequest extends Component {
                         <option value="1">Automotive</option>
                     </select>
                     <RaisedButton label ='Save!' onClick={this.saveAndDisable} secondary={true} />
-                    <Chat/>
+                    <Chat userID={this.props.clientID} creatorID={this.state.request[0].user_id} 
+                    helperID={this.state.request[0].help_id} requestID={this.state.request[0].id}/> 
                     <RaisedButton label='Close Request'/>
 
                 </div>
@@ -72,21 +74,24 @@ class ViewRequest extends Component {
                     <Map/>
                     <span>request.description</span>
                     <RaisedButton label='Commit to help'/>
-                    <Chat/> 
+                    <Chat userID={this.props.clientID} creatorID={this.state.request[0].user_id} 
+                    helperID={this.state.request[0].help_id} requestID={this.state.request[0].id}/> 
                 </div>
             }
             </div>
         )
         :
              (
-                <div>Uh oh! Looks like something went wrong!</div>
+                <div>Loading . . .</div>
                 // <Link to='/'>Home</Link>
             )
         
     }
 }
 function mapStateToProps(state){
-    return state
+    return {
+        clientID : state.users.userID
+    }
 }
 
 export default connect(mapStateToProps)(ViewRequest);

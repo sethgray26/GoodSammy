@@ -2,10 +2,19 @@ import axios from 'axios'
 
 const initialState = {
     userData: {},
-    error: false
+    error: false,
+    userID: null
 }
 
 const CREATE_USERS = 'CREATE_USERS'
+const UPDATE_USER = 'UPDATE_USER'
+
+export function updateUser( id ){
+    return {
+        type: UPDATE_USER,
+        payload: id
+    }
+}
 
 export function createUsers( userData ){
     //action creatrot
@@ -28,6 +37,8 @@ export default function reducer( state = initialState, action ){
             return Object.assign({}, state, { userData: action.payload })
         case CREATE_USERS + '_REJECTED':
             return Object.assign({}, state, { error: true })
+        case UPDATE_USER:
+            return Object.assign({}, state, {userID: action.payload })
         default:
             return state;
     }  
