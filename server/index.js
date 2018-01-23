@@ -14,7 +14,7 @@ const maps_controller = require('./controllers/maps_controller.jsx')
 const request_controller = require('./controllers/request_controller.jsx')
 
 const app = express()
-app.use(bodyParser.json() )
+app.use(bodyParser.json())
 app.use(cors())
 
 massive(process.env.DB_CONNECTION).then( db => {
