@@ -1,0 +1,1 @@
+UPDATE request SET help_id = NULL WHERE id = $1

@@ -26,5 +26,12 @@ module.exports = {
 
         dbInstance.update_Helper(help_id, request_id)
         .then((request) => res.status(200).send(request))
+    },
+    remove_Help: (req,res) => {
+        const dbInstance = req.app.get('db')
+        const {request_id} = req.body 
+
+        dbInstance.remove_Help(request_id)
+        .then((request) => res.status(200).send(request))
     }
 }

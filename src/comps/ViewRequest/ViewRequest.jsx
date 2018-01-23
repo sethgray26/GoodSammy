@@ -41,6 +41,18 @@ class ViewRequest extends Component {
             request_id: this.state.request[0].id
         }
         axios.put('/commit', sammy)
+        // this.setState({
+        //     request: this.state.request[0]
+        // })
+        // console.log(this.state.request);
+        
+    }
+
+    removeHelper = () => {
+        let removed = {
+            request_id: this.state.request[0].id
+        }
+        axios.put('/removeHelp', removed)
     }
 
 
@@ -59,7 +71,7 @@ class ViewRequest extends Component {
         return this.state.request[0] ?
         (
             <div>
-                {/* false ternary placeholder, Redux to be implented: If user id matches who is signed in */}
+                {/* false ternary placeholder: If user id matches who is signed in */}
                 {this.state.request.user_id !== this.state.help_id ?
                 <div>
                     {/* own view */}
@@ -85,7 +97,10 @@ class ViewRequest extends Component {
                     {this.state.request[0].help_id === null ?
                     <RaisedButton label='Commit to help' onClick ={this.handleCommit} primary ={true} />
                     :
-                    <div><Chat/></div>
+                    <div>
+                        <Chat/>
+                        <Link to ='/reqList'><RaisedButton label = 'quit' onClick={this.removeHelper}/></Link>
+                    </div>
                     
                 }
                 <Link to='/reqList'><RaisedButton label ='Return to List' secondary={true} /></Link>
