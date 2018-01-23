@@ -75,11 +75,10 @@ class RequestList extends Component {
                 <RepeatedRequest
                     key = {request.id}
                     description = {request.description}
-                    category = {request.category}
+                    category = {request.category_name}
                     username = {request.username}
                     requestID = {request.id}
                     distance={request.distance}
-                    username={request.username}
                 />
             )
         })
