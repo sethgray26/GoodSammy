@@ -13,7 +13,7 @@ export default class Chat extends Component{
             response:[]
         }
         socket.on('generate response', response=>{
-            console.log(response)
+            // console.log(response)
             this.setState({response: response})
         
         })       
@@ -34,7 +34,6 @@ export default class Chat extends Component{
     }
     render(){
         const { messageInput, socket } = this.state;
-        console.log('response: ', this.state.response)
         return(
             <div className="chat-container">
                 <div className="message-box">

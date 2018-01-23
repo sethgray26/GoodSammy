@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {Card, CardHeader, CardText, CardTitle, CardActions} from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
+import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 import {Link} from 'react-router-dom'
 
@@ -30,8 +29,9 @@ class RepeatedRequest extends Component {
                         <br/>
                         <p style={{ marginBottom: 8, fontSize: 18, fontWeight: 300}}>Disance from you: {this.props.distance}</p>
                     <CardActions>
-                        <Link to='/reqDetail'><RaisedButton primary = {true} label = "View Details"/></Link>
-                        {/*<RaisedButton/>*/}
+                        <Link to={`/request/${this.props.requestID}`} >
+                            <RaisedButton label="View Details" primary={true} />
+                        </Link>
                     </CardActions>
                     </CardText>
                 </Card>

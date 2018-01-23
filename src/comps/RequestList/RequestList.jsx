@@ -82,22 +82,25 @@ class RequestList extends Component {
                     description={request.description}
                     category={request.cat_name}
                     distance={request.distance}
-                    username={request.user_id}
+                    username={request.username}
+                    requestID={request.id}
                 />
             )
         })
         return (
-            <div>
-                <div className="list_header">
-                    <img style={{height: 70, width: 70 }} src={blue_hand} alt='blue_hand'/>
-                </div>
 
-                <Map/>
-                <Map />
-                <h3>Lend a hand today!</h3>
-                <br />
-                <section>{request}</section>
+            <div className='body-content' >
+                    <div className="list_header">
+                        <img style={{height: 70, width: 70 }} src={blue_hand} alt='blue_hand'/>
+                    </div>
 
+                    {this.state.requestArr.length !== 0 ?
+                    <div>
+                        <h3>Lend a hand today!</h3>
+                        <section>{request}</section>
+                    </div>
+                    :
+                    <div>Looks like no one needs help! </div>}
             </div>
         );
     }
