@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Map from '../Map/Map'
 import Chat from '../Chat/Chat'
 import axios from 'axios'
@@ -46,7 +47,7 @@ class ViewRequest extends Component {
     }
 
     render() {
-
+        console.log('this.props: ',this.props)
         return this.state.request[0] ?
         (
             <div>
@@ -84,5 +85,8 @@ class ViewRequest extends Component {
         
     }
 }
+function mapStateToProps(state){
+    return state
+}
 
-export default ViewRequest;
+export default connect(mapStateToProps)(ViewRequest);

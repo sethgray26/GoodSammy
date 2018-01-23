@@ -12,6 +12,7 @@ import blue_hand from'./blueHand.png'
 import { Dialog, TextField, RaisedButton } from 'material-ui'
 import { lightGreen500, blue500 } from 'material-ui/styles/colors';
 import { lightBlue500 } from 'material-ui/styles/colors';
+import Chat from './../Chat/Chat.jsx'
 
 
 class Landing extends Component {
@@ -74,6 +75,8 @@ class Landing extends Component {
         .then(res => {
             if (res.data === true) {
                 //redirect to dashboard
+                //need to get userID here and put in store. 
+                console.log('res.data: ',res.data)
                 this.props.history.push('/Home')
             }
             else {
