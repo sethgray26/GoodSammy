@@ -26,7 +26,7 @@ class ViewRequest extends Component {
         let updates = {
             description: this.refs.description.value,
             category: this.refs.category.value,
-            request_id: this.state.request[0].id
+            request_id: this.state.request.id
         }
         axios.put('/update', updates)
     }
@@ -36,21 +36,23 @@ class ViewRequest extends Component {
     }
 
     handleCommit = () =>{
+        console.log('ClientId ist',this.props.clientID)
+
         let sammy = {
-            help_id: '',
-            request_id: this.state.request[0].id
+            help_id: this.props.clientID,
+            request_id: this.state.request.id
         }
         axios.put('/commit', sammy)
-        // this.setState({
-        //     request: this.state.request[0]
-        // })
-        // console.log(this.state.request);
+        
+        this.setState({
+            request: Object.assign({}, this.state.request, {help_id: this.props.clientID})
+        })
         
     }
 
     removeHelper = () => {
         let removed = {
-            request_id: this.state.request[0].id
+            request_id: this.state.request.id
         }
         axios.put('/removeHelp', removed)
     }
@@ -60,7 +62,7 @@ class ViewRequest extends Component {
         
         axios.get(`/request/+${this.props.match.params.id}`).then((res) => {
             this.setState({
-                request: res.data
+                request: res.data[0]
             })
             
         })
@@ -68,16 +70,16 @@ class ViewRequest extends Component {
 
     render() {
             
-        return this.state.request[0] ?
+        return this.state.request ?
         (
             <div>
                 {/* false ternary placeholder: If user id matches who is signed in */}
-                {this.state.request.user_id !== this.state.help_id ?
+                {this.state.request.user_id === this.props.clientID ?
                 <div>
                     {/* own view */}
-                    <Map lat={+this.state.request[0].lat} lng ={+this.state.request[0].long}/>
+                    <Map lat={+this.state.request.lat} lng ={+this.state.request.long}/>
                     <RaisedButton label ='Edit Information' onClick={this.enableStatus} primary = {true} />
-                    <textarea name="" id="" cols="30" rows="10" disabled={this.state.disable} ref='description' defaultValue={this.state.request[0].description}></textarea>
+                    <textarea name="" id="" cols="30" rows="10" disabled={this.state.disable} ref='description' defaultValue={this.state.request.description}></textarea>
                     <select name="" id="" disabled={this.state.disable} ref='category'>
                         <option value="1">Automotive</option>
                     </select>
@@ -89,17 +91,17 @@ class ViewRequest extends Component {
                 :
                 <div>
                     {/* other view */}
-                    <Map lat={+this.state.request[0].lat} lng={+this.state.request[0].long}/>
+                    <Map lat={+this.state.request.lat} lng={+this.state.request.long}/>
                     <br/>
-                    <p>{this.state.request[0].description}</p>
+                    <p>{this.state.request.description}</p>
                     <br/>
                     {/* If someone is already helping */}
-                    {this.state.request[0].help_id === null ?
+                    {this.state.request.help_id === null ?
                     <RaisedButton label='Commit to help' onClick ={this.handleCommit} primary ={true} />
                     :
                     <div>
                         <Chat/>
-                        <Link to ='/reqList'><RaisedButton label = 'quit' onClick={this.removeHelper}/></Link>
+                        <Link to ='/reqList'><RaisedButton label = 'Cancel' onClick={this.removeHelper}/></Link>
                     </div>
                     
                 }
@@ -118,7 +120,7 @@ class ViewRequest extends Component {
     }
 }
 function mapStateToProps(state){
-    return state
+    return {clientID: state.users.userID}
 }
 
 export default connect(mapStateToProps)(ViewRequest);
