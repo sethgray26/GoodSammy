@@ -1,0 +1,34 @@
+.view_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px;
+}
+
+.map_wrapper {
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.text_area {
+    width: 100%;
+    height: 150px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.text_button_wrapper {
+    margin-bottom: 10px;
+}
+
+.chat_wrapper {
+    margin-bottom: 15px;
+}
