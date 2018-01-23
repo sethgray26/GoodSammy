@@ -19,5 +19,19 @@ module.exports = {
         
         dbInstance.update_req_info(request_id, description, category)
         .then((request) => res.status(200).send(request))
+    },
+    update_Helper: (req,res) => {
+        const dbInstance = req.app.get('db')
+        const{help_id, request_id} = req.body 
+
+        dbInstance.update_Helper(help_id, request_id)
+        .then((request) => res.status(200).send(request))
+    },
+    remove_Help: (req,res) => {
+        const dbInstance = req.app.get('db')
+        const {request_id} = req.body 
+
+        dbInstance.remove_Help(request_id)
+        .then((request) => res.status(200).send(request))
     }
 }
