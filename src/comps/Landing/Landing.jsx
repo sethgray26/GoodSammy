@@ -29,6 +29,7 @@ class Landing extends Component {
 
         this.createUser = this.createUser.bind(this)
         this.login = this.login.bind(this)
+        this.inputSubmit = this.inputSubmit.bind(this)
     }
 
     handleOpen = () => {
@@ -43,45 +44,45 @@ class Landing extends Component {
 
     inputChange(e) {
         let { name, value } = e.target
-        console.log('name',name, 'val', value)
         let newState = {}
         newState[name] = value
         this.setState(newState)
     }s
 
     createUser(){
-        console.log('createuser state',this.state.username)
         let { username, password, confirmPassword, phone } = this.state
 
         if ( password === confirmPassword ){
-            console.log('username', username, 'password', password)
             this.props.createUsers({ username, password, phone })
             .then(res => {
                 this.handleClose()
             })
         }else {
-            return "Passwords do not maatch"
+            return "Passwords do not match"
         }
         
     }
 
-    login() {
+    inputSubmit(e){
+        if( e.key === "Enter" && e.target.value.length < 0 ){
+            this.login()
+        }
+    }
+
+    login(  ) {
         console.log('hit')
         axios.put(`/checkLogin/${this.state.username}`, { txtPassword: this.state.password })
         .then(res => {
-            console.log('res promise', res)
             if (res.data === true) {
                 //redirect to dashboard
                 this.props.history.push('/Home')
-                console.log('true')
             }
             else {
-                //stay on log in page
-                console.log('false')
+                //stay on log in p
                 alert('Incorrect username or password, please try again!')
             }
         }).catch(error => {
-            console.log('error', error)
+            
         });
     }
 
@@ -108,21 +109,6 @@ class Landing extends Component {
                     <img src={blue_hand} alt='blue_hand'/>
                 </div>
 
-                {/*<div className='landing_body'>
-                    <Link to='/createReq'><RaisedButton 
-                        label='Need Help?' 
-                        primary={true} buttonStyle={{ borderRadius: 25 }} 
-                        style={ styles.needHelp } 
-                    /></Link>
-
-                    <Link to='/reqList'><RaisedButton 
-                        label='Help Someone' 
-                        backgroundColor={ lightGreen500 } 
-                        buttonStyle={{ borderRadius: 25 }} 
-                        style={ styles.helpsomeone }
-                    /></Link>
-
-                </div>*/}
 
                 <div className='landing_footer'>
                     <Chat/>
@@ -151,12 +137,13 @@ class Landing extends Component {
                         underlineFocusStyle={styles.underlineStyle}
                         floatingLabelStyle={styles.floatingLabelStyle}
                         floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        onKeyPress={this.inputSubmit}
                     /><br />
 
                     <RaisedButton label='LOGIN' 
                         backgroundColor={ lightGreen500 } 
                         style={ styles.logandsign }
-                        onClick={ () => this.login()}
+                        onClick={ (e) => this.login(e)}
                     />
                     <RaisedButton label='SIGN UP' 
                         backgroundColor={ lightBlue500 } 
@@ -227,7 +214,7 @@ class Landing extends Component {
 }
 
 function mapStateToProps( state ){
-    console.log('map', state)
+    
     return {
         userData: state.users.userData
     }
@@ -252,7 +239,8 @@ const styles = {
     },
 
     logandsign: {
-        margin: 12
+        margin: 12,
+        marginTop: 13
     },
     underlineStyle: {
         borderColor: blue500,

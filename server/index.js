@@ -16,7 +16,7 @@ const maps_controller = require('./controllers/maps_controller.jsx')
 const request_controller = require('./controllers/request_controller.jsx')
 
 const app = express()
-app.use(bodyParser.json() )
+app.use(bodyParser.json())
 app.use(cors())
 
 massive(process.env.DB_CONNECTION).then( db => {
@@ -32,11 +32,6 @@ app.use( session({
 const io = socket(app.listen( process.env.SERVER_PORT, () => {
     console.log('listening on port 3005')}) );
 
-// app.use( session({
-//     secret: process.env.SESSION_SECRET,
-//     saveUninitialized: true, 
-//     resave: false
-// }))
 
 // app.use( express.static( __dirname + '/../build' ))
 
@@ -53,17 +48,20 @@ app.post('/chat/socketID', chat_controller.updateSocketID)
 app.post('/chat/usernames', chat_controller.getUsernames)
 // .===================================================. //
 
-// app.post('/createUser',users_controller.createUsers )
-// app.put('/checkLogin/:username',users_controller.checkLogin)
-// app.get('/logout',users_controller.logOut)
+app.get('/auth/me', users_controller.getUserId )
+app.post('/createUser',users_controller.createUsers )
+app.put('/checkLogin/:username',users_controller.checkLogin)
+app.get('/logout',users_controller.logOut)
 
 // ========== ENDPOINTS ========== //
 
 // === GET REQUESTS === //
 // tests #3
 app.get('/request', controllers.get_Request )
+app.get('/request/:id', controllers.get_one_request)
 
 // === PUT REQUESTS === //
+app.put('/update', controllers.update_req_info)
 
 // === POST REQUESTS === //
 // app.post('/createUser', users_controller.createUsers )
