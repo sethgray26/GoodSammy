@@ -39,7 +39,7 @@ class ViewRequest extends Component {
             help_id: '',
             request_id: this.state.request[0].id
         }
-        axios.put('/update', sammy)
+        axios.put('/commit', sammy)
     }
 
 
@@ -49,17 +49,16 @@ class ViewRequest extends Component {
             this.setState({
                 request: res.data
             })
-            console.log(res.data);
             
         })
     }
 
     render() {
-
+            
         return this.state.request[0] ?
         (
             <div>
-                {/* false ternary placeholder, Redux to be implented */}
+                {/* false ternary placeholder, Redux to be implented: If user id matches who is signed in */}
                 {this.state.request.user_id !== this.state.help_id ?
                 <div>
                     {/* own view */}
@@ -81,6 +80,7 @@ class ViewRequest extends Component {
                     <br/>
                     <p>{this.state.request[0].description}</p>
                     <br/>
+                    {/* If someone is already helping */}
                     {this.state.request[0].help_id === null ?
                     <RaisedButton label='Commit to help' onClick ={this.handleCommit} primary ={true} />
                     :
