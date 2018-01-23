@@ -75,6 +75,8 @@ class Landing extends Component {
         .then(res => {
             if (res.data === true) {
                 //redirect to dashboard
+                //need to get userID here and put in store. 
+                console.log('res.data: ',res.data)
                 this.props.history.push('/Home')
             }
             else {
@@ -111,7 +113,6 @@ class Landing extends Component {
 
 
                 <div className='landing_footer'>
-                    <Chat/>
 
                     <TextField
                         name='username'

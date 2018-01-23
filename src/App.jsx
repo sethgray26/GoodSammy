@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import {Route, HashRouter, Link } from 'react-router-dom';
-import './App.css';
+import {Route, HashRouter } from 'react-router-dom';
 
 import Home from './comps/Home/Home.jsx'
 import Chat from './comps/Chat/Chat';
 import CreateRequest from './comps/CreateRequest/CreateRequest'; 
 import RequestList from './comps/RequestList/RequestList';   
-import {Route, HashRouter } from 'react-router-dom';
 import Landing from './comps/Landing/Landing';  
-import Home from './comps/Home/Home.jsx'
 import ViewRequest from './comps/ViewRequest/ViewRequest'
 import './App.css';
 

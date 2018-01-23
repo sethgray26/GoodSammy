@@ -13,10 +13,8 @@ module.exports = {
                 conversationID = convo[0].id
                 let request = await db.get_request_by_id(requestID);
                 let sendMe = {}
-                console.log('request: . . . . . . ', request[0].description)
                 sendMe.description = request[0].description.slice(0,28)+'...'
                 sendMe.id = conversationID
-                console.log('sendMe obj====> ', sendMe)
                 res.status(200).json(sendMe)
             }
             else {
