@@ -14,7 +14,7 @@ const maps_controller = require('./controllers/maps_controller.jsx')
 const request_controller = require('./controllers/request_controller.jsx')
 
 const app = express()
-app.use(bodyParser.json() )
+app.use(bodyParser.json())
 app.use(cors())
 
 massive(process.env.DB_CONNECTION).then( db => {
@@ -54,6 +54,7 @@ app.get('/request/:id', controllers.get_one_request)
 
 // === PUT REQUESTS === //
 app.put('/update', controllers.update_req_info)
+app.put('/commit', controllers.update_Helper )
 
 // === POST REQUESTS === //
 app.post('/createUser', users_controller.createUsers )

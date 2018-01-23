@@ -168,7 +168,7 @@ class Landing extends Component {
                         <TextField
                             name='password'
                             value={this.state.password}
-                            onChange={() => this.inputChange()}
+                            onChange={(e) => this.inputChange(e)}
                             fullWidth={true}
                             multiLine={true}
                             floatingLabelText="Create a Password"

@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import Map from '../Map/Map';
 import RepeatedRequest from './../RepeatedList/repeatedList';
+import repeatedList from './../RepeatedList/repeatedList';
+
+import blue_hand from './blueHand.png'
+import './RequestList.css'
+
 import { setLocationState } from '../../ducks/reducers/maps';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -73,21 +78,26 @@ class RequestList extends Component {
         const request = this.state.requestArr.map(request => {
             return (
                 <RepeatedRequest
-                    key = {request.id}
-                    description = {request.description}
-                    category = {request.category_name}
-                    username = {request.username}
-                    requestID = {request.id}
+                    key={request.id}
+                    description={request.description}
+                    category={request.cat_name}
                     distance={request.distance}
+                    username={request.username}
+                    requestID={request.id}
                 />
             )
         })
         return (
+
             <div className='body-content' >
+                    <div className="list_header">
+                        <img style={{height: 70, width: 70 }} src={blue_hand} alt='blue_hand'/>
+                    </div>
+
                     {this.state.requestArr.length !== 0 ?
                     <div>
-                    <strong>People Need help!</strong>
-                    <section>{request}</section>
+                        <h3>Lend a hand today!</h3>
+                        <section>{request}</section>
                     </div>
                     :
                     <div>Looks like no one needs help! </div>}

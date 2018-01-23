@@ -1,0 +1,8 @@
+.list_header {
+    /* border: 2px solid green; */
+    margin-bottom: 10px;
+}
+
+.list_header > img {
+    margin-top: 10px;
+}

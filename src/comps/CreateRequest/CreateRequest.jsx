@@ -136,21 +136,6 @@ class CreateRequest extends Component {
 
                         </SelectField>
                     </div>
-
-                    {/*<div>Select a category:
-                         <select name="Category selection" id="" ref='category' >
-                            <option value="1" >Automotive</option>
-                            <option value="2" >Life</option>
-                            <option value="3">Spritual</option>
-                            <option value="4">Money</option>
-                            <option value="5">Moving</option>
-                            <option value="6">Errands</option>
-                            <option value="7">Love</option>
-                            <option value="8">Coding</option>
-                            <option value="9">Construction</option>
-                            <option value="10">Baking</option>
-                        </select>
-                    </div>*/}
                 
                     <h2>How can a Good Sammy help you?</h2>
 
@@ -173,12 +158,6 @@ class CreateRequest extends Component {
                         />
                     </div>
 
-                    {/*<textarea
-                        name="Request Description"
-                        id="" cols="40" rows="10"
-                        ref='description'
-                        placeholder='Example..."I need help changing a tire!"'
-                    ></textarea>*/}
                 </div>
                 <br />
                 <div className="map">
@@ -197,15 +176,7 @@ class CreateRequest extends Component {
                         style={ styles.logandsign }
                         onClick={this.requestCreator}
                     /></Link>
-
-
-                    {/*<button className='Request-help-button' onClick= {this.requestCreator} >Request Help</button>
-                        <Link to='/Home'><button className='Cancel-request'>Cancel</button></Link>*/}
                 </div>
-
-                {/*<section>
-                    <input type="range" min='1' max='5' className='rating-slider' />
-                </section>*/}
             </div>
         );
     }

@@ -1,1 +1,3 @@
-select * from users JOIN request on request.user_id = users.id ORDER BY request.id DESC
+select request.* , category.name as cat_name from request 
+join category on category.id = request.category_id
+ORDER BY request.id DESC 
