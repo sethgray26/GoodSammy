@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Map from '../Map/Map'
 import Chat from '../Chat/Chat'
 import axios from 'axios'
@@ -84,11 +85,9 @@ class ViewRequest extends Component {
                     {this.state.request[0].help_id === null ?
                     <RaisedButton label='Commit to help' onClick ={this.handleCommit} primary ={true} />
                     :
-                    <div>Looks like someone is already helping!</div>
+                    <div><Chat/></div>
                     
                 }
-                <Chat/> 
-                <br/>
                 <Link to='/reqList'><RaisedButton label ='Return to List' secondary={true} /></Link>
                 </div>
             }
@@ -103,5 +102,8 @@ class ViewRequest extends Component {
         
     }
 }
+function mapStateToProps(state){
+    return state
+}
 
-export default ViewRequest;
+export default connect(mapStateToProps)(ViewRequest);

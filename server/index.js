@@ -1,13 +1,15 @@
 const express = require('express')
-      bodyParser = require('body-parser')
-      cors = require('cors')
-      session = require('express-session')
-      controllers = require('./controllers')
-      massive = require('massive')
-      socketManager = require('./socketManager')
-      const socket=require('socket.io')
+bodyParser = require('body-parser')
+cors = require('cors')
+session = require('express-session')
+controllers = require('./controllers')
+massive = require('massive')
+socketManager = require('./socketManager')
+socket=require('socket.io')
+chat_controller = require('./controllers/chat_controller')
 
-      require('dotenv').config()
+
+require('dotenv').config()
 
 const users_controller = require('./controllers/users_controller.jsx')
 const maps_controller = require('./controllers/maps_controller.jsx')
@@ -27,19 +29,25 @@ app.use( session({
     resave: false
 }))
 
-
-const io = socket(app.listen( process.env.SERVER_PORT, () => {console.log('listening on port 3005')}));
+const io = socket(app.listen( process.env.SERVER_PORT, () => {
+    console.log('listening on port 3005')}) );
 
 
 // app.use( express.static( __dirname + '/../build' ))
 
 //***END POINTS***
 //User
-app.post('/createUser',users_controller.createUsers)
+// app.post('/createUser',users_controller.createUsers)
 app.put('/setLocation/:id',maps_controller.setLocation)
 
 //Requests
 app.post('/createRequest',request_controller.createRequest)
+
+// .=============. CHAT ENDPOINTS .=====================. //
+app.post('/chat/socketID', chat_controller.updateSocketID)
+app.post('/chat/usernames', chat_controller.getUsernames)
+// .===================================================. //
+
 app.get('/auth/me', users_controller.getUserId )
 app.post('/createUser',users_controller.createUsers )
 app.put('/checkLogin/:username',users_controller.checkLogin)
@@ -57,11 +65,16 @@ app.put('/update', controllers.update_req_info)
 app.put('/commit', controllers.update_Helper )
 
 // === POST REQUESTS === //
-app.post('/createUser', users_controller.createUsers )
+// app.post('/createUser', users_controller.createUsers )
 // test #4 
 
 
 // === DELETE REQUESTS === //
+
+
+
 const chat= io.on('connection', (socket)=>{
     socketManager.respond(chat, socket, app);
 })
+
+

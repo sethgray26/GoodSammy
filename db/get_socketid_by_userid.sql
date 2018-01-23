@@ -1,0 +1,1 @@
+select socket_id from users where id = $1;
