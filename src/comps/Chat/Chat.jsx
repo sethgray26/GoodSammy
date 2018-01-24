@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import io from 'socket.io-client';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import StayScrolled from 'react-stay-scrolled';
+import StayScrolled from 'react-stay-scrolled' ;
 import Message from './Message';
 
 // Material-UI //
