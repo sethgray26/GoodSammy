@@ -16,7 +16,6 @@ class RequestList extends Component {
         this.state = {
             requestArr: []
         }
-
     }
 
     //Get the Geolocation of the user

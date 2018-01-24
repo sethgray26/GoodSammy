@@ -7,15 +7,13 @@ import RaisedButton  from 'material-ui/RaisedButton';
 import { RadioButton } from 'material-ui';
 import {Link} from 'react-router-dom';  
 
-
 class ViewRequest extends Component {
     constructor(){
         super()
             this.state = {
                 request: [],
-                disable: true,
-            }
-            
+                disable: true
+            }            
     }
     enableStatus = () => {
         this.setState({
@@ -46,8 +44,7 @@ class ViewRequest extends Component {
         
         this.setState({
             request: Object.assign({}, this.state.request, {help_id: this.props.clientID})
-        })
-        
+        })        
     }
 
     removeHelper = () => {
@@ -57,19 +54,16 @@ class ViewRequest extends Component {
         axios.put('/removeHelp', removed)
     }
 
-
     componentDidMount(){
         
         axios.get(`/request/+${this.props.match.params.id}`).then((res) => {
             this.setState({
                 request: res.data[0]
-            })
-            
+            })            
         })
     }
-
     render() {
-            
+        console.log('values\n++++++++++++',this.state.request)
         return this.state.request ?
         (
             <div>
@@ -84,10 +78,11 @@ class ViewRequest extends Component {
                         <option value="1">Automotive</option>
                     </select>
                     <RaisedButton label ='Save!' onClick={this.saveAndDisable} secondary={true} />
+                    
                     <Chat userID={this.props.clientID} creatorID={this.state.request.user_id} 
-                    helperID={this.state.request.help_id} requestID={this.state.request.id}/> 
-                    <RaisedButton label='Close Request'/>
+                    helperID={this.state.request.help_id} requestID={this.state.request.id}/>
 
+                    <RaisedButton label='Close Request'/>
                 </div>
                 :
                 <div>
@@ -101,11 +96,12 @@ class ViewRequest extends Component {
                     <RaisedButton label='Commit to help' onClick ={this.handleCommit} primary ={true} />
                     :
                     <div>
+                        {this.state.request.id &&
                         <Chat userID={this.props.clientID} creatorID={this.state.request.user_id} 
                         helperID={this.state.request.help_id} requestID={this.state.request.id}/>
+                        }
                         <Link to ='/reqList'><RaisedButton label = 'Cancel' onClick={this.removeHelper}/></Link>
-                    </div>
-                    
+                    </div>                    
                 }
                 <Link to='/reqList'><RaisedButton label ='Return to List' secondary={true} /></Link>
                 </div>
@@ -113,12 +109,11 @@ class ViewRequest extends Component {
             </div>
         )
         :
-             (
+            (
                 <div>Uh oh! Looks like something went wrong!  
                      <Link to='/'><RaisedButton label ='Home Page' primary ={true}/></Link>
                 </div>
-            )
-        
+            )        
     }
 }
 function mapStateToProps(state){
@@ -126,5 +121,4 @@ function mapStateToProps(state){
         clientID : state.users.userID
     }
 }
-
 export default connect(mapStateToProps)(ViewRequest);
