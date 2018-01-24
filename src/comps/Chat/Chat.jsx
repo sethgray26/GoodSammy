@@ -99,9 +99,9 @@ export default class Chat extends Component {
         const { messageInput, socket, requestDescription, username } = this.state;
         const { userID, helperID, creatorID } = this.props;
         return (
-            <div className="chat-container" style={{ margin: "4vw", padding: "8px" }}>
+            <div className="chat-container" style={{ padding: "8px" }}>
                 
-                <Paper zDepth={2} style={{ padding: "20px" }}>
+                <Paper zDepth={1} style={{ padding: "20px" }}>
                 <h3>Regarding Request: {requestDescription}</h3>
                 <div style={{fontSize:".8em", color:"gray"}}>
                     <h3>conversation ID: {this.state.conversationID}</h3>

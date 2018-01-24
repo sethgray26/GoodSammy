@@ -3,9 +3,14 @@ import { connect } from 'react-redux';
 import Map from '../Map/Map'
 import Chat from '../Chat/Chat'
 import axios from 'axios'
+
 import RaisedButton  from 'material-ui/RaisedButton';  
-import { RadioButton } from 'material-ui';
+import { lightGreen300 } from 'material-ui/styles/colors';
 import {Link} from 'react-router-dom';  
+
+import './ViewRequest.css'
+import { white } from 'material-ui/styles/colors';
+
 
 class ViewRequest extends Component {
     constructor(){
@@ -23,9 +28,10 @@ class ViewRequest extends Component {
     saveChanges = () => {
         let updates = {
             description: this.refs.description.value,
-            category: this.refs.category.value,
             request_id: this.state.request.id
         }
+        // console.log(updates);
+        
         axios.put('/update', updates)
     }
     saveAndDisable = () => {
@@ -67,52 +73,118 @@ class ViewRequest extends Component {
         return this.state.request ?
         (
             <div>
-                {/* false ternary placeholder: If user id matches who is signed in */}
+                {/* false ternary placeholder, Redux to be implented */}
                 {this.state.request.user_id === this.props.clientID ?
-                <div>
-                    {/* own view */}
-                    <Map lat={+this.state.request.lat} lng ={+this.state.request.long}/>
-                    <RaisedButton label ='Edit Information' onClick={this.enableStatus} primary = {true} />
-                    <textarea name="" id="" cols="30" rows="10" disabled={this.state.disable} ref='description' defaultValue={this.state.request.description}></textarea>
-                    <select name="" id="" disabled={this.state.disable} ref='category'>
-                        <option value="1">Automotive</option>
-                    </select>
-                    <RaisedButton label ='Save!' onClick={this.saveAndDisable} secondary={true} />
-                    
-                    {this.state.request.help_id &&
-                    <Chat userID={this.props.clientID} creatorID={this.state.request.user_id} 
-                    helperID={this.state.request.help_id} requestID={this.state.request.id}/>
-                    }
-                    <RaisedButton label='Close Request'/>
-                </div>
+
+                    <div className="view_wrapper">
+                        {/* own view */}
+                        <div className="map_wrapper">
+                            <Map  
+                                lat={+this.state.request.lat} 
+                                lng ={+this.state.request.long}
+                            />
+                        </div>
+                        
+                        <div className="text_wrapper">
+                            <textarea className="text_area"
+                                name="" 
+                                id="" 
+                                cols="30" 
+                                rows="10" 
+                                disabled={this.state.disable} 
+                                ref='description' 
+                                defaultValue={this.state.request.description}>
+                            </textarea>
+                        </div>
+                        
+                        <div className="text_button_wrapper">
+                            <RaisedButton 
+                                label ='Edit Information' 
+                                onClick={this.enableStatus} 
+                                primary = {true} 
+                            />
+                            <RaisedButton 
+                            label ='Save!' 
+                            disabled={this.state.disable} 
+                            onClick={this.saveAndDisable} 
+                            secondary={true} 
+                            style={{marginLeft: 13}}
+                            />
+                        </div>
+                        
+                        <div className="chat_wrapper">
+                            <Chat 
+                                userID={this.props.clientID} 
+                                creatorID={this.state.request.user_id} 
+                                helperID={this.state.request.help_id} 
+                                requestID={this.state.request.id}
+                            />
+                        </div>
+                        
+                        <div className="close_wrapper">
+                            <RaisedButton 
+                                label='Close Request'
+                                labelColor={white}
+                                backgroundColor={ lightGreen300 }
+                                style ={{ width:150 }}
+                            />
+                        </div>
+                        
+                    </div>
+
                 :
-                <div>
-                    {/* other view */}
-                    <Map lat={+this.state.request.lat} lng={+this.state.request.long}/>
-                    <br/>
-                    <p>{this.state.request.description}</p>
-                    <br/>
-                    {/* If someone is already helping */}
-                    {this.state.request.help_id === null ?
-                    <RaisedButton label='Commit to help' onClick ={this.handleCommit} primary ={true} />
-                    :
-                    <div>
-                        {this.state.request.id &&
-                        <Chat userID={this.props.clientID} creatorID={this.state.request.user_id} 
-                        helperID={this.state.request.help_id} requestID={this.state.request.id}/>
-                        }
-                        <Link to ='/reqList'><RaisedButton label = 'Cancel' onClick={this.removeHelper}/></Link>
-                    </div>                    
-                }
-                <Link to='/reqList'><RaisedButton label ='Return to List' secondary={true} /></Link>
-                </div>
+
+                    <div className="view_wrapper">
+                        {/* other view */}
+                        <div className="map_wrapper">
+                            <Map  
+                                lat={+this.state.request.lat} 
+                                lng ={+this.state.request.long}
+                            />
+                        </div>
+                        <div className="desc_wrapper">
+                            <span>{this.state.request.description}</span>
+                        </div>
+
+                        {/* if someone is already helping */}
+
+                        {this.state.request.help_id === null ?
+                        
+                            <RaisedButton 
+                                label='Commit to help' 
+                                onClick ={this.handleCommit} 
+                                backgroundColor={ lightGreen300 } 
+                            />
+                    
+                        :
+
+                        <div>
+                            <div className="chat_wrapper">
+
+                                <Chat 
+                                    userID={this.props.clientID} 
+                                    creatorID={this.state.request.user_id} 
+                                    helperID={this.state.request.help_id} 
+                                    requestID={this.state.request.id}
+                                />
+
+                            </div>
+
+                            <Link to ='/reqList'><RaisedButton label = 'Stop helping' onClick={this.removeHelper}/></Link>
+                        </div>
+                    }
+
+                        <Link to='/reqList'><RaisedButton label ='Return to List' secondary={true} /></Link>
+
+                    </div>
             }
             </div>
         )
-        :
-            (
+
+                :
+             (
                 <div>Uh oh! Looks like something went wrong!  
-                     <Link to='/'><RaisedButton label ='Home Page' primary ={true}/></Link>
+                    <Link to='/'><RaisedButton label ='Home Page' primary ={true}/></Link>
                 </div>
             )        
     }
