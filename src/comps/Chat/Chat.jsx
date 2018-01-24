@@ -97,14 +97,17 @@ export default class Chat extends Component {
 
     render() {     
         const { messageInput, socket, requestDescription, username } = this.state;
-        const { userID, helperID } = this.props;
+        const { userID, helperID, creatorID } = this.props;
         return (
             <div className="chat-container" style={{ margin: "4vw", padding: "8px" }}>
                 
                 <Paper zDepth={2} style={{ padding: "20px" }}>
                 <h3>Regarding Request: {requestDescription}</h3>
-                <h3>coversationID: {this.state.conversationID}</h3>
-
+                <div style={{fontSize:".8em", color:"gray"}}>
+                    <h3>conversation ID: {this.state.conversationID}</h3>
+                    <h3>you are { userID===helperID ? username.helper : userID===creatorID ? username.creator : 'not logged in.' }  id:{userID}</h3>
+                    <h3>helper: {username.helper} {helperID} | creator: {username.creator} {creatorID} </h3>
+                </div>
                     <StayScrolled component="div" style={{height:"40vh", overflowWrap:"break-word",
                         overflowY:"scroll", overflowX:"hidden"}}>
                         {

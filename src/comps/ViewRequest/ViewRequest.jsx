@@ -79,9 +79,10 @@ class ViewRequest extends Component {
                     </select>
                     <RaisedButton label ='Save!' onClick={this.saveAndDisable} secondary={true} />
                     
+                    {this.state.request.help_id &&
                     <Chat userID={this.props.clientID} creatorID={this.state.request.user_id} 
                     helperID={this.state.request.help_id} requestID={this.state.request.id}/>
-
+                    }
                     <RaisedButton label='Close Request'/>
                 </div>
                 :
