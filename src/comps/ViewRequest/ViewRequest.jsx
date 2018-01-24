@@ -64,6 +64,7 @@ class ViewRequest extends Component {
             this.setState({
                 request: res.data[0]
             })
+            console.log(res.data[0]);
             
         })
     }
