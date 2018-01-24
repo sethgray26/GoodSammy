@@ -4,7 +4,7 @@ import Map from '../Map/Map'
 import Chat from '../Chat/Chat'
 import axios from 'axios'
 import RaisedButton  from 'material-ui/RaisedButton';  
-import { RadioButton } from 'material-ui';
+import TextField from 'material-ui/TextField';
 import {Link} from 'react-router-dom';  
 
 
@@ -12,8 +12,9 @@ class ViewRequest extends Component {
     constructor(){
         super()
             this.state = {
-                request: [],
+                request: null,
                 disable: true,
+                andrewsIdea:'Sucks at the foos'
             }
             
     }
@@ -25,7 +26,6 @@ class ViewRequest extends Component {
     saveChanges = () => {
         let updates = {
             description: this.refs.description.value,
-            category: this.refs.category.value,
             request_id: this.state.request.id
         }
         axios.put('/update', updates)
@@ -64,7 +64,8 @@ class ViewRequest extends Component {
             this.setState({
                 request: res.data[0]
             })
-            console.log(res.data[0]);
+            console.log('logging state', this.state.request);
+            
             
         })
     }
@@ -75,16 +76,14 @@ class ViewRequest extends Component {
         (
             <div>
                 {/* false ternary placeholder: If user id matches who is signed in */}
-                {this.state.request.user_id === this.props.clientID ?
+                {this.state.request.user_id !== this.props.clientID ?
                 <div>
                     {/* own view */}
                     <Map lat={+this.state.request.lat} lng ={+this.state.request.long}/>
                     <RaisedButton label ='Edit Information' onClick={this.enableStatus} primary = {true} />
                     <textarea name="" id="" cols="30" rows="10" disabled={this.state.disable} ref='description' defaultValue={this.state.request.description}></textarea>
-                    <select name="" id="" disabled={this.state.disable} ref='category'>
-                        <option value="1">Automotive</option>
-                    </select>
-                    <RaisedButton label ='Save!' onClick={this.saveAndDisable} secondary={true} />
+                    <TextField id='description' name='description' ref='description' multiLine={true} disabled={this.state.disable} defaultValue={this.state.request.description} />
+                    <RaisedButton label ='Save!' onClick={this.saveAndDisable} secondary={true} disabled={this.state.disable} />
                     <Chat userID={this.props.clientID} creatorID={this.state.request.user_id} 
                     helperID={this.state.request.help_id} requestID={this.state.request.id}/> 
                     <RaisedButton label='Close Request'/>
