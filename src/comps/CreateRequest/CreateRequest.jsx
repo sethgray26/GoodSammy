@@ -59,6 +59,7 @@ class CreateRequest extends Component {
     }
 
      componentDidMount() {
+        console.log('client ID from props\n ==============> ', this.props.clientID)
         if (navigator.geolocation) {
             // console.log('supported in browser')
             navigator.geolocation.getCurrentPosition((position) => {
@@ -231,7 +232,8 @@ const items = [
 function mapStateToProps(state) {
     return {
         lat: state.maps.lat,
-        lng: state.maps.lng
+        lng: state.maps.lng,
+        clientID: state.users.userID
     };
   }
   

@@ -62,6 +62,8 @@ app.get('/request/:id', controllers.get_one_request)
 
 // === PUT REQUESTS === //
 app.put('/update', controllers.update_req_info)
+app.put('/commit', controllers.update_Helper )
+app.put('/removeHelp', controllers.remove_Help)
 
 // === POST REQUESTS === //
 // app.post('/createUser', users_controller.createUsers )

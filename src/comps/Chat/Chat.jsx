@@ -1,10 +1,11 @@
-// requires as props: userID, creatorID, helperID, requestID
+// requires as props: clientID, creatorID, helperID, requestID
+// props userID, creatorID, helperID, requestID
 
 import React, { Component } from 'react';
 import io from 'socket.io-client';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import StayScrolled from 'react-stay-scrolled';
+import StayScrolled from 'react-stay-scrolled' ;
 import Message from './Message';
 
 // Material-UI //
@@ -90,6 +91,7 @@ export default class Chat extends Component {
     }
 
     render() {
+        
         const { messageInput, socket, requestDescription, userID, username, helperID } = this.state;
         return (
             <div className="chat-container" style={{ padding: "8px" }}>
