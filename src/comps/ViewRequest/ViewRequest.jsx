@@ -141,7 +141,7 @@ class ViewRequest extends Component {
                         </div>
                         
                     </div>
-
+                    // this.props.clientID
                 :
 
                     <div className="view_wrapper">
@@ -165,7 +165,7 @@ class ViewRequest extends Component {
                                 onClick ={this.handleCommit} 
                                 backgroundColor={ lightGreen300 } 
                             />
-                    
+                            // this.state.request.help_id
                         :
 
                         <div>
@@ -190,7 +190,7 @@ class ViewRequest extends Component {
             }
             </div>
         )
-
+                    // this.state.request
                 :
              (
                 <div>Uh oh! Looks like something went wrong!  
