@@ -5,11 +5,11 @@ import Chat from '../Chat/Chat'
 import axios from 'axios'
 
 import RaisedButton  from 'material-ui/RaisedButton';  
-import { RadioButton } from 'material-ui';
-import { lightGreen500, lightGreen400, lightGreen300, blue500, lightBlue500 } from 'material-ui/styles/colors';
+import { lightGreen300 } from 'material-ui/styles/colors';
 // import {Link} from 'react-router-dom';  
 
 import './ViewRequest.css'
+import { white } from 'material-ui/styles/colors';
 
 
 class ViewRequest extends Component {
@@ -29,7 +29,6 @@ class ViewRequest extends Component {
     saveChanges = () => {
         let updates = {
             description: this.refs.description.value,
-            category: this.refs.category.value,
             request_id: this.state.request[0].id
         }
         // console.log(updates);
@@ -88,13 +87,12 @@ class ViewRequest extends Component {
                         />
 
                         <RaisedButton 
-                        style={{marginLeft: 13}}
                         label ='Save!' 
                         disabled={this.state.disable} 
                         onClick={this.saveAndDisable} 
                         secondary={true} 
+                        style={{marginLeft: 13}}
                         />
-
                     </div>
                     
                     <div className="chat_wrapper">
@@ -102,19 +100,42 @@ class ViewRequest extends Component {
                     </div>
                     
 
-                    <RaisedButton 
-                        label='Close Request'
-                        backgroundColor={ lightGreen300 }
-                    />
+                    <div className="close_wrapper">
+                        <RaisedButton 
+                            label='Close Request'
+                            labelColor={white}
+                            backgroundColor={ lightGreen300 }
+                            style ={{ width:150 }}
+                        />
+                    </div>
+                    
 
                 </div>
                 :
-                <div>
+                <div className="view_wrapper">
                     {/* other view */}
-                    <Map/>
-                    <span>request.description</span>
-                    <RaisedButton label='Commit to help'/>
-                    <Chat/> 
+
+                    <div className="map_wrapper">
+                        <Map  
+                            lat={+this.state.request[0].lat} 
+                            lng ={+this.state.request[0].long}
+                        />
+                    </div>
+
+                    <div className="desc_wrapper">
+                        <span>{this.state.request[0].description}</span>
+                    </div>
+
+                    <div className="commit_button_wrapper">
+                        <RaisedButton 
+                            label='Commit to help'
+                            backgroundColor={ lightGreen300 }
+                        />
+                    </div>
+
+                    <div className="chat_wrapper">
+                        <Chat/>
+                    </div>
                 </div>
             }
             </div>
