@@ -111,7 +111,8 @@ class ViewRequest extends Component {
                             style={{marginLeft: 13}}
                             />
                         </div>
-                        
+
+                        {this.state.request.help_id &&
                         <div className="chat_wrapper">
                             <Chat 
                                 userID={this.props.clientID} 
@@ -119,7 +120,7 @@ class ViewRequest extends Component {
                                 helperID={this.state.request.help_id} 
                                 requestID={this.state.request.id}
                             />
-                        </div>
+                        </div>}
                         
                         <div className="close_wrapper">
                             <RaisedButton 
@@ -154,13 +155,12 @@ class ViewRequest extends Component {
                                 label='Commit to help' 
                                 onClick ={this.handleCommit} 
                                 backgroundColor={ lightGreen300 } 
-                            />
-                    
+                            />                        
                         :
 
                         <div>
+                             {this.state.request.help_id &&   
                             <div className="chat_wrapper">
-
                                 <Chat 
                                     userID={this.props.clientID} 
                                     creatorID={this.state.request.user_id} 
@@ -168,7 +168,7 @@ class ViewRequest extends Component {
                                     requestID={this.state.request.id}
                                 />
 
-                            </div>
+                            </div>}
 
                             <Link to ='/reqList'><RaisedButton label = 'Stop helping' onClick={this.removeHelper}/></Link>
                         </div>

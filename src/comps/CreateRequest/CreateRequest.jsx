@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios'
 
 import './CreateRequest.css'
+import ConfirmDialog from '../Dialog/Dialog'
 // import blue_hand from './blueHand.png'
 
 import { setLocationState } from '../../ducks/reducers/maps';
@@ -25,12 +26,15 @@ class CreateRequest extends Component {
             value: null,
             category: "",
             description: "",
-            userData: undefined
+            userData: undefined,
+            dialogToggle : false
         }
 
         this.handleChange = this.handleChange.bind(this)
         this.requestToState = this.requestToState.bind(this)
     }
+
+    
 
     requestToState(e, index, value){
         if( e.target.id === 'category'){
@@ -101,7 +105,7 @@ class CreateRequest extends Component {
             lat: this.props.lat,
             long: this.props.lng
         }
-
+        // call ConfirmDialog here
         console.log("request",generated)
         this.props.createRequest(generated)
     }
