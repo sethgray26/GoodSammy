@@ -16,7 +16,6 @@ class RequestList extends Component {
         this.state = {
             requestArr: []
         }
-
     }
 
     //Get the Geolocation of the user
@@ -76,6 +75,7 @@ class RequestList extends Component {
 
     render() {
         const request = this.state.requestArr.map(request => {
+            console.log('request: ',request)
             return (
                 <RepeatedRequest
                     key={request.id}
@@ -84,6 +84,8 @@ class RequestList extends Component {
                     distance={request.distance}
                     username={request.username}
                     requestID={request.id}
+                    creatorID={request.user_id}
+                    helpID={request.help_id}
                 />
             )
         })

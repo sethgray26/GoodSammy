@@ -34,18 +34,22 @@ export default class Chat extends Component {
         }
         
         socket.on('convo messages', response => { // messages for this conversation
+            console.log('got messages')
             this.setState({ response })
         })
     }
 
     componentWillMount() {
+        
+        console.log('props\n===================>',this.props)   
         socket.emit('chat mounted');
         
         socket.on('socket id', id=>{
             console.log('Connected.\nSocket ID: ', id)
-            const {socketID, userID, requestID, creatorID, helperID } = this.state
+            const { socketID } = this.state
+            const { userID, creatorID, helperID, requestID } = this.props
             axios.post('http://localhost:3005/chat/socketID', 
-                {socketID: id, userID, requestID, creatorID, helperID})
+                { socketID: id, userID, requestID, creatorID, helperID })
                 .then(res=>{
                     const conversationID = res.data.id
                     const requestDescription = res.data.description
@@ -54,11 +58,11 @@ export default class Chat extends Component {
                 })
             })
         // get usernames to display under messages
-        const { creatorID, helperID } = this.state;
-        axios.post('http://localhost:3005/chat/usernames', {creatorID, helperID})
+        const { creatorID, helperID } = this.props;
+        axios.post('http://localhost:3005/chat/usernames', { creatorID, helperID })
             .then(res=>{
                 this.setState({
-                    username: {creator: res.data.sendMe.creator, helper: res.data.sendMe.helper}
+                    username: { creator: res.data.sendMe.creator, helper: res.data.sendMe.helper }
                 })
             })
     }
@@ -82,7 +86,8 @@ export default class Chat extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { conversationID, messageInput, userID } = this.state;
+        const { conversationID, messageInput } = this.state;
+        const { userID } = this.props;
         const timestamp = this.getDateString();
 
         socket.emit('emit message', {conversationID, messageInput, userID, timestamp});
@@ -90,16 +95,19 @@ export default class Chat extends Component {
         this.setState({ messageInput: '' })
     }
 
-    render() {
-        
-        const { messageInput, socket, requestDescription, userID, username, helperID } = this.state;
+    render() {     
+        const { messageInput, socket, requestDescription, username } = this.state;
+        const { userID, helperID, creatorID } = this.props;
         return (
             <div className="chat-container" style={{ padding: "8px" }}>
                 
                 <Paper zDepth={1} style={{ padding: "20px" }}>
                 <h3>Regarding Request: {requestDescription}</h3>
-                <h3>coversationID: {this.state.conversationID}</h3>
-
+                <div style={{fontSize:".8em", color:"gray"}}>
+                    <h3>conversation ID: {this.state.conversationID}</h3>
+                    <h3>you are { userID===helperID ? username.helper : userID===creatorID ? username.creator : 'not logged in.' }  id:{userID}</h3>
+                    <h3>helper: {username.helper} {helperID} | creator: {username.creator} {creatorID} </h3>
+                </div>
                     <StayScrolled component="div" style={{height:"40vh", overflowWrap:"break-word",
                         overflowY:"scroll", overflowX:"hidden"}}>
                         {
