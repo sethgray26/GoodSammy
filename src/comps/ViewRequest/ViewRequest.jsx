@@ -84,8 +84,8 @@ class ViewRequest extends Component {
                         <option value="1">Automotive</option>
                     </select>
                     <RaisedButton label ='Save!' onClick={this.saveAndDisable} secondary={true} />
-                    <Chat userID={this.props.clientID} creatorID={this.state.request[0].user_id} 
-                    helperID={this.state.request[0].help_id} requestID={this.state.request[0].id}/> 
+                    <Chat userID={this.props.clientID} creatorID={this.state.request.user_id} 
+                    helperID={this.state.request.help_id} requestID={this.state.request.id}/> 
                     <RaisedButton label='Close Request'/>
 
                 </div>
@@ -101,8 +101,8 @@ class ViewRequest extends Component {
                     <RaisedButton label='Commit to help' onClick ={this.handleCommit} primary ={true} />
                     :
                     <div>
-                        <Chat userID={this.props.clientID} creatorID={this.state.request[0].user_id} 
-                        helperID={this.state.request[0].help_id} requestID={this.state.request[0].id}/>
+                        <Chat userID={this.props.clientID} creatorID={this.state.request.user_id} 
+                        helperID={this.state.request.help_id} requestID={this.state.request.id}/>
                         <Link to ='/reqList'><RaisedButton label = 'Cancel' onClick={this.removeHelper}/></Link>
                     </div>
                     
