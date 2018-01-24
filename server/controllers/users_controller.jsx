@@ -22,7 +22,7 @@ module.exports = {
 
     },
 
-    checkLogin: (req, resp) => {
+    checkLogin: (req, resp) => { // need this to return userID to go in redux store. 
 
         const db = req.app.get('db')
         console.log('check login', req.session)
@@ -34,14 +34,14 @@ module.exports = {
                 if (res === true) {
                     //password match!
                     req.session.user = user[0].id
-                    console.log('req',req.session)
+                    // send user id
+                    resp.status(200).json({ id:req.session.user });
                 }
                 else {
                     //password incorrect!
                     console.log('password incorrect')
+                    resp.status(200).send(res)
                 }
-                resp.status(200).send(res);
-                console.log('re', res)
             });
         }).catch(error => {
             console.log(error)

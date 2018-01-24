@@ -83,8 +83,9 @@ class ViewRequest extends Component {
                     <select name="" id="" disabled={this.state.disable} ref='category'>
                         <option value="1">Automotive</option>
                     </select>
-                    <RaisedButton label ='Save!' disabled={this.state.disable} onClick={this.saveAndDisable} secondary={true} />
-                    <Chat/>
+                    <RaisedButton label ='Save!' onClick={this.saveAndDisable} secondary={true} />
+                    <Chat userID={this.props.clientID} creatorID={this.state.request.user_id} 
+                    helperID={this.state.request.help_id} requestID={this.state.request.id}/> 
                     <RaisedButton label='Close Request'/>
 
                 </div>
@@ -100,7 +101,8 @@ class ViewRequest extends Component {
                     <RaisedButton label='Commit to help' onClick ={this.handleCommit} primary ={true} />
                     :
                     <div>
-                        <Chat/>
+                        <Chat userID={this.props.clientID} creatorID={this.state.request.user_id} 
+                        helperID={this.state.request.help_id} requestID={this.state.request.id}/>
                         <Link to ='/reqList'><RaisedButton label = 'Cancel' onClick={this.removeHelper}/></Link>
                     </div>
                     
@@ -120,7 +122,9 @@ class ViewRequest extends Component {
     }
 }
 function mapStateToProps(state){
-    return {clientID: state.users.userID}
+    return {
+        clientID : state.users.userID
+    }
 }
 
 export default connect(mapStateToProps)(ViewRequest);

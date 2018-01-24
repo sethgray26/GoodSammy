@@ -1,4 +1,5 @@
-// requires as props: userID, creatorID, helperID, requestID
+// requires as props: clientID, creatorID, helperID, requestID
+// props userID, creatorID, helperID, requestID
 
 import React, { Component } from 'react';
 import io from 'socket.io-client';
@@ -90,6 +91,7 @@ export default class Chat extends Component {
     }
 
     render() {
+        
         const { messageInput, socket, requestDescription, userID, username, helperID } = this.state;
         return (
             <div className="chat-container" style={{ margin: "4vw", padding: "8px" }}>

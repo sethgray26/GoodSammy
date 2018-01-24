@@ -5,7 +5,7 @@ import axios from 'axios'
 
 import './Landing.css'
 
-import { createUsers } from '../../ducks/reducers/users.jsx'
+import { createUsers, updateUser } from '../../ducks/reducers/users.jsx'
 
 import blue_hand from'./blueHand.png'
 
@@ -73,23 +73,20 @@ class Landing extends Component {
         console.log('hit')
         axios.put(`/checkLogin/${this.state.username}`, { txtPassword: this.state.password })
         .then(res => {
-            if (res.data === true) {
+            if (res.data.id) {
                 //redirect to dashboard
-                //need to get userID here and put in store. 
-                console.log('res.data: ',res.data)
+                // put res.data.id on redux as client's userIDselese
+                this.props.updateUser(res.data.id)
                 this.props.history.push('/Home')
             }
             else {
                 //stay on log in p
+                //TODO make this an inline error instead of alert
                 alert('Incorrect username or password, please try again!')
             }
-        }).catch(error => {
-            
+        }).catch(error => {            
         });
     }
-
-
-
 
     render (){
         const actions = [
@@ -217,11 +214,12 @@ class Landing extends Component {
 function mapStateToProps( state ){
     
     return {
-        userData: state.users.userData
+        userData: state.users.userData,
+        userID: state.users.userID
     }
 }
 
-export default connect( mapStateToProps, { createUsers }) ( Landing )
+export default connect( mapStateToProps, { createUsers, updateUser }) ( Landing )
 
 
 const styles = {
