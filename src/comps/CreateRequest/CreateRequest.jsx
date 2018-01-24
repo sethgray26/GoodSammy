@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios'
 
 import './CreateRequest.css'
-import blue_hand from './blueHand.png'
+// import blue_hand from './blueHand.png'
 
 import { setLocationState } from '../../ducks/reducers/maps';
 import { createRequest } from '../../ducks/reducers/requests';
@@ -127,7 +127,7 @@ class CreateRequest extends Component {
                             onClick={this.requestToState}
                             style={{margin: 5}}
                             floatingLabelText="Select a Category"
-                            floatingLabelStyle={{color: 'red', left: 10, color: blue500}}
+                            floatingLabelStyle={{left: 10, color: blue500}}
                         >
                             <MenuItem key={1} value={1} primaryText="Automotive" />
                             <MenuItem key={2} value={2} primaryText="Spiritual" />
