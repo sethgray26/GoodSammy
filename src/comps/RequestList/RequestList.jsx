@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Map from '../Map/Map';
 import RepeatedRequest from './../RepeatedList/repeatedList';
 import repeatedList from './../RepeatedList/repeatedList';
+import CircularProgress from 'material-ui/CircularProgress';
 
 import blue_hand from './blueHand.png'
 import './RequestList.css'
@@ -14,7 +15,8 @@ class RequestList extends Component {
     constructor() {
         super()
         this.state = {
-            requestArr: []
+            requestArr: [],
+            clientID: null
         }
     }
 
@@ -31,11 +33,7 @@ class RequestList extends Component {
         else {
             console.log('not supported in browser')
         }
-        axios.get('/request').then((res) => {
-            this.setState({
-                requestArr: res.data
-            })
-        })
+        
     }
 
     componentWillReceiveProps(nextprops) {
@@ -75,7 +73,6 @@ class RequestList extends Component {
 
     render() {
         const request = this.state.requestArr.map(request => {
-            console.log('request: ',request)
             return (
                 <RepeatedRequest
                     key={request.id}
@@ -90,7 +87,13 @@ class RequestList extends Component {
             )
         })
         return (
-
+            <div>
+            { this.state.requestArr.length === 0 ? 
+                <div>
+                    <br/><br/><br/> {/*  display loading circle until have request ARR */}
+                    <CircularProgress size={80} thickness={5}/>
+                </div>
+            :
             <div className='body-content' >
                     <div className="list_header">
                         <img style={{height: 70, width: 70 }} src={blue_hand} alt='blue_hand'/>
@@ -98,11 +101,15 @@ class RequestList extends Component {
 
                     {this.state.requestArr.length !== 0 ?
                     <div>
-                        <h3>Lend a hand today!</h3>
+                        <h3>Lend a hand today! | 
+                            {this.props.clientID ? " clientID: "+ this.props.clientID
+                            : " clientID from state: "+this.state.clientID }</h3>
                         <section>{request}</section>
                     </div>
                     :
                     <div>Looks like no one needs help! </div>}
+            </div>
+            }
             </div>
         );
     }
@@ -111,7 +118,8 @@ class RequestList extends Component {
 function mapStateToProps(state) {
     return {
         lat: state.maps.lat,
-        lng: state.maps.lng
+        lng: state.maps.lng,
+        clientID: state.users.userID
     };
 }
 

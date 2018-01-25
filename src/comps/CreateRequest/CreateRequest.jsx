@@ -32,22 +32,20 @@ class CreateRequest extends Component {
 
         this.handleChange = this.handleChange.bind(this)
         this.requestToState = this.requestToState.bind(this)
+        this.toggleDialog = this.toggleDialog.bind(this)
     }
 
-    
+    toggleDialog(){
+        this.setState({dialogToggle:!this.state.dialogToggle})
+        this.props.history.push('/Home')
+    }
 
     requestToState(e, index, value){
-        if( e.target.id === 'category'){
             this.setState({
-                category: value
+                [e.target.id] : value
             //   category: e.target.innerHTML
             })
-          } else if ( e.target.id === 'description'){
-            this.setState({
-              description: e.target.value,
-            //   value: value
-            })
-        }
+        
 
         console.log("target", this.state.category )
     }
@@ -97,7 +95,6 @@ class CreateRequest extends Component {
     requestCreator = () => {
         //Post request
         //User_id, cat_id, desc, long, lat
-            console.log("value",this.state.description)
         let generated = {
             user_id:this.state.userData,
             category_id: this.state.category,
@@ -106,14 +103,16 @@ class CreateRequest extends Component {
             long: this.props.lng
         }
         // call ConfirmDialog here
-        console.log("request",generated)
         this.props.createRequest(generated)
+        this.setState({dialogToggle:true})
     }
 
     render() {
 
         return (
+            
             <div className='create_req' >
+                
                 {/*<div className='create_req_header'>
                     <img src={blue_hand} alt='blue_hand'/>
                 </div>*/}
@@ -165,15 +164,16 @@ class CreateRequest extends Component {
 
                 </div>
                 <br />
+{/*                 
                 <div className="map">
                     <Map lat={this.state.lat} lng={this.state.lng}/>
-                </div>
+                </div> */}
 
                 <div className='buttons'>
                     <RaisedButton label='Request Help' 
                         backgroundColor={ lightGreen500 } 
                         style={ styles.logandsign }
-                        onClick={this.requestCreator}
+                        onClick={ this.requestCreator }
                     />
 
                     <Link to='/Home'><RaisedButton label='Cancel' 
@@ -182,6 +182,7 @@ class CreateRequest extends Component {
                         onClick={this.requestCreator}
                     /></Link>
                 </div>
+                <ConfirmDialog open={this.state.dialogToggle} toggleDialog={this.toggleDialog}/>
             </div>
         );
     }
