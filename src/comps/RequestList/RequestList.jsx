@@ -16,7 +16,6 @@ class RequestList extends Component {
         this.state = {
             requestArr: []
         }
-
     }
 
     //Get the Geolocation of the user
@@ -55,11 +54,10 @@ class RequestList extends Component {
             console.log('req lat', arr[i].lat, 'req long',arr[i].long)
             console.log('user lat', lat1, 'user long',lon1)
             let type = 'imperial'
-            const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=${type}&origins=${lat1},${lon1}&destinations=${arr[i].lat},${arr[i].long}&key=AIzaSyCIIg2weQK6p4wUTy6nXrCj4-hPGgA40xI`
-            console.log(url)    
-            // axios.get(url).then( res => {
-            //     return console.log('res',res.data.rows[0].elements[0].distance.text)}) 
-            newArr.push(axios.get(url))
+            //const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=${type}&origins=${lat1},${lon1}&destinations=${arr[i].lat},${arr[i].long}&key=AIzaSyCIIg2weQK6p4wUTy6nXrCj4-hPGgA40xI`
+            //console.log(url) 
+            //newArr.push(axios.get(url))
+            newArr.push(axios.put('/getDistance',{type:type, lat1: lat1, lon1: lon1, lat2:arr[i].lat, lon2: arr[i].long}))
         }
         console.log('array of promise:', newArr)
         Promise.all(newArr).then(res => {
@@ -76,6 +74,7 @@ class RequestList extends Component {
 
     render() {
         const request = this.state.requestArr.map(request => {
+            console.log('request: ',request)
             return (
                 <RepeatedRequest
                     key={request.id}
@@ -84,6 +83,8 @@ class RequestList extends Component {
                     distance={request.distance}
                     username={request.username}
                     requestID={request.id}
+                    creatorID={request.user_id}
+                    helpID={request.help_id}
                 />
             )
         })
