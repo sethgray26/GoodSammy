@@ -1,4 +1,5 @@
-import axios from 'axios';
+//import axios from 'axios';
+const axios = require('axios');
 
 //initial state
 const initialState = {
@@ -12,34 +13,29 @@ const SET_LOCATION = 'SET_LOCATION'
 const SET_LOCATION_STATE = 'SET_LOCATION_STATE'
 
 //Action Creators
-export function setLocation(id, lat, lng) {
-    console.log('action creator', id, lat, lng)
-    return {
-        type: SET_LOCATION,
-        // payload: [{lat:lat, lng:lng}]
-        payload: axios.put(`/setLocation/${id}`, { lng: lng, lat: lat })
-            .then(res => {
-                console.log('then', res.data)
-                return res.data
-            })
-    }
-}
+// export function setLocation(id, lat, lng) {
+//     console.log('action creator', id, lat, lng)
+//     return {
+//         type: SET_LOCATION,
+//         // payload: [{lat:lat, lng:lng}]
+//         payload: axios.put(`/setLocation/${id}`, { lng: lng, lat: lat })
+//             .then(res => {
+//                 console.log('then', res.data)
+//                 return res.data
+//             })
+//     }
+// }
 
-export function setLocationState(lat, lng) {
+function setLocationState(lat, lng) {
     console.log('action creator', lat, lng)
-    if (typeof lat !== 'number' || typeof lng !== 'number') {
-        return 'Must be a number'
-    }
-    else {
         return {
             type: SET_LOCATION_STATE,
             payload: [{ lat: lat, lng: lng }]
         }
-    }
 }
 
 //Reducer
-export default function reducer(state = initialState, action) {
+function reducer(state = initialState, action) {
     switch (action.type) {
         //Get Profile Data
         case SET_LOCATION_STATE: //test
@@ -60,4 +56,9 @@ export default function reducer(state = initialState, action) {
         default:
             return state;
     }
+}
+
+module.exports = {
+    setLocationState: setLocationState,
+    reducer
 }
