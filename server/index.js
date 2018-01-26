@@ -18,6 +18,12 @@ const request_controller = require('./controllers/request_controller.jsx')
 const app = express()
 app.use(bodyParser.json())
 app.use(cors())
+app.use(function(req, res, next){
+    res.header('Access-Control-Allow-Origin', "*");
+    res.header('Access-Control-Allow-Methods', "GET,PUT,POST,DELETE");
+    res.header('Access-Control-Allow-Headers', "Content-Type");
+    next();
+})
 
 massive(process.env.DB_CONNECTION).then( db => {
     app.set( 'db', db)
@@ -36,6 +42,8 @@ const io = socket(app.listen( process.env.SERVER_PORT, () => {
 // app.use( express.static( __dirname + '/../build' ))
 
 //***END POINTS***
+//maps
+app.put('/getDistance', maps_controller.getDistance)
 //User
 // app.post('/createUser',users_controller.createUsers)
 app.put('/setLocation/:id',maps_controller.setLocation)
