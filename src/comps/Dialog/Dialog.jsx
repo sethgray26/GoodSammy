@@ -20,28 +20,23 @@ export default class ConfirmDialog extends React.Component {
 
 render() {
     const actions = [
+        
         <FlatButton
-            label="Cancel"
-            primary={true}
-            onClick={this.handleClose}
-        />,
-        <FlatButton
-            label="Submit"
+            label="Confirm"
             primary={true}
             keyboardFocused={true}
-            onClick={this.handleClose}
+            onClick={this.props.toggleDialog}
         />
     ];
 
     return ( 
         <div>
-            <RaisedButton label="Dialog" onClick={this.handleOpen} />
             <Dialog
                 title="Confirmation Dialog"
                 actions={actions}
                 modal={false}
-                open={this.state.open}
-                onRequestClose={this.handleClose}
+                open={this.props.open}
+                onRequestClose={this.props.toggleDialog}
             >
                 Request submitted! Hang in there!
             </Dialog>
@@ -49,3 +44,4 @@ render() {
     );
 }
 }
+            
