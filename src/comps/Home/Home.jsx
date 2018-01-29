@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-// import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-// import axios from 'axios'
 
 import './Home.css'
 
@@ -12,13 +10,6 @@ import { RaisedButton } from 'material-ui'
 import { lightGreen500, blue500 } from 'material-ui/styles/colors';
 
 export default class Home extends Component {
-    constructor(){
-        super()
-        this.state={
-
-        }
-
-    }
 
 
     render(){
@@ -44,10 +35,11 @@ export default class Home extends Component {
                     /></Link>
 
                     <a href={process.env.REACT_APP_LOGOUT}>
-                        <RaisedButton label='LOGOUT' 
-                            backgroundColor={ lightGreen500 } 
-                            style={ styles.logandsign }
-                    /></a>
+                            <RaisedButton label='LOGOUT' 
+                                backgroundColor={ lightGreen500 } 
+                                style={ styles.logandsign }
+                            />
+                    </a>
 
                 </div>
 
