@@ -18,8 +18,7 @@ class ViewRequest extends Component {
             this.state = {
                 request: null,
                 disable: true
-            }
-            
+            }            
     }
     enableStatus = () => {
         this.setState({
@@ -51,8 +50,7 @@ class ViewRequest extends Component {
         
         this.setState({
             request: Object.assign({}, this.state.request, {help_id: this.props.clientID})
-        })
-        
+        })        
     }
 
     removeHelper = () => {
@@ -62,20 +60,16 @@ class ViewRequest extends Component {
         axios.put('/removeHelp', removed)
     }
 
-
     componentDidMount(){
         
         axios.get(`/request/+${this.props.match.params.id}`).then((res) => {
             this.setState({
                 request: res.data[0]
-            })
-            
+            })            
         })
     }
-
     render() {
-        // console.log('this.props: ',this.props)
-        
+        console.log('values\n++++++++++++',this.state.request)
         return this.state.request ?
         (
             <div>
@@ -117,7 +111,8 @@ class ViewRequest extends Component {
                             style={{marginLeft: 13}}
                             />
                         </div>
-                        
+
+                        {this.state.request.help_id &&
                         <div className="chat_wrapper">
                             <Chat 
                                 userID={this.props.clientID} 
@@ -125,7 +120,7 @@ class ViewRequest extends Component {
                                 helperID={this.state.request.help_id} 
                                 requestID={this.state.request.id}
                             />
-                        </div>
+                        </div>}
                         
                         <div className="close_wrapper">
                             <RaisedButton 
@@ -169,8 +164,8 @@ class ViewRequest extends Component {
                         :
 
                         <div>
+                             {this.state.request.help_id &&   
                             <div className="chat_wrapper">
-
                                 <Chat 
                                     userID={this.props.clientID} 
                                     creatorID={this.state.request.user_id} 
@@ -178,7 +173,7 @@ class ViewRequest extends Component {
                                     requestID={this.state.request.id}
                                 />
 
-                            </div>
+                            </div>}
 
                             
                                 <Link to ='/reqList'>
@@ -211,8 +206,7 @@ class ViewRequest extends Component {
                 <div>Uh oh! Looks like something went wrong!  
                     <Link to='/'><RaisedButton label ='Home Page' primary ={true}/></Link>
                 </div>
-            )
-        
+            )        
     }
 }
 function mapStateToProps(state){

@@ -31,9 +31,15 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
+  "transform": {
+    "^.+\\.js$": "<rootDir>/packages/babel-jest"
+  },
   "proxy": "http://localhost:3005",
-  "main": "server/index.js"
+  "main": "server/index.js",
+  "devDependencies": {
+    "jest": "^22.1.4"
+  }
 }
