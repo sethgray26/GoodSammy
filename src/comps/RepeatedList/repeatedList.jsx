@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom'
 class RepeatedRequest extends Component {
 
     componentWillReceiveProps(nextprops){
-        console.log('props',nextprops)
+        // console.log('props',nextprops)
     }
 
 
