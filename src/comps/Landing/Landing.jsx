@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 import './Landing.css'
@@ -12,7 +12,7 @@ import blue_hand from'./blueHand.png'
 import { Dialog, TextField, RaisedButton } from 'material-ui'
 import { lightGreen500, blue500 } from 'material-ui/styles/colors';
 import { lightBlue500 } from 'material-ui/styles/colors';
-import Chat from './../Chat/Chat.jsx'
+// import Chat from './../Chat/Chat.jsx'
 
 
 class Landing extends Component {
@@ -89,17 +89,23 @@ class Landing extends Component {
     }
 
     render (){
+
         const actions = [
-            <RaisedButton
-              label="Cancel"
-              primary={true}
-              onClick={this.handleClose}
-            />,
-            <RaisedButton
-              label="Submit"
-              primary={true}
-              onClick={() => this.createUser()}
-            /> 
+            <div className="dialog_button_wrapper">
+                <RaisedButton
+                    label="Cancel"
+                    primary={true}
+                    style={{margin: 3}}
+                    onClick={this.handleClose}
+                />
+
+                <RaisedButton
+                    label="Submit"
+                    primary={true}
+                    style={{margin: 3}}
+                    onClick={() => this.createUser()}
+                /> 
+            </div>
         ];
 
         return(
@@ -111,45 +117,56 @@ class Landing extends Component {
 
                 <div className='landing_footer'>
 
-                    <TextField
-                        name='username'
-                        value={this.state.username}
-                        onChange={(e) => this.inputChange(e)}
-                        fullWidth={false}
-                        multiLine={false}
-                        floatingLabelText="Username"
-                        underlineFocusStyle={styles.underlineStyle}
-                        floatingLabelStyle={styles.floatingLabelStyle}
-                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                    /><br />
+                    <div className="login_text_wrapper">
 
+                        <TextField
+                            name='username'
+                            value={this.state.username}
+                            onChange={(e) => this.inputChange(e)}
+                            fullWidth={false}
+                            multiLine={false}
+                            floatingLabelText="Username"
+                            underlineFocusStyle={styles.underlineStyle}
+                            floatingLabelStyle={styles.floatingLabelStyle}
+                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        /><br />
 
-                    <TextField
-                        name='password'
-                        value={this.state.password}
-                        onChange={(e) => this.inputChange(e)}
-                        fullWidth={false}
-                        multiLine={false}
-                        type='password'
-                        floatingLabelText="Password"
-                        underlineFocusStyle={styles.underlineStyle}
-                        floatingLabelStyle={styles.floatingLabelStyle}
-                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                        onKeyPress={this.inputSubmit}
-                    /><br />
+                        <TextField
+                            name='password'
+                            value={this.state.password}
+                            onChange={(e) => this.inputChange(e)}
+                            fullWidth={false}
+                            multiLine={false}
+                            type='password'
+                            floatingLabelText="Password"
+                            underlineFocusStyle={styles.underlineStyle}
+                            floatingLabelStyle={styles.floatingLabelStyle}
+                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                            onKeyPress={this.inputSubmit}
+                        /><br />
 
-                    <RaisedButton label='LOGIN' 
-                        backgroundColor={ lightGreen500 } 
-                        style={ styles.logandsign }
-                        onClick={ (e) => this.login(e)}
-                    />
-                    <RaisedButton label='SIGN UP' 
-                        backgroundColor={ lightBlue500 } 
-                        style={ styles.logandsign }
-                        onClick={this.handleOpen}/>
+                    </div>
 
+                    
+                    <div className="login_button_wrapper">
+
+                        <RaisedButton label='LOGIN' 
+                            backgroundColor={ lightGreen500 } 
+                            style={ styles.logandsign }
+                            onClick={ (e) => this.login(e)}
+                        />
+                        <RaisedButton label='SIGN UP' 
+                            backgroundColor={ lightBlue500 } 
+                            style={ styles.logandsign }
+                            onClick={this.handleOpen}/>
+
+                    </div>
+                    
+
+                    
                     <Dialog
                         title='SIGN UP!'
+                        titleStyle={styles.title}
                         actions={ actions }
                         modal={true}
                         open={this.state.openSignUp}>
@@ -163,31 +180,33 @@ class Landing extends Component {
                             floatingLabelText="Create a Username"
                             underlineFocusStyle={styles.underlineStyle}
                             floatingLabelStyle={styles.floatingLabelStyle}                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                        /><br />
+                        />
 
                         <TextField
-                            name='password'
+                            name="password"
+                            type="password"
                             value={this.state.password}
                             onChange={(e) => this.inputChange(e)}
                             fullWidth={true}
-                            multiLine={true}
+                            // multiLine={true}
                             floatingLabelText="Create a Password"
                             underlineFocusStyle={styles.underlineStyle}
                             floatingLabelStyle={styles.floatingLabelStyle}
                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                        /><br />
+                        />
 
                         <TextField
                             name='confirmPassword'
+                            type='password'
                             value={this.state.confirmPassword}
                             onChange={(e) => this.inputChange(e)}
                             fullWidth={true}
-                            multiLine={true}
+                            // multiLine={true}
                             floatingLabelText="Confirm Password"
                             underlineFocusStyle={styles.underlineStyle}
                             floatingLabelStyle={styles.floatingLabelStyle}
                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                        /><br />
+                        />
 
                         <TextField
                             name='phone'
@@ -199,9 +218,7 @@ class Landing extends Component {
                             underlineFocusStyle={styles.underlineStyle}
                             floatingLabelStyle={styles.floatingLabelStyle}
                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                        /><br />
-
-
+                        />
 
                     </Dialog>
                 </div>
@@ -238,17 +255,24 @@ const styles = {
     },
 
     logandsign: {
-        margin: 12,
+        margin: 8,
         marginTop: 13
     },
     underlineStyle: {
         borderColor: blue500,
       },
     floatingLabelStyle: {
-        color: blue500
+        color: blue500,
+        fontFamily: 'Gloria Hallelujah',
+        fontSize: 20,
+        letterSpacing: 2 
       },
     floatingLabelFocusStyle: {
         color: blue500,
       },
+
+    title: {
+        fontFamily: 'Gloria Hallelujah',
+    }
 }
 

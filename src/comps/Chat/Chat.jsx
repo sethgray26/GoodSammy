@@ -10,7 +10,7 @@ import Message from './Message';
 import fn from '../../utils/functions';
 
 // Material-UI //
-import Divider from 'material-ui/Divider';
+// import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 
@@ -88,9 +88,9 @@ export default class Chat extends Component {
         const { messageInput, socket, requestDescription, username } = this.state;
         const { userID, helperID, creatorID } = this.props;
         return (
-            <div className="chat-container" style={{ padding: "8px" }}>
+            <div className="chat-container" style={{ padding: "1px" }}>
                 
-                <Paper zDepth={1} style={{ padding: "20px" }}>
+                <Paper zDepth={1} style={{ padding: "20px",backgroundColor: "rgb(235, 240, 241)" }}>
                 <h3>Regarding Request: {requestDescription}</h3>
                 <div style={{fontSize:".8em", color:"gray"}}>
                     <h3>conversation ID: {this.state.conversationID}</h3>

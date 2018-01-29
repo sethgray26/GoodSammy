@@ -27,3 +27,15 @@
     margin-top: -100px;
     /* border: 2px solid red; */
 }
+
+.dialog_button_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid red; */
+}
+
+.login_text_wrapper {
+    margin-bottom: 5px;
+}

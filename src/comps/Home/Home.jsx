@@ -10,7 +10,6 @@ import blue_hand from'./blueHand.png'
 
 import { RaisedButton } from 'material-ui'
 import { lightGreen500, blue500 } from 'material-ui/styles/colors';
-import { lightBlue500 } from 'material-ui/styles/colors';
 
 export default class Home extends Component {
     constructor(){
@@ -44,9 +43,10 @@ export default class Home extends Component {
                         style={ styles.helpsomeone }
                     /></Link>
 
-                    <a href={process.env.REACT_APP_LOGOUT}><RaisedButton label='LOGOUT' 
-                        backgroundColor={ lightGreen500 } 
-                        style={ styles.logandsign }
+                    <a href={process.env.REACT_APP_LOGOUT}>
+                        <RaisedButton label='LOGOUT' 
+                            backgroundColor={ lightGreen500 } 
+                            style={ styles.logandsign }
                     /></a>
 
                 </div>

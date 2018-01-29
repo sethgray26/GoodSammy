@@ -11,7 +11,7 @@ import { createRequest } from '../../ducks/reducers/requests';
 import { connect } from 'react-redux';
 
 import{ SelectField, TextField, MenuItem, RaisedButton } from 'material-ui';
-import { blue500, lightGreen500, red400 } from 'material-ui/styles/colors';
+import { blue500, lightGreen500, red400, lightBlue500 } from 'material-ui/styles/colors';
 
 
 import Map from '../Map/Map';
@@ -142,7 +142,7 @@ class CreateRequest extends Component {
                         </SelectField>
                     </div>
                 
-                    <h2>How can a Good Sammy help you?</h2>
+                    {/* <h2>How can a Good Sammy help you?</h2> */}
 
                     <div className='create_req_desc'>
                         <TextField
@@ -152,7 +152,7 @@ class CreateRequest extends Component {
                             multiLine={ true }
                             fullWidth={false}
                             style={{ margin: 10, marginTop: -10 }}
-                            rows={ 8 }
+                            rows={ 1 }
                             floatingLabelStyle={styles.floatingLabelStyle}
                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                             // underlineStyle={styles.underlineStyle}
@@ -173,7 +173,8 @@ class CreateRequest extends Component {
                 <div className='buttons'>
                     <button onClick={()=>console.log(this.state.description)}>console</button>
                     <RaisedButton label='Request Help' 
-                        backgroundColor={ lightGreen500 } 
+                        backgroundColor={ blue500 } 
+                        // primary={true}
                         style={ styles.logandsign }
                         onClick={ this.requestCreator }
                     />
@@ -190,13 +191,13 @@ class CreateRequest extends Component {
     }
 }
 
-const items = [
-    <MenuItem key={1} value="1" primaryText="Automotive" />,
-    <MenuItem key={2} value={2} primaryText="Spiritual" />,
-    <MenuItem key={3} value={3} primaryText="Life" />,
-    <MenuItem key={4} value={4} primaryText="Errends" />,
-    <MenuItem key={5} value={5} primaryText="handyman" />,
-  ];
+// const items = [
+//     <MenuItem key={1} value="1" primaryText="Automotive" />,
+//     <MenuItem key={2} value={2} primaryText="Spiritual" />,
+//     <MenuItem key={3} value={3} primaryText="Life" />,
+//     <MenuItem key={4} value={4} primaryText="Errends" />,
+//     <MenuItem key={5} value={5} primaryText="handyman" />,
+//   ];
 
   const styles = {
     needHelp: {
