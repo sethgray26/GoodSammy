@@ -12,7 +12,6 @@ import { lightGreen300 } from 'material-ui/styles/colors';
 import {lightGreen500} from 'material-ui/styles/colors';  
 import {Link} from 'react-router-dom';  
 import Dialog from 'material-ui/Dialog'; 
-import CircularProgress from 'material-ui/CircularProgress';  
 
 import './ViewRequest.css'
 import { white } from 'material-ui/styles/colors';
