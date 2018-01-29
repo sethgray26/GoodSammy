@@ -114,7 +114,6 @@ class RequestList extends Component {
                         <h3>Lend a hand today! | 
                             {this.props.clientID ? " clientID: "+ this.props.clientID
                             : " clientID from state: "+this.state.clientID }</h3>
-                        <section>{request}</section>
 
                         <Link to='/Home'>
                             <RaisedButton 
@@ -122,8 +121,9 @@ class RequestList extends Component {
                                 backgroundColor={ lightBlue500 }
                                 // buttonStyle={{ borderRadius: 25 }} 
                                 style={ styles.logandsign } 
-                            />
+                                />
                         </Link>
+                                <section>{request}</section>
                     </div>
 
                         
