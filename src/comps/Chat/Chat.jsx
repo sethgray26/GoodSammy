@@ -7,9 +7,10 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import StayScrolled from 'react-stay-scrolled' ;
 import Message from './Message';
+import fn from '../../utils/functions';
 
 // Material-UI //
-import Divider from 'material-ui/Divider';
+// import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 
@@ -66,29 +67,17 @@ export default class Chat extends Component {
                 })
             })
     }
-   
-    getDateString = function(){
-        let d = new Date()
-        let hours = '0'+d.getHours()
-        hours = hours.substring(hours.length -2)
-        let minutes = '0'+d.getMinutes()
-        minutes = minutes.substring(minutes.length -2)
-        let seconds = '0'+d.getSeconds()
-        seconds = seconds.substring(seconds.length -2)
-        let timestamp = ''
-        timestamp = hours + ':' + minutes + ':' + seconds
-        return timestamp
-    }
+
 
     handleChange = (e) => {
         this.setState({ messageInput: e.target.value })
     }
-
+    
     handleSubmit = (e) => {
         e.preventDefault();
         const { conversationID, messageInput } = this.state;
         const { userID } = this.props;
-        const timestamp = this.getDateString();
+        const timestamp = fn.getDateString();
 
         socket.emit('emit message', {conversationID, messageInput, userID, timestamp});
 
@@ -99,9 +88,9 @@ export default class Chat extends Component {
         const { messageInput, socket, requestDescription, username } = this.state;
         const { userID, helperID, creatorID } = this.props;
         return (
-            <div className="chat-container" style={{ padding: "8px" }}>
+            <div className="chat-container" style={{ padding: "1px" }}>
                 
-                <Paper zDepth={1} style={{ padding: "20px" }}>
+                <Paper zDepth={1} style={{ padding: "20px",backgroundColor: "rgb(235, 240, 241)" }}>
                 <h3>Regarding Request: {requestDescription}</h3>
                 <div style={{fontSize:".8em", color:"gray"}}>
                     <h3>conversation ID: {this.state.conversationID}</h3>

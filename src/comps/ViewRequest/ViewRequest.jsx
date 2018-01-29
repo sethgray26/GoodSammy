@@ -7,6 +7,7 @@ import axios from 'axios'
 import RaisedButton  from 'material-ui/RaisedButton';  
 import TextField from 'material-ui/TextField';
 import { lightGreen300 } from 'material-ui/styles/colors';
+import {lightGreen500} from 'material-ui/styles/colors';  
 import {Link} from 'react-router-dom';  
 
 import './ViewRequest.css'
@@ -150,6 +151,7 @@ class ViewRequest extends Component {
                                 lng ={+this.state.request.long}
                             />
                         </div>
+                        
                         <div className="desc_wrapper">
                             <span>{this.state.request.description}</span>
                         </div>
@@ -158,12 +160,15 @@ class ViewRequest extends Component {
 
                         {this.state.request.help_id !== this.props.clientID || this.state.request.help_id === null ?
                         
-                            <RaisedButton 
-                                label='Commit to help' 
-                                onClick ={this.handleCommit} 
-                                backgroundColor={ lightGreen300 } 
-                            />
-                            // this.state.request.help_id
+                            <div className="commit_button_wrapper">
+                                <RaisedButton 
+                                    label='Commit to help' 
+                                    onClick ={this.handleCommit} 
+                                    backgroundColor={ lightGreen300 } 
+                                />
+                            </div>
+                            
+                    
                         :
 
                         <div>
@@ -178,11 +183,26 @@ class ViewRequest extends Component {
 
                             </div>}
 
-                            <Link to ='/reqList'><RaisedButton label = 'Stop helping' onClick={this.removeHelper}/></Link>
+                            
+                                <Link to ='/reqList'>
+                                    <RaisedButton 
+                                        label = 'Stop helping' 
+                                        style={{ marginBottom: 15 }}
+                                        primary={true}
+                                        onClick={this.removeHelper}
+                                    />
+                                </Link>
+                            
+
                         </div>
                     }
 
-                        <Link to='/reqList'><RaisedButton label ='Return to List' secondary={true} /></Link>
+                        <Link to='/reqList'>
+                            <RaisedButton 
+                                label ='Return to List' 
+                                backgroundColor={ lightGreen500 }
+                            />
+                        </Link>
 
                     </div>
             }
@@ -202,4 +222,5 @@ function mapStateToProps(state){
         clientID : state.users.userID
     }
 }
+
 export default connect(mapStateToProps)(ViewRequest);
