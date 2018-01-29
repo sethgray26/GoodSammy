@@ -5,7 +5,9 @@ import Chat from '../Chat/Chat'
 import axios from 'axios'
 
 import RaisedButton  from 'material-ui/RaisedButton';  
-import { lightGreen300, lightGreen500 } from 'material-ui/styles/colors';
+import TextField from 'material-ui/TextField';
+import { lightGreen300 } from 'material-ui/styles/colors';
+import {lightGreen500} from 'material-ui/styles/colors';  
 import {Link} from 'react-router-dom';  
 
 import './ViewRequest.css'
@@ -18,7 +20,8 @@ class ViewRequest extends Component {
             this.state = {
                 request: null,
                 disable: true
-            }            
+            }
+            
     }
     enableStatus = () => {
         this.setState({
@@ -60,6 +63,11 @@ class ViewRequest extends Component {
         axios.put('/removeHelp', removed)
     }
 
+    deleteRequest = () => {
+        
+        axios.delete(`/delete/+${this.props.match.params.id}`)
+    }
+
     componentDidMount(){
         
         axios.get(`/request/+${this.props.match.params.id}`).then((res) => {
@@ -69,11 +77,10 @@ class ViewRequest extends Component {
         })
     }
     render() {
-        console.log('values\n++++++++++++',this.state.request)
         return this.state.request ?
         (
             <div>
-                {/* false ternary placeholder, Redux to be implented */}
+            
                 {this.state.request.user_id === this.props.clientID ?
 
                     <div className="view_wrapper">
@@ -128,11 +135,12 @@ class ViewRequest extends Component {
                                 labelColor={white}
                                 backgroundColor={ lightGreen300 }
                                 style ={{ width:150 }}
+                                onClick={this.deleteRequest}
                             />
                         </div>
                         
                     </div>
-
+                    // this.props.clientID
                 :
 
                     <div className="view_wrapper">
@@ -150,7 +158,7 @@ class ViewRequest extends Component {
 
                         {/* if someone is already helping */}
 
-                        {this.state.request.help_id === null ?
+                        {this.state.request.help_id !== this.props.clientID || this.state.request.help_id === null ?
                         
                             <div className="commit_button_wrapper">
                                 <RaisedButton 
@@ -200,7 +208,7 @@ class ViewRequest extends Component {
             }
             </div>
         )
-
+                    // this.state.request
                 :
              (
                 <div>Uh oh! Looks like something went wrong!  
