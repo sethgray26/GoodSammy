@@ -9,7 +9,7 @@ import StayScrolled from 'react-stay-scrolled' ;
 import Message from './Message';
 
 // Material-UI //
-import Divider from 'material-ui/Divider';
+// import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 
@@ -94,10 +94,11 @@ export default class Chat extends Component {
         
         const { messageInput, socket, requestDescription, userID, username, helperID } = this.state;
         return (
-            <div className="chat-container" style={{ padding: "8px" }}>
+            <div className="chat-container" style={{ padding: "1px" }}>
                 
-                <Paper zDepth={1} style={{ padding: "20px" }}>
+                <Paper zDepth={1} style={{ padding: "20px",backgroundColor: "rgb(235, 240, 241)" }}>
                 <h3>Regarding Request: {requestDescription}</h3>
+                <br/>
                 <h3>coversationID: {this.state.conversationID}</h3>
 
                     <StayScrolled component="div" style={{height:"40vh", overflowWrap:"break-word",

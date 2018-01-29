@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
-import Map from '../Map/Map';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
+import axios from 'axios';
+
+// import Map from '../Map/Map';
 import RepeatedRequest from './../RepeatedList/repeatedList';
-import repeatedList from './../RepeatedList/repeatedList';
+// import repeatedList from './../RepeatedList/repeatedList';s
+import { setLocationState } from '../../ducks/reducers/maps';
 
 import blue_hand from './blueHand.png'
 import './RequestList.css'
 
-import { setLocationState } from '../../ducks/reducers/maps';
-import { connect } from 'react-redux';
-import axios from 'axios';
+import { RaisedButton } from 'material-ui'
+import { lightBlue500 } from 'material-ui/styles/colors';
+
+
 
 class RequestList extends Component {
     constructor() {
@@ -16,13 +22,12 @@ class RequestList extends Component {
         this.state = {
             requestArr: []
         }
-
     }
 
     //Get the Geolocation of the user
     componentDidMount() {
         if (navigator.geolocation) {
-            console.log('supported in browser')
+            // console.log('supported in browser')
             navigator.geolocation.getCurrentPosition((position) => {
                 const lat = position.coords.latitude;
                 const lng = position.coords.longitude;
@@ -30,7 +35,7 @@ class RequestList extends Component {
             })
         }
         else {
-            console.log('not supported in browser')
+            // console.log('not supported in browser')
         }
         axios.get('/request').then((res) => {
             this.setState({
@@ -44,30 +49,30 @@ class RequestList extends Component {
         const lat = nextprops.lat
         const lng = nextprops.lng
         this.distance(lat, lng)
-        console.log('myLocation', lat, lng)
+        // console.log('myLocation', lat, lng)
     }
 
     distance = (lat1, lon1) => {
         let arr = this.state.requestArr
-        console.log('arr', arr)
+        // console.log('arr', arr)
         let newArr = []
         for (var i = 0; i < arr.length; i++) {
-            console.log('req lat', arr[i].lat, 'req long',arr[i].long)
-            console.log('user lat', lat1, 'user long',lon1)
+            // console.log('req lat', arr[i].lat, 'req long',arr[i].long)
+            // console.log('user lat', lat1, 'user long',lon1)
             let type = 'imperial'
             const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=${type}&origins=${lat1},${lon1}&destinations=${arr[i].lat},${arr[i].long}&key=AIzaSyCIIg2weQK6p4wUTy6nXrCj4-hPGgA40xI`
-            console.log(url)    
+            // console.log(url)    
             // axios.get(url).then( res => {
             //     return console.log('res',res.data.rows[0].elements[0].distance.text)}) 
             newArr.push(axios.get(url))
         }
-        console.log('array of promise:', newArr)
+        // console.log('array of promise:', newArr)
         Promise.all(newArr).then(res => {
             let requestArr = this.state.requestArr
             let newState = {}
             for (var j = 0; j < requestArr.length; j++) {
                 requestArr[j].distance = res[j].data.rows[0].elements[0].distance.text
-                console.log(`distance for index ${j}`,res[j].data.rows[0].elements[0].distance.text)
+                // console.log(`distance for index ${j}`,res[j].data.rows[0].elements[0].distance.text)
             }
             this.setState({requestArr})
         })
@@ -98,11 +103,29 @@ class RequestList extends Component {
                     <div>
                         <h3>Lend a hand today!</h3>
                         <section>{request}</section>
+
+                        <Link to='/Home'>
+                            <RaisedButton 
+                                label='Home' 
+                                backgroundColor={ lightBlue500 }
+                                // buttonStyle={{ borderRadius: 25 }} 
+                                style={ styles.logandsign } 
+                            />
+                        </Link>
                     </div>
+
+                        
                     :
                     <div>Looks like no one needs help! </div>}
             </div>
         );
+    }
+}
+
+const styles = {
+    logandsign: {
+        margin: 12,
+        marginTop: 18
     }
 }
 
