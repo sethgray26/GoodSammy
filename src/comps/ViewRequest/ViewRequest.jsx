@@ -4,6 +4,7 @@ import Map from '../Map/Map'
 import Chat from '../Chat/Chat'
 import axios from 'axios'
 
+import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton  from 'material-ui/RaisedButton';  
 import FlatButton from 'material-ui/FlatButton';  
 import TextField from 'material-ui/TextField';
@@ -11,7 +12,6 @@ import { lightGreen300 } from 'material-ui/styles/colors';
 import {lightGreen500} from 'material-ui/styles/colors';  
 import {Link} from 'react-router-dom';  
 import Dialog from 'material-ui/Dialog'; 
-import CircularProgress from 'material-ui/CircularProgress';  
 
 import './ViewRequest.css'
 import { white } from 'material-ui/styles/colors';
@@ -48,16 +48,15 @@ class ViewRequest extends Component {
     }
 
     handleCommit = () =>{
-        console.log('ClientId ist',this.props.clientID)
 
         let sammy = {
-            help_id: this.props.clientID,
+            help_id: this.state.clientID,
             request_id: this.state.request.id
         }
         axios.put('/commit', sammy)
         
         this.setState({
-            request: Object.assign({}, this.state.request, {help_id: this.props.clientID})
+            request: Object.assign({}, this.state.request, {help_id: this.state.clientID})
         })        
     }
 
@@ -80,7 +79,9 @@ class ViewRequest extends Component {
     }
 
     componentDidMount(){
-        
+        axios.get('auth/me').then((res)=>{ // get clientID from session
+            this.setState({clientID: res.data.user})
+        })
         axios.get(`/request/+${this.props.match.params.id}`).then((res) => {
             this.setState({
                 request: res.data[0]
@@ -112,7 +113,9 @@ class ViewRequest extends Component {
         return this.state.request  ?
         (
             <div>
-                {this.state.request.user_id === this.props.clientID ?
+                <button onClick={()=>this.props.history.push('/reqlist')}>back</button>
+                <p>clientID from state:{this.state.clientID}</p>
+                {this.state.request.user_id === this.state.clientID ?
 
                     <div className="view_wrapper">
                         {/* own view */}
@@ -153,7 +156,7 @@ class ViewRequest extends Component {
                         {this.state.request.help_id &&
                         <div className="chat_wrapper">
                             <Chat 
-                                userID={this.props.clientID} 
+                                userID={this.state.clientID} 
                                 creatorID={this.state.request.user_id} 
                                 helperID={this.state.request.help_id} 
                                 requestID={this.state.request.id}
@@ -182,7 +185,6 @@ class ViewRequest extends Component {
                         </div>
                         
                     </div>
-                    // this.props.clientID
                 :
 
                     <div className="view_wrapper">
@@ -200,7 +202,7 @@ class ViewRequest extends Component {
 
                         {/* if someone is already helping */}
 
-                        {this.state.request.help_id !== this.props.clientID || this.state.request.help_id === null ?
+                        {this.state.request.help_id !== this.state.clientID || this.state.request.help_id === null ?
                         
                             <div className="commit_button_wrapper">
                                 <RaisedButton 
@@ -217,7 +219,7 @@ class ViewRequest extends Component {
                              {this.state.request.help_id &&   
                             <div className="chat_wrapper">
                                 <Chat 
-                                    userID={this.props.clientID} 
+                                    userID={this.state.clientID} 
                                     creatorID={this.state.request.user_id} 
                                     helperID={this.state.request.help_id} 
                                     requestID={this.state.request.id}
@@ -259,10 +261,6 @@ class ViewRequest extends Component {
             )        
     }
 }
-function mapStateToProps(state){
-    return {
-        clientID : state.users.userID
-    }
-}
 
-export default connect(mapStateToProps)(ViewRequest);
+
+export default ViewRequest;
