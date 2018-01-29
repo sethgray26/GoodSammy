@@ -26,7 +26,7 @@ const SET_LOCATION_STATE = 'SET_LOCATION_STATE'
 //     }
 // }
 
-function setLocationState(lat, lng) {
+export function setLocationState(lat, lng) {
     console.log('action creator', lat, lng)
         return {
             type: SET_LOCATION_STATE,
@@ -35,7 +35,7 @@ function setLocationState(lat, lng) {
 }
 
 //Reducer
-function reducer(state = initialState, action) {
+export default function reducer(state = initialState, action) {
     switch (action.type) {
         //Get Profile Data
         case SET_LOCATION_STATE: //test
@@ -58,7 +58,7 @@ function reducer(state = initialState, action) {
     }
 }
 
-module.exports = {
-    setLocationState: setLocationState,
-    reducer
-}
+// module.exports = {
+//     setLocationState: setLocationState,
+//     reducer
+// }

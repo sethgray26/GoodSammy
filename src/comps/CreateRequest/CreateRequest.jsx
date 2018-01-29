@@ -33,6 +33,7 @@ class CreateRequest extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.requestToState = this.requestToState.bind(this)
         this.toggleDialog = this.toggleDialog.bind(this)
+        this.requestCreator = this.requestCreator.bind(this)
     }
 
     toggleDialog(){
@@ -42,9 +43,10 @@ class CreateRequest extends Component {
 
     requestToState(e, index, value){
             this.setState({
-                [e.target.id] : value
+                [e.target.id] : [e.target.value]
             //   category: e.target.innerHTML
             })
+            console.log('requestToState: ',e.target.id,e.target.value)
         
 
         console.log("target", this.state.category )
@@ -92,9 +94,10 @@ class CreateRequest extends Component {
         this.setState(newState)
       }
 
-    requestCreator = () => {
+    requestCreator () {
         //Post request
         //User_id, cat_id, desc, long, lat
+        console.log('this.state.description: ',this.state.description)
         let generated = {
             user_id:this.state.userData,
             category_id: this.state.category,
@@ -170,6 +173,7 @@ class CreateRequest extends Component {
                 </div> */}
 
                 <div className='buttons'>
+                    <button onClick={()=>console.log(this.state.description)}>console</button>
                     <RaisedButton label='Request Help' 
                         backgroundColor={ lightGreen500 } 
                         style={ styles.logandsign }

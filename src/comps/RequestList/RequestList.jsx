@@ -33,7 +33,11 @@ class RequestList extends Component {
         else {
             console.log('not supported in browser')
         }
-        
+        axios.get('/request').then((res) => {
+            this.setState({
+                requestArr: res.data
+            })
+        })
     }
 
     componentWillReceiveProps(nextprops) {
