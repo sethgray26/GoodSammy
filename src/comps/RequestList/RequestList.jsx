@@ -110,11 +110,10 @@ class RequestList extends Component {
                         <img style={{height: 70, width: 70 }} src={blue_hand} alt='blue_hand'/>
                     </div>
 
-                    {this.state.requestArr.length !== 0 ?
+                    {this.state.requestArr.length !== 0  ?
                     <div>
                         <h3>Lend a hand today! | 
                             clientID from state: {this.state.clientID}</h3>
-                        <section>{request}</section>
 
                         <Link to='/Home'>
                             <RaisedButton 
@@ -122,8 +121,9 @@ class RequestList extends Component {
                                 backgroundColor={ lightBlue500 }
                                 // buttonStyle={{ borderRadius: 25 }} 
                                 style={ styles.logandsign } 
-                            />
+                                />
                         </Link>
+                                <section>{request}</section>
                     </div>                        
                     :
                     <div>Looks like no one needs help! </div>}

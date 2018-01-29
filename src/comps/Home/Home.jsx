@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
@@ -49,10 +48,11 @@ export default class Home extends Component {
                     /></Link>
 
                     <a href={process.env.REACT_APP_LOGOUT}>
-                        <RaisedButton label='LOGOUT' 
-                            backgroundColor={ lightGreen500 } 
-                            style={ styles.logandsign }
-                    /></a>
+                            <RaisedButton label='LOGOUT' 
+                                backgroundColor={ lightGreen500 } 
+                                style={ styles.logandsign }
+                            />
+                    </a>
 
                 </div>
 

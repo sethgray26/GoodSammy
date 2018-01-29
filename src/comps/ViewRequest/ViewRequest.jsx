@@ -6,10 +6,13 @@ import axios from 'axios'
 
 import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton  from 'material-ui/RaisedButton';  
+import FlatButton from 'material-ui/FlatButton';  
 import TextField from 'material-ui/TextField';
 import { lightGreen300 } from 'material-ui/styles/colors';
 import {lightGreen500} from 'material-ui/styles/colors';  
 import {Link} from 'react-router-dom';  
+import Dialog from 'material-ui/Dialog'; 
+import CircularProgress from 'material-ui/CircularProgress';  
 
 import './ViewRequest.css'
 import { white } from 'material-ui/styles/colors';
@@ -21,6 +24,7 @@ class ViewRequest extends Component {
             this.state = {
                 request: null,
                 disable: true,
+                open: false,
                 clientID: null
             }
             
@@ -69,6 +73,12 @@ class ViewRequest extends Component {
         axios.delete(`/delete/+${this.props.match.params.id}`)
     }
 
+    handleAmerica = () => {
+        this.setState({
+            open: !this.state.open
+        })
+    }
+
     componentDidMount(){
         axios.get('auth/me').then((res)=>{ // get clientID from session
             this.setState({clientID: res.data.user})
@@ -78,9 +88,30 @@ class ViewRequest extends Component {
                 request: res.data[0]
             })            
         })
+        axios.get('auth/me').then((res)=>{
+            this.setState({
+                clientID: res.data.user
+            })
+        })
     }
     render() {
-        return this.state.request ?
+        const actions = [
+            <FlatButton 
+            label = "Cancel"
+            primary={true}
+            keyboardFocused={true}
+            onClick = {this.handleAmerica}
+            />,
+            <Link to ='/Home'>
+                <FlatButton 
+                label = "Delete"
+                primary={true}
+                onClick={this.deleteRequest}
+                />
+            </Link>
+        ]
+
+        return this.state.request  ?
         (
             <div>
                 <button onClick={()=>this.props.history.push('/reqlist')}>back</button>
@@ -139,8 +170,19 @@ class ViewRequest extends Component {
                                 labelColor={white}
                                 backgroundColor={ lightGreen300 }
                                 style ={{ width:150 }}
-                                onClick={this.deleteRequest}
+                                onClick={this.handleAmerica}
                             />
+                            <div>
+                                <Dialog
+                                    title = "Are you sure want to close this request?"
+                                    actions = {actions}
+                                    modal={false}
+                                    open={this.state.open}
+                                    onRequestClose={this.handleAmerica}
+                                >
+                                    Click on the "Delete" button if you no longer need help 
+                                </Dialog>
+                            </div>
                         </div>
                         
                     </div>
@@ -215,8 +257,7 @@ class ViewRequest extends Component {
                 :
              (
                 <div>
-                    <br/><br/><br/> {/*  display loading circle until have request ARR */}
-                    <CircularProgress size={80} thickness={5}/>
+                   <br/><br/><br/> <CircularProgress size={80} thickness={5} />
                 </div>
             )        
     }
