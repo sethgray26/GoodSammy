@@ -33,5 +33,10 @@ module.exports = {
 
         dbInstance.remove_Help(request_id)
         .then((request) => res.status(200).send(request))
+    },
+    delete_Request: (req, res) => {
+        const dbInstance = req.app.get('db')
+        dbInstance.deleteRequest(req.params.id)
+        .then(() => res.status(200).send('Deleted!'))
     }
 }

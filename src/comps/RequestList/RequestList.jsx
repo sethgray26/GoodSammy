@@ -50,7 +50,7 @@ class RequestList extends Component {
     componentWillReceiveProps(nextprops) {
         //Calc distance and push to requestArr
         const lat = nextprops.lat
-        const lng = nextprops.lng
+        const lng = nextprops.lng 
         this.distance(lat, lng)
         // console.log('myLocation', lat, lng)
     }
