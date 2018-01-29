@@ -61,7 +61,6 @@ class CreateRequest extends Component {
     }
 
      componentDidMount() {
-        console.log('client ID from props\n ==============> ', this.props.clientID)
         if (navigator.geolocation) {
             // console.log('supported in browser')
             navigator.geolocation.getCurrentPosition((position) => {
@@ -81,7 +80,7 @@ class CreateRequest extends Component {
                 this.setState({
                     userData: res.data.user
                 })
-                console.log("user",res.data.user)
+                console.log("clientID",res.data.user)
             })
     }
 
@@ -136,7 +135,7 @@ class CreateRequest extends Component {
                             <MenuItem key={1} value={1} primaryText="Automotive" />
                             <MenuItem key={2} value={2} primaryText="Spiritual" />
                             <MenuItem key={3} value={3} primaryText="Life" />
-                            <MenuItem key={4} value={4} primaryText="Errends" />
+                            <MenuItem key={4} value={4} primaryText="Errands" />
                             <MenuItem key={5} value={5} primaryText="handyman" />
 
                         </SelectField>
@@ -186,6 +185,7 @@ class CreateRequest extends Component {
                     /></Link>
                 </div>
                 <ConfirmDialog open={this.state.dialogToggle} toggleDialog={this.toggleDialog}/>
+                <p>client ID from state: {this.state.userData} </p>
             </div>
         );
     }
@@ -195,7 +195,7 @@ class CreateRequest extends Component {
 //     <MenuItem key={1} value="1" primaryText="Automotive" />,
 //     <MenuItem key={2} value={2} primaryText="Spiritual" />,
 //     <MenuItem key={3} value={3} primaryText="Life" />,
-//     <MenuItem key={4} value={4} primaryText="Errends" />,
+//     <MenuItem key={4} value={4} primaryText="Errands" />,
 //     <MenuItem key={5} value={5} primaryText="handyman" />,
 //   ];
 
@@ -240,8 +240,7 @@ class CreateRequest extends Component {
 function mapStateToProps(state) {
     return {
         lat: state.maps.lat,
-        lng: state.maps.lng,
-        clientID: state.users.userID
+        lng: state.maps.lng
     };
   }
   

@@ -29,6 +29,7 @@ class RequestList extends Component {
 
     //Get the Geolocation of the user
     componentDidMount() {
+        axios.get('auth/me').then(res=>{this.setState({clientID:res.data.user})})
         if (navigator.geolocation) {
             // console.log('supported in browser')
             navigator.geolocation.getCurrentPosition((position) => {
@@ -112,8 +113,7 @@ class RequestList extends Component {
                     {this.state.requestArr.length !== 0 ?
                     <div>
                         <h3>Lend a hand today! | 
-                            {this.props.clientID ? " clientID: "+ this.props.clientID
-                            : " clientID from state: "+this.state.clientID }</h3>
+                            clientID from state: {this.state.clientID}</h3>
                         <section>{request}</section>
 
                         <Link to='/Home'>
@@ -144,8 +144,7 @@ const styles = {
 function mapStateToProps(state) {
     return {
         lat: state.maps.lat,
-        lng: state.maps.lng,
-        clientID: state.users.userID
+        lng: state.maps.lng
     };
 }
 
