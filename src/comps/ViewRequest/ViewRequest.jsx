@@ -18,8 +18,7 @@ class ViewRequest extends Component {
         super()
             this.state = {
                 request: null,
-                disable: true,
-                andrewsIdea:'Sucks at the foos'
+                disable: true
             }
             
     }
@@ -63,6 +62,11 @@ class ViewRequest extends Component {
         axios.put('/removeHelp', removed)
     }
 
+    deleteRequest = () => {
+        
+        axios.delete(`/delete/+${this.props.match.params.id}`)
+    }
+
     componentDidMount(){
         
         axios.get(`/request/+${this.props.match.params.id}`).then((res) => {
@@ -72,11 +76,10 @@ class ViewRequest extends Component {
         })
     }
     render() {
-        console.log('values\n++++++++++++',this.state.request)
         return this.state.request ?
         (
             <div>
-                {/* false ternary placeholder, Redux to be implented */}
+            
                 {this.state.request.user_id === this.props.clientID ?
 
                     <div className="view_wrapper">
@@ -131,6 +134,7 @@ class ViewRequest extends Component {
                                 labelColor={white}
                                 backgroundColor={ lightGreen300 }
                                 style ={{ width:150 }}
+                                onClick={this.deleteRequest}
                             />
                         </div>
                         
@@ -152,7 +156,7 @@ class ViewRequest extends Component {
 
                         {/* if someone is already helping */}
 
-                        {this.state.request.help_id === null ?
+                        {this.state.request.help_id !== this.props.clientID || this.state.request.help_id === null ?
                         
                             <RaisedButton 
                                 label='Commit to help' 

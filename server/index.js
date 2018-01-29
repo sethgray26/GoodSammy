@@ -71,7 +71,7 @@ app.put('/removeHelp', controllers.remove_Help)
 
 
 // === DELETE REQUESTS === //
-
+app.delete('/delete/:id', controllers.delete_Request)
 
 
 const chat= io.on('connection', (socket)=>{
