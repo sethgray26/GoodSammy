@@ -124,9 +124,7 @@ class RequestList extends Component {
                                 style={ styles.logandsign } 
                             />
                         </Link>
-                    </div>
-
-                        
+                    </div>                        
                     :
                     <div>Looks like no one needs help! </div>}
             </div>
