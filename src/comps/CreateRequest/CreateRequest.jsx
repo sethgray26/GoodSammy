@@ -41,15 +41,13 @@ class CreateRequest extends Component {
         this.props.history.push('/Home')
     }
 
-    requestToState(e, index, value){
+    requestToState(e){
+        console.log('e.target.innerHTML',e.target.innerHTML)
+        const{id, innerHTML} = e.target
             this.setState({
-                [e.target.id] : [e.target.value]
+                [id]: [e.target.value]
             //   category: e.target.innerHTML
             })
-            console.log('requestToState: ',e.target.id,e.target.value)
-        
-
-        console.log("target", this.state.category )
     }
 
 
@@ -101,7 +99,7 @@ class CreateRequest extends Component {
         let generated = {
             user_id:this.state.userData,
             category_id: this.state.category,
-            description: this.state.description,
+            description: this.state.description[0],
             lat: this.props.lat,
             long: this.props.lng
         }
