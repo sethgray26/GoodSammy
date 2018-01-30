@@ -41,8 +41,6 @@ class RequestList extends Component {
                 const lat = position.coords.latitude;
                 const lng = position.coords.longitude;
                 this.props.setLocationState(lat, lng)
-                this.distance(lat, lng)
-                // console.log('lat, lng:',lat,lng)
             })
         }
         else {
@@ -59,8 +57,6 @@ class RequestList extends Component {
     }
 
     distance = (lat1, lon1) => {
-        console.log('called this.distance---------------------')
-        console.log('this.state.requestArr: ',this.state.requestArr)
         let arr = this.state.requestArr
         let newArr = []
         for (var i = 0; i < arr.length; i++) {
@@ -68,7 +64,6 @@ class RequestList extends Component {
             //const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=${type}&origins=${lat1},${lon1}&destinations=${arr[i].lat},${arr[i].long}&key=AIzaSyCIIg2weQK6p4wUTy6nXrCj4-hPGgA40xI`
            
             //newArr.push(axios.get(url))
-            console.log('making axios call-----------------------------------------------------')
             newArr.push(axios.put('/getDistance',{type:type, lat1: lat1, lon1: lon1, lat2:arr[i].lat, lon2: arr[i].long}))
         }
       
