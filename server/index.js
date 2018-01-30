@@ -1,5 +1,5 @@
 const express = require('express')
-const https = require('https')
+const http = require('http')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const session = require('express-session')
@@ -44,9 +44,11 @@ app.use( session({
 }))
 app.use( express.static( __dirname + '/../build' ))
 
-var server = https.createServer(app)   // options, app
+var server = http.Server(app)   // options, app
 
-var io = socket(server.listen(process.env.SERVER_PORT, ()=>{console.log('running')}))                       // socket.listen(server)
+var io = socket(server)
+
+server.listen(process.env.SERVER_PORT, ()=>{console.log('running')})// socket.listen(server)
 
 // keys for secure connection //
 // var privateKey= fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/privkey1.pem').toString();
