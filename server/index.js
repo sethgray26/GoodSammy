@@ -64,7 +64,6 @@ app.get('/logout',users_controller.logOut)
 // ========== ENDPOINTS ========== //
 
 // === GET REQUESTS === //
-// tests #3
 app.get('/request', controllers.get_Request )
 app.get('/request/:id', controllers.get_one_request)
 
@@ -75,7 +74,6 @@ app.put('/removeHelp', controllers.remove_Help)
 
 // === POST REQUESTS === //
 // app.post('/createUser', users_controller.createUsers )
-// test #4 
 
 
 // === DELETE REQUESTS === //
