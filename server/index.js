@@ -20,7 +20,9 @@ const app = express()
 var options = {
 	key: fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/privkey1.pem'),
 	cert: fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/cert1.pem'),
-	ca: fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/chain1.pem')
+    ca: fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/chain1.pem'),
+    requestCert: false,
+    rejectunauthorized: false
 }
 app.use(bodyParser.json())
 app.use(cors())
@@ -43,7 +45,8 @@ app.use( session({
 app.use( express.static( __dirname + '/../build' ))
 
 var server = https.createServer(options, app)
-var io = socket(app.listen(process.env.SERVER_PORT, ()=>{console.log('server running port: '+process.env.SERVER_PORT)}))
+server.listen(process.env.SERVER_PORT)
+var io = socket.listen(server)
 
 // keys for secure connection //
 var privateKey= fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/privkey1.pem').toString();
