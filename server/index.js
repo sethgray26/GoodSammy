@@ -41,8 +41,9 @@ app.use( session({
     resave: false
 }))
 app.use( express.static( __dirname + '/../build' ))
+
 var server = https.createServer(options, app)
-var io = socket(server)
+var io = socket(app.listen(process.env.SERVER_PORT, ()=>{console.log('server running port: '+process.env.SERVER_PORT)}))
 
 // keys for secure connection //
 var privateKey= fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/privkey1.pem').toString();
@@ -100,4 +101,3 @@ const chat= io.on('connection', (socket)=>{
 })
 
 
-server.listen(process.env.SERVER_PORT, ()=>{console.log('server running port: '+process.env.SERVER_PORT)})
