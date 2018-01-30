@@ -9,6 +9,7 @@ import blue_hand from'./blueHand.png'
 
 import { RaisedButton } from 'material-ui'
 import { lightGreen500, blue500 } from 'material-ui/styles/colors';
+import { white } from 'material-ui/styles/colors';
 
 export default class Home extends Component {
     constructor(){
@@ -48,6 +49,7 @@ export default class Home extends Component {
                     <Link id='button' to='/reqList'>
                         <RaisedButton 
                             label='Help Someone' 
+                            labelStyle={{color: white}}
                             backgroundColor={ lightGreen500 } 
                             buttonStyle={{ borderRadius: 25 }} 
                             style={ styles.helpsomeone }
@@ -58,6 +60,7 @@ export default class Home extends Component {
                     <div>
                     <a href={process.env.REACT_APP_LOGOUT}>
                         <RaisedButton label='LOGOUT' 
+                            labelStyle={{color: white}}
                             backgroundColor={ lightGreen500 } 
                             style={ styles.logandsign }
                     /></a>
@@ -65,7 +68,6 @@ export default class Home extends Component {
 
                 </div>
 
-                <p>ClientID on this comp's state: {this.state.clientID}</p>
             </div>
         )
     }
