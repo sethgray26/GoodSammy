@@ -14,7 +14,7 @@ import fn from '../../utils/functions';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 
-const socketUrl = 'https://192.168.0.126:3005'; // server URL
+const socketUrl = 'https://hifiveapp.com'; // server URL
 const socket = io.connect(socketUrl, {secure: true});
 
 export default class Chat extends Component {    

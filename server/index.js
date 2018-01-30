@@ -17,13 +17,13 @@ const maps_controller = require('./controllers/maps_controller.jsx')
 const request_controller = require('./controllers/request_controller.jsx')
 
 const app = express()
-var options = {
-	key: fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/privkey1.pem'),
-	cert: fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/cert1.pem'),
-    ca: fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/chain1.pem'),
-    requestCert: false,
-    rejectunauthorized: false
-}
+// var options = {
+// 	key: fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/privkey1.pem'),
+// 	cert: fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/cert1.pem'),
+//     ca: fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/chain1.pem'),
+//     requestCert: false,
+//     rejectunauthorized: false
+// }
 app.use(bodyParser.json())
 app.use(cors())
 app.use(function(req, res, next){
@@ -44,14 +44,14 @@ app.use( session({
 }))
 app.use( express.static( __dirname + '/../build' ))
 
-var server = https.createServer(options, app)
-server.listen(process.env.SERVER_PORT)
-var io = socket.listen(server)
+var server = https.createServer(app)   // options, app
+
+var io = socket(server.listen(process.env.SERVER_PORT, ()=>{console.log('running')}))                       // socket.listen(server)
 
 // keys for secure connection //
-var privateKey= fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/privkey1.pem').toString();
-var certificate= fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/cert1.pem').toString();
-var ca = fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/chain1.pem').toString();
+// var privateKey= fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/privkey1.pem').toString();
+// var certificate= fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/cert1.pem').toString();
+// var ca = fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/chain1.pem').toString();
 ////////////////////////////////////////////////////////////////////////
 
 
