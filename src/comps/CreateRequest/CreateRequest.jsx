@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios'
 
 import './CreateRequest.css'
-import ConfirmDialog from '../Dialog/Dialog'
+// import ConfirmDialog from '../Dialog/Dialog'
 // import blue_hand from './blueHand.png'
 
 import { setLocationState } from '../../ducks/reducers/maps';
@@ -11,7 +11,7 @@ import { createRequest } from '../../ducks/reducers/requests';
 import { connect } from 'react-redux';
 
 import{ SelectField, TextField, MenuItem, RaisedButton } from 'material-ui';
-import { blue500, lightGreen500, red400, lightBlue500 } from 'material-ui/styles/colors';
+import { blue500, red400 } from 'material-ui/styles/colors';
 
 
 import Map from '../Map/Map';

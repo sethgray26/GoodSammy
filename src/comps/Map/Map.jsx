@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { compose, withProps } from "recompose";
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
-import { setLocation } from '../../ducks/reducers/maps';
-import { connect } from 'react-redux';
+// import { setLocation } from '../../ducks/reducers/maps';
+// import { connect } from 'react-redux';
 
 class Map extends Component {
 
