@@ -5,6 +5,8 @@ import axios from 'axios';
 
 // import Map from '../Map/Map';
 import RepeatedRequest from './../RepeatedList/repeatedList';
+import repeatedList from './../RepeatedList/repeatedList';
+import CircularProgress from 'material-ui/CircularProgress';
 // import repeatedList from './../RepeatedList/repeatedList';s
 import { setLocationState } from '../../ducks/reducers/maps';
 
@@ -20,12 +22,14 @@ class RequestList extends Component {
     constructor() {
         super()
         this.state = {
-            requestArr: []
+            requestArr: [],
+            clientID: null
         }
     }
 
     //Get the Geolocation of the user
     componentDidMount() {
+        axios.get('auth/me').then(res=>{this.setState({clientID:res.data.user})})
         if (navigator.geolocation) {
             // console.log('supported in browser')
             navigator.geolocation.getCurrentPosition((position) => {
@@ -47,7 +51,7 @@ class RequestList extends Component {
     componentWillReceiveProps(nextprops) {
         //Calc distance and push to requestArr
         const lat = nextprops.lat
-        const lng = nextprops.lng
+        const lng = nextprops.lng 
         this.distance(lat, lng)
         // console.log('myLocation', lat, lng)
     }
@@ -80,7 +84,6 @@ class RequestList extends Component {
 
     render() {
         const request = this.state.requestArr.map(request => {
-            console.log('request: ',request)
             return (
                 <RepeatedRequest
                     key={request.id}
@@ -95,16 +98,22 @@ class RequestList extends Component {
             )
         })
         return (
-
+            <div>
+            { this.state.requestArr.length === 0 ? 
+                <div>
+                    <br/><br/><br/> {/*  display loading circle until have request ARR */}
+                    <CircularProgress size={80} thickness={5}/>
+                </div>
+            :
             <div className='body-content' >
                     <div className="list_header">
                         <img style={{height: 70, width: 70 }} src={blue_hand} alt='blue_hand'/>
                     </div>
 
-                    {this.state.requestArr.length !== 0 ?
+                    {this.state.requestArr.length !== 0  ?
                     <div>
-                        <h3>Lend a hand today!</h3>
-                        <section>{request}</section>
+                        <h3>Lend a hand today! | 
+                            clientID from state: {this.state.clientID}</h3>
 
                         <Link to='/Home'>
                             <RaisedButton 
@@ -112,13 +121,14 @@ class RequestList extends Component {
                                 backgroundColor={ lightBlue500 }
                                 // buttonStyle={{ borderRadius: 25 }} 
                                 style={ styles.logandsign } 
-                            />
+                                />
                         </Link>
-                    </div>
-
-                        
+                                <section>{request}</section>
+                    </div>                        
                     :
                     <div>Looks like no one needs help! </div>}
+            </div>
+            }
             </div>
         );
     }

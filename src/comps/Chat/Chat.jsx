@@ -22,7 +22,6 @@ export default class Chat extends Component {
         super(props);
         this.state = {
             messageInput: "",
-            socket: io('http://192.168.0.126:3005'),
             response: [],
             socketID: null,
             creatorID: 4,
@@ -49,7 +48,7 @@ export default class Chat extends Component {
             console.log('Connected.\nSocket ID: ', id)
             // const { socketID } = this.state
             const { userID, creatorID, helperID, requestID } = this.props
-            axios.post('http://localhost:3005/chat/socketID', 
+            axios.post('/chat/socketID', 
                 { socketID: id, userID, requestID, creatorID, helperID })
                 .then(res=>{
                     const conversationID = res.data.id
@@ -60,7 +59,7 @@ export default class Chat extends Component {
             })
         // get usernames to display under messages
         const { creatorID, helperID } = this.props;
-        axios.post('http://localhost:3005/chat/usernames', { creatorID, helperID })
+        axios.post('/chat/usernames', { creatorID, helperID })
             .then(res=>{
                 this.setState({
                     username: { creator: res.data.sendMe.creator, helper: res.data.sendMe.helper }

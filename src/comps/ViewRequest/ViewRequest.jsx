@@ -4,9 +4,14 @@ import Map from '../Map/Map'
 import Chat from '../Chat/Chat'
 import axios from 'axios'
 
+import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton  from 'material-ui/RaisedButton';  
-import { lightGreen300, lightGreen500 } from 'material-ui/styles/colors';
+import FlatButton from 'material-ui/FlatButton';  
+import TextField from 'material-ui/TextField';
+import { lightGreen300 } from 'material-ui/styles/colors';
+import {lightGreen500} from 'material-ui/styles/colors';  
 import {Link} from 'react-router-dom';  
+import Dialog from 'material-ui/Dialog'; 
 
 import './ViewRequest.css'
 import { white } from 'material-ui/styles/colors';
@@ -17,8 +22,11 @@ class ViewRequest extends Component {
         super()
             this.state = {
                 request: null,
-                disable: true
-            }            
+                disable: true,
+                open: false,
+                clientID: null
+            }
+            
     }
     enableStatus = () => {
         this.setState({
@@ -40,16 +48,15 @@ class ViewRequest extends Component {
     }
 
     handleCommit = () =>{
-        console.log('ClientId ist',this.props.clientID)
 
         let sammy = {
-            help_id: this.props.clientID,
+            help_id: this.state.clientID,
             request_id: this.state.request.id
         }
         axios.put('/commit', sammy)
         
         this.setState({
-            request: Object.assign({}, this.state.request, {help_id: this.props.clientID})
+            request: Object.assign({}, this.state.request, {help_id: this.state.clientID})
         })        
     }
 
@@ -60,21 +67,55 @@ class ViewRequest extends Component {
         axios.put('/removeHelp', removed)
     }
 
-    componentDidMount(){
+    deleteRequest = () => {
         
+        axios.delete(`/delete/+${this.props.match.params.id}`)
+    }
+
+    handleAmerica = () => {
+        this.setState({
+            open: !this.state.open
+        })
+    }
+
+    componentDidMount(){
+        axios.get('auth/me').then((res)=>{ // get clientID from session
+            this.setState({clientID: res.data.user})
+        })
         axios.get(`/request/+${this.props.match.params.id}`).then((res) => {
             this.setState({
                 request: res.data[0]
             })            
         })
+        axios.get('auth/me').then((res)=>{
+            this.setState({
+                clientID: res.data.user
+            })
+        })
     }
     render() {
-        console.log('values\n++++++++++++',this.state.request)
-        return this.state.request ?
+        const actions = [
+            <FlatButton 
+            label = "Cancel"
+            primary={true}
+            keyboardFocused={true}
+            onClick = {this.handleAmerica}
+            />,
+            <Link to ='/Home'>
+                <FlatButton 
+                label = "Delete"
+                primary={true}
+                onClick={this.deleteRequest}
+                />
+            </Link>
+        ]
+
+        return this.state.request  ?
         (
             <div>
-                {/* false ternary placeholder, Redux to be implented */}
-                {this.state.request.user_id === this.props.clientID ?
+                <button onClick={()=>this.props.history.push('/reqlist')}>back</button>
+                <p>clientID from state:{this.state.clientID}</p>
+                {this.state.request.user_id === this.state.clientID ?
 
                     <div className="view_wrapper">
                         {/* own view */}
@@ -115,7 +156,7 @@ class ViewRequest extends Component {
                         {this.state.request.help_id &&
                         <div className="chat_wrapper">
                             <Chat 
-                                userID={this.props.clientID} 
+                                userID={this.state.clientID} 
                                 creatorID={this.state.request.user_id} 
                                 helperID={this.state.request.help_id} 
                                 requestID={this.state.request.id}
@@ -128,11 +169,22 @@ class ViewRequest extends Component {
                                 labelColor={white}
                                 backgroundColor={ lightGreen300 }
                                 style ={{ width:150 }}
+                                onClick={this.handleAmerica}
                             />
+                            <div>
+                                <Dialog
+                                    title = "Are you sure want to close this request?"
+                                    actions = {actions}
+                                    modal={false}
+                                    open={this.state.open}
+                                    onRequestClose={this.handleAmerica}
+                                >
+                                    Click on the "Delete" button if you no longer need help 
+                                </Dialog>
+                            </div>
                         </div>
                         
                     </div>
-
                 :
 
                     <div className="view_wrapper">
@@ -150,7 +202,7 @@ class ViewRequest extends Component {
 
                         {/* if someone is already helping */}
 
-                        {this.state.request.help_id === null ?
+                        {this.state.request.help_id !== this.state.clientID || this.state.request.help_id === null ?
                         
                             <div className="commit_button_wrapper">
                                 <RaisedButton 
@@ -167,7 +219,7 @@ class ViewRequest extends Component {
                              {this.state.request.help_id &&   
                             <div className="chat_wrapper">
                                 <Chat 
-                                    userID={this.props.clientID} 
+                                    userID={this.state.clientID} 
                                     creatorID={this.state.request.user_id} 
                                     helperID={this.state.request.help_id} 
                                     requestID={this.state.request.id}
@@ -200,19 +252,15 @@ class ViewRequest extends Component {
             }
             </div>
         )
-
+                    // this.state.request
                 :
              (
-                <div>Uh oh! Looks like something went wrong!  
-                    <Link to='/'><RaisedButton label ='Home Page' primary ={true}/></Link>
+                <div>
+                   <br/><br/><br/> <CircularProgress size={80} thickness={5} />
                 </div>
             )        
     }
 }
-function mapStateToProps(state){
-    return {
-        clientID : state.users.userID
-    }
-}
 
-export default connect(mapStateToProps)(ViewRequest);
+
+export default ViewRequest;

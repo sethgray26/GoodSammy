@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-// import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-// import axios from 'axios'
+import axios from 'axios'
 
 import './Home.css'
 
@@ -15,11 +14,15 @@ export default class Home extends Component {
     constructor(){
         super()
         this.state={
-
+            clientID: null
         }
-
     }
-
+    componentDidMount(){  // get client ID from session
+        axios.get('auth/me').then((res)=>{
+            console.log('======>res.data.user (clientID)',res.data.user)
+            this.setState({clientID: res.data.user})
+        })
+    }
 
     render(){
 
@@ -62,7 +65,7 @@ export default class Home extends Component {
 
                 </div>
 
-              
+                <p>ClientID on this comp's state: {this.state.clientID}</p>
             </div>
         )
     }

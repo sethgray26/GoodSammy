@@ -1,5 +1,5 @@
 //import axios from 'axios';
-// const axios = require('axios');
+const axios = require('axios');
 
 //initial state
 const initialState = {
@@ -13,18 +13,18 @@ const SET_LOCATION = 'SET_LOCATION'
 const SET_LOCATION_STATE = 'SET_LOCATION_STATE'
 
 //Action Creators
-// export function setLocation(id, lat, lng) {
-//     console.log('action creator', id, lat, lng)
-//     return {
-//         type: SET_LOCATION,
-//         // payload: [{lat:lat, lng:lng}]
-//         payload: axios.put(`/setLocation/${id}`, { lng: lng, lat: lat })
-//             .then(res => {
-//                 console.log('then', res.data)
-//                 return res.data
-//             })
-//     }
-// }
+export function setLocation(id, lat, lng) {
+    console.log('action creator', id, lat, lng)
+    return {
+        type: SET_LOCATION,
+        // payload: [{lat:lat, lng:lng}]
+        payload: axios.put(`/setLocation/${id}`, { lng: lng, lat: lat })
+            .then(res => {
+                console.log('then', res.data)
+                return res.data
+            })
+    }
+}
 
 export function setLocationState(lat, lng) {
     console.log('action creator', lat, lng)
