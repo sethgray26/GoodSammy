@@ -13,5 +13,4 @@ module.exports = {
         timestamp = hours + ':' + minutes + ':' + seconds
         return timestamp
     }
-
 }
