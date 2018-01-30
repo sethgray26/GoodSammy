@@ -34,13 +34,14 @@ class RequestList extends Component {
         })
         axios.get('auth/me').then(res=>{
             this.setState({ clientID:res.data.user }) })
-
+        
         
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 const lat = position.coords.latitude;
                 const lng = position.coords.longitude;
                 this.props.setLocationState(lat, lng)
+                this.distance(lat, lng)
             })
         }
         else {
