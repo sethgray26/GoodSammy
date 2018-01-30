@@ -15,9 +15,9 @@ module.exports = {
     },
     update_req_info: (req,res) =>{
         const dbInstance = req.app.get('db')
-        const{description, category, request_id} = req.body
+        const{description, request_id} = req.body
         
-        dbInstance.update_req_info(request_id, description, category)
+        dbInstance.update_req_info(request_id, description)
         .then((request) => res.status(200).send(request))
     },
     update_Helper: (req,res) => {

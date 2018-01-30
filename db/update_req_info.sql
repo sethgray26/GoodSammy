@@ -1,4 +1,3 @@
 update request set 
-description = $2,
-category_id =$3
+description = $2
 WHERE id = $1

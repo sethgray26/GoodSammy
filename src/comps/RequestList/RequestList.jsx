@@ -3,11 +3,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 
-// import Map from '../Map/Map';
 import RepeatedRequest from './../RepeatedList/repeatedList';
 import repeatedList from './../RepeatedList/repeatedList';
 import CircularProgress from 'material-ui/CircularProgress';
-// import repeatedList from './../RepeatedList/repeatedList';s
 import { setLocationState } from '../../ducks/reducers/maps';
 
 import blue_hand from './blueHand.png'
@@ -16,11 +14,9 @@ import './RequestList.css'
 import { RaisedButton } from 'material-ui'
 import { lightBlue500 } from 'material-ui/styles/colors';
 
-
-
 class RequestList extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             requestArr: [],
             clientID: null
@@ -28,9 +24,17 @@ class RequestList extends Component {
     }
 
     //Get the Geolocation of the user
-    componentDidMount() {
+    async componentDidMount() {
+        await axios.get('/request').then((res) => { //get request array
+            this.setState({
+                requestArr: res.data
+            })
+        })
+        axios.get('auth/me').then(res=>{
+            this.setState({ clientID:res.data.user }) })
+
+        
         if (navigator.geolocation) {
-            // console.log('supported in browser')
             navigator.geolocation.getCurrentPosition((position) => {
                 const lat = position.coords.latitude;
                 const lng = position.coords.longitude;
@@ -38,43 +42,34 @@ class RequestList extends Component {
             })
         }
         else {
-            // console.log('not supported in browser')
+            console.log('not supported in browser')
         }
-        axios.get('/request').then((res) => {
-            this.setState({
-                requestArr: res.data
-            })
-        })
+        
     }
 
     componentWillReceiveProps(nextprops) {
         //Calc distance and push to requestArr
         const lat = nextprops.lat
         const lng = nextprops.lng 
-        this.distance(lat, lng)
-        // console.log('myLocation', lat, lng)
+        this.distance(lat, lng)  // *********
     }
 
     distance = (lat1, lon1) => {
         let arr = this.state.requestArr
-        // console.log('arr', arr)
         let newArr = []
         for (var i = 0; i < arr.length; i++) {
-            // console.log('req lat', arr[i].lat, 'req long',arr[i].long)
-            // console.log('user lat', lat1, 'user long',lon1)
             let type = 'imperial'
             //const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=${type}&origins=${lat1},${lon1}&destinations=${arr[i].lat},${arr[i].long}&key=AIzaSyCIIg2weQK6p4wUTy6nXrCj4-hPGgA40xI`
-            //console.log(url) 
+           
             //newArr.push(axios.get(url))
             newArr.push(axios.put('/getDistance',{type:type, lat1: lat1, lon1: lon1, lat2:arr[i].lat, lon2: arr[i].long}))
         }
-        // console.log('array of promise:', newArr)
+      
         Promise.all(newArr).then(res => {
             let requestArr = this.state.requestArr
             let newState = {}
             for (var j = 0; j < requestArr.length; j++) {
                 requestArr[j].distance = res[j].data.rows[0].elements[0].distance.text
-                // console.log(`distance for index ${j}`,res[j].data.rows[0].elements[0].distance.text)
             }
             this.setState({requestArr})
         })
@@ -109,11 +104,10 @@ class RequestList extends Component {
                         <img style={{height: 70, width: 70 }} src={blue_hand} alt='blue_hand'/>
                     </div>
 
-                    {this.state.requestArr.length !== 0 ?
+                    {this.state.requestArr.length !== 0  ?
                     <div>
                         <h3>Lend a hand today! | 
-                            {this.props.clientID ? " clientID: "+ this.props.clientID
-                            : " clientID from state: "+this.state.clientID }</h3>
+                            clientID from state: {this.state.clientID}</h3>
 
                         <Link to='/Home'>
                             <RaisedButton 
@@ -124,9 +118,7 @@ class RequestList extends Component {
                                 />
                         </Link>
                                 <section>{request}</section>
-                    </div>
-
-                        
+                    </div>                        
                     :
                     <div>Looks like no one needs help! </div>}
             </div>
@@ -146,8 +138,7 @@ const styles = {
 function mapStateToProps(state) {
     return {
         lat: state.maps.lat,
-        lng: state.maps.lng,
-        clientID: state.users.userID
+        lng: state.maps.lng
     };
 }
 
