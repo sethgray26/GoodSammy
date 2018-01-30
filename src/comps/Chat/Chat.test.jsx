@@ -1,8 +1,7 @@
 import renderer from 'react-test-renderer'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Home from './Home'
-import { Router } from 'react-router'
+import Chat from './Chat'
 
 
 test('using renderer', ()=>{
@@ -10,8 +9,11 @@ test('using renderer', ()=>{
     // let tree = component.toJSON();
     // expect(1).toBeTruthy();
 
-    const home = new Home();
-    
+    const home = new Chat();
+    home.setState = (state)=>{
+        console.log(state.messageInput ==="I get set")
+    }
+    home.handleChange({target:{value:"I get set"}});
     // const div = document.createElement('div');
     // ReactDOM.render(<Home />, div)
     // ReactDOM.unmountComponentAtNode(div)

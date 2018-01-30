@@ -31,7 +31,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "transform": {
@@ -40,9 +40,6 @@
   "proxy": "http://localhost:3005",
   "main": "server/index.js",
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-jest": "^22.1.0",
-    "jest": "^22.1.4",
     "react-test-renderer": "^16.2.0"
   }
 }
