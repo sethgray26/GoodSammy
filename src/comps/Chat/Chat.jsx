@@ -46,7 +46,7 @@ export default class Chat extends Component {
         
         socket.on('socket id', id=>{
             console.log('Connected.\nSocket ID: ', id)
-            const { socketID } = this.state
+            // const { socketID } = this.state
             const { userID, creatorID, helperID, requestID } = this.props
             axios.post('/chat/socketID', 
                 { socketID: id, userID, requestID, creatorID, helperID })
