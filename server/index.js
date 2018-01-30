@@ -67,6 +67,7 @@ app.get('/logout',users_controller.logOut)
 // tests #3
 app.get('/request', controllers.get_Request )
 app.get('/request/:id', controllers.get_one_request)
+app.get('/userslist', users_controller.getNamesAndIDs)
 
 // === PUT REQUESTS === //
 app.put('/update', controllers.update_req_info)

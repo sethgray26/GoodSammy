@@ -4,9 +4,38 @@ import RaisedButton from 'material-ui/RaisedButton'
 import {Link} from 'react-router-dom'
 
 class RepeatedRequest extends Component {
+    constructor(props){
+        super(props)
+        this.state={
+            username:{
+                creator:null,
+                helper:null
+            }
+        }
+    }
+    componentDidMount(){
+        // get username for creator and helper from this.props.userNames
+        let helperName=null
+        let creatorName=null
+        this.props.userNames.map(item=>{
+            if(item.id===this.props.creatorID){
+                creatorName=item.username
+            } else if (item.id===this.props.helpID){
+                creatorName=item.username
+            }
+        })
+        this.setState({
+            username:{
+                creator:[creatorName],
+                helper:[helperName]
+            }
+        })
+
+    }
 
     componentWillReceiveProps(nextprops){
         // console.log('props',nextprops)
+        // has usernames array on this.props.userNames
     }
 
 
@@ -18,7 +47,7 @@ class RepeatedRequest extends Component {
                         className = 'repeated-request'
                         title = {this.props.category.toUpperCase() }
                         titleStyle = {{ float: 'left' }}
-                        subtitle = {`${this.props.distance} from you. CreatorID: ${this.props.creatorID} | helpID: ${this.props.helpID}`}
+                        subtitle = {`${this.props.distance} from you. Creator: ${this.state.username.creator} | Helper: ${this.state.username.helper}`} // here we want to display names instead of id's
                         subtitleStyle ={{ float: 'right', marginLeft: 20 }}
                         actAsExpander = {true}
                         showExpandableButton = {true}
