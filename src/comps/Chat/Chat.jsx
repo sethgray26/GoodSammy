@@ -14,8 +14,8 @@ import fn from '../../utils/functions';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 
-const socketUrl = 'http://192.168.0.126:3005'; // server URL
-const socket = io(socketUrl);
+const socketUrl = 'https://192.168.0.126:3005'; // server URL
+const socket = io.connect(socketUrl, {secure: true});
 
 export default class Chat extends Component {    
     constructor(props) {
