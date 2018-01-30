@@ -40,7 +40,7 @@ app.use( session({
     saveUninitialized: true, 
     resave: false
 }))
-
+app.use( express.static( __dirname + '/../build' ))
 var server = https.createServer(options, app)
 var io = socket(server)
 
@@ -50,9 +50,9 @@ var certificate= fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com
 var ca = fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/chain1.pem').toString();
 ////////////////////////////////////////////////////////////////////////
 
-server.listen(process.env.SERVER_PORT, ()=>{})
 
-app.use( express.static( __dirname + '/../build' ))
+
+
 
 //***END POINTS***
 //maps
@@ -100,3 +100,4 @@ const chat= io.on('connection', (socket)=>{
 })
 
 
+server.listen(process.env.SERVER_PORT, ()=>{console.log('server running port: '+process.env.SERVER_PORT)})
