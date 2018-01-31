@@ -1,3 +1,5 @@
+// req.match.params.id = assigned || unassigned 
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
@@ -28,19 +30,28 @@ class RequestList extends Component {
 
     //Get the Geolocation of the user
     async componentDidMount() {
-        await axios.get('/userslist').then((res)=>{
-            let arr = res.data
-            this.setState({userNames: arr})
-        })
-        await axios.get('/request').then((res) => { //get request array
+
+        await axios.get('auth/me').then(res=>{  // get client ID
+            this.setState({ clientID:res.data.user }) })
+        {this.props.match.params.id === "unassigned" 
+        ? 
+        await axios.get(`/allrequests/${this.state.clientID}`).then((res) => { //get request array
             this.setState({
                 requestArr: res.data
             })
         })
-        
-        axios.get('auth/me').then(res=>{
-            this.setState({ clientID:res.data.user }) })
-        
+        :
+        await axios.get(`/myrequests/${this.state.clientID}`).then((res) => { //get request array
+            this.setState({
+                requestArr: res.data
+            })
+        })
+        }
+
+        await axios.get('/userslist').then((res)=>{  // get list of usernames
+            let arr = res.data
+            this.setState({userNames: arr})
+        })
         
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
