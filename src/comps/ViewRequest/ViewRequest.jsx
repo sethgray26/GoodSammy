@@ -117,6 +117,8 @@ class ViewRequest extends Component {
         return this.state.request  ?
         (
             <div>
+                <button onClick={()=>this.props.history.push('/reqlist')}>back</button>
+                <p>clientID from state:{this.state.clientID}</p>
                 {this.state.request.user_id === this.state.clientID ?
 
                     <div className="view_wrapper">
@@ -178,7 +180,7 @@ class ViewRequest extends Component {
                                 label ={`Return to List`} 
                                 backgroundColor={ lightGreen500 }
                             />
-                        </Link>
+                            </Link>
                             <div>
                                 <Dialog
                                     title = "Are you sure want to close this request?"
@@ -216,8 +218,7 @@ class ViewRequest extends Component {
                                 <RaisedButton 
                                     label='Commit to help' 
                                     onClick ={this.handleCommit} 
-                                    primary={true}
-                                    // backgroundColor={ lightGreen300 } 
+                                    backgroundColor={ lightGreen300 } 
                                 />
                             </div>
                             
@@ -252,13 +253,8 @@ class ViewRequest extends Component {
 
                         <Link to={`/reqlist/${this.state.urlParam}`}>
                             <RaisedButton 
-<<<<<<< HEAD
                                 label ={`Return to List`} 
                                 backgroundColor={ lightGreen500 }
-=======
-                                label ='Return to List' 
-                                backgroundColor={ lightGreen300 }
->>>>>>> master
                             />
                         </Link>
 
