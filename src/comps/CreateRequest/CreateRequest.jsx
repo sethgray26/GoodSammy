@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import './CreateRequest.css'
 import ConfirmDialog from '../Dialog/Dialog'
+import blue_hand from './blueHand.png'
 
 import { setLocationState } from '../../ducks/reducers/maps';
 import { createRequest } from '../../ducks/reducers/requests';
