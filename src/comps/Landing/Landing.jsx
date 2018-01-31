@@ -89,14 +89,12 @@ class Landing extends Component {
         if(!this.state.password) {errors.password = "required field"}
         
         if (errors.username || errors.password) {
-            console.log('got error')
-            console.log(errors)
+            
             this.setState({error:errors})
             return
         } 
         axios.put(`/checkLogin/${this.state.username}`, { txtPassword: this.state.password })
         .then(res => {
-            console.log('res==>',res)
             if (res.data.id) {
                 //redirect to dashboard
                 // put res.data.id on redux as client's userIDselese
@@ -107,7 +105,6 @@ class Landing extends Component {
                 //stay on log in p
                 //TODO make this an inline error instead of alert
                 //setstatewith error message
-                console.log('wrong pw or username')
                 this.setState({error :{username:"Incorrect username or password",
                                     password:null}
                                 })

@@ -36,9 +36,9 @@ class RepeatedRequest extends Component {
         // let subtitleString = `${this.props.distance} from You. Creator: ${creatorName}`
         // if (helperName) subtitleString+=` | Helper: ${helperName}`;
         // this.setState({subtitleString:subtitleString})
-        if (this.props.distance){
-            this.setState({subtitleString: `${this.props.distance} from You.`})
-        }
+        // if (this.props.distance){
+        //     this.setState({subtitleString: `${this.props.distance} from You.`})
+        // }
     }
 
 
@@ -50,7 +50,7 @@ class RepeatedRequest extends Component {
                         className = 'repeated-request'
                         title = {this.props.category.toUpperCase() }
                         titleStyle = {{ float: 'left' }}
-                        subtitle = {this.state.subtitleString}// here we want to display names instead of id's
+                        subtitle = {`${this.props.distance} from You`}// here we want to display names instead of id's
                         subtitleStyle ={{ float: 'right', marginLeft: 20 }}
                         actAsExpander = {true}
                         showExpandableButton = {true}
