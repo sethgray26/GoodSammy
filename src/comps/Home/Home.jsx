@@ -46,10 +46,20 @@ export default class Home extends Component {
                     </div>
 
                     <div>
-                    <Link id='button' to='/reqList'>
+                    <Link id='button' to='/reqList/unassigned'>
                         <RaisedButton 
                             label='Help Someone' 
                             labelStyle={{color: white}}
+                            backgroundColor={ lightGreen500 } 
+                            buttonStyle={{ borderRadius: 25 }} 
+                            style={ styles.helpsomeone }
+                        />
+                    </Link>
+                    </div>
+                    <div>
+                    <Link id='button' to='/reqList/assigned'>
+                        <RaisedButton 
+                            label='My Requests' 
                             backgroundColor={ lightGreen500 } 
                             buttonStyle={{ borderRadius: 25 }} 
                             style={ styles.helpsomeone }
