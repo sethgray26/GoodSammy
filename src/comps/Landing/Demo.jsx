@@ -12,7 +12,7 @@ import list_vid from './list_vid.mov'
 
 import { Dialog, TextField, RaisedButton } from 'material-ui'
 import { lightGreen500, blue500 } from 'material-ui/styles/colors';
-import { lightBlue500 } from 'material-ui/styles/colors';
+import { lightBlue500, white } from 'material-ui/styles/colors';
 
 
 export default class Demo extends Component {
@@ -49,12 +49,23 @@ export default class Demo extends Component {
         return(
             <div className="Demo">
 
+                <h1>Portfolio Walkthrough</h1>
 
-                <RaisedButton label='About this App' 
-                    backgroundColor={ lightBlue500 } 
-                    style={ styles.logandsign }
-                    onClick={this.handleDemoOpen}
-                />
+                <div className='arrow_wrapper'>
+                    <div className='arrow bounce'>
+                    </div>
+                </div>
+                
+
+                <div>
+                    <RaisedButton 
+                        label='About this App' 
+                        labelStyle={{color: white}}
+                        backgroundColor={ lightBlue500 } 
+                        style={ styles.logandsign }
+                        onClick={this.handleDemoOpen}
+                    />
+                </div>
 
                     
                 <Dialog
@@ -130,8 +141,9 @@ const styles = {
     },
 
     logandsign: {
-        margin: 8,
-        marginTop: 13
+        margin: 4,
+        marginTop: 4,
+        height: 55
     },
     
 
