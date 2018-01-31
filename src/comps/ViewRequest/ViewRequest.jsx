@@ -235,7 +235,7 @@ class ViewRequest extends Component {
                             </div>}
 
                             
-                                <Link to ='/reqList'>
+                                <Link to ={`/reqlist/${this.state.urlParam}`}>
                                     <RaisedButton 
                                         label = 'Stop helping' 
                                         style={{ marginBottom: 15 }}
