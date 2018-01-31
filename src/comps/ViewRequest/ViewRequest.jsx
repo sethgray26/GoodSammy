@@ -175,6 +175,12 @@ class ViewRequest extends Component {
                                 style ={{ width:150 }}
                                 onClick={this.handleAmerica}
                             />
+                            <Link to={`/reqlist/${this.state.urlParam}`}>
+                            <RaisedButton 
+                                label ={`Return to List`} 
+                                backgroundColor={ lightGreen500 }
+                            />
+                        </Link>
                             <div>
                                 <Dialog
                                     title = "Are you sure want to close this request?"
