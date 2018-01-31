@@ -21,26 +21,33 @@ class RequestList extends Component {
         super(props)
         this.state = {
             requestArr: [],
-            clientID: null
+            clientID: null,
+            userNames: []
         }
     }
 
     //Get the Geolocation of the user
     async componentDidMount() {
+        await axios.get('/userslist').then((res)=>{
+            let arr = res.data
+            this.setState({userNames: arr})
+        })
         await axios.get('/request').then((res) => { //get request array
             this.setState({
                 requestArr: res.data
             })
         })
+        
         axios.get('auth/me').then(res=>{
             this.setState({ clientID:res.data.user }) })
-
+        
         
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 const lat = position.coords.latitude;
                 const lng = position.coords.longitude;
                 this.props.setLocationState(lat, lng)
+                this.distance(lat, lng)
             })
         }
         else {
@@ -75,7 +82,6 @@ class RequestList extends Component {
             }
             this.setState({requestArr})
         })
-
     }
 
     render() {
@@ -86,10 +92,11 @@ class RequestList extends Component {
                     description={request.description}
                     category={request.cat_name}
                     distance={request.distance}
-                    username={request.username}
+                    username={request.username}  // does this exist ? there's no username on the request table in the DB...
                     requestID={request.id}
                     creatorID={request.user_id}
                     helpID={request.help_id}
+                    userNames={this.state.userNames}
                 />
             )
         })
