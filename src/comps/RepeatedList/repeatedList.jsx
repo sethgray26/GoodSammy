@@ -58,7 +58,7 @@ class RepeatedRequest extends Component {
                         <br/>
                         <p style={{ marginBottom: 8, fontSize: 18, fontWeight: 300}}>Disance from you: {this.props.distance}</p>
                     <CardActions>
-                        <Link to={`/request/${this.props.requestID}`} >
+                        <Link to={`/viewrequest/${this.props.requestID}`} >
                             <RaisedButton label="View Details" primary={true} />
                         </Link>
                     </CardActions>

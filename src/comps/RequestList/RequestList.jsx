@@ -82,7 +82,6 @@ class RequestList extends Component {
             }
             this.setState({requestArr})
         })
-
     }
 
     render() {
