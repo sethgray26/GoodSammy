@@ -4,7 +4,6 @@ import axios from 'axios'
 
 import './CreateRequest.css'
 import ConfirmDialog from '../Dialog/Dialog'
-// import blue_hand from './blueHand.png'
 
 import { setLocationState } from '../../ducks/reducers/maps';
 import { createRequest } from '../../ducks/reducers/requests';
@@ -14,7 +13,6 @@ import{ SelectField, TextField, MenuItem, RaisedButton } from 'material-ui';
 import { blue500, red400 } from 'material-ui/styles/colors';
 
 
-import Map from '../Map/Map';
 import './CreateRequest.css'
 
 class CreateRequest extends Component {

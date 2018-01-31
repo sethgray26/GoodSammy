@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 
 import RepeatedRequest from './../RepeatedList/repeatedList';
-import repeatedList from './../RepeatedList/repeatedList';
 import CircularProgress from 'material-ui/CircularProgress';
 import { setLocationState } from '../../ducks/reducers/maps';
 
