@@ -60,5 +60,11 @@ module.exports = {
 
     getUserId: (req, res ) => {
         res.status(200).send(req.session)
+    },
+    getNamesAndIDs: (req, res) => {
+        const db = req.app.get('db')
+        db.get_usernames_and_ids().then(list=>{
+            res.status(200).send(list)
+        })
     }
 }

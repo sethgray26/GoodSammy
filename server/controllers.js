@@ -1,10 +1,16 @@
 
 module.exports = {
    
-    get_Request: (req, res) => {
+    get_Request_null_help: (req, res) => {
         const dbInstance = req.app.get('db')
         // console.log(dbInstance)
-        dbInstance.getRequest()
+        dbInstance.getRequestNullHelp(req.params.id)
+        .then((request) => res.status(200).send(request))
+    },
+    get_my_Requests: (req, res) => {
+        const dbInstance = req.app.get('db')
+        // console.log(dbInstance)
+        dbInstance.get_requests_with_id(req.params.id)
         .then((request) => res.status(200).send(request))
     },
     get_one_request: (req, res) => {

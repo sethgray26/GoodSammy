@@ -17,8 +17,8 @@ class App extends Component {
           <Route exact path='/' component={ Landing }/>
           <Route exact path='/Home' component={ Home }/>
           <Route path='/createReq' component={ CreateRequest }/>
-          <Route path='/reqList' component={ RequestList }/>
-          <Route path= '/request/:id' component={ ViewRequest }/> 
+          <Route path='/reqList/:id' component={ RequestList }/>
+          <Route path= '/viewrequest/:id' component={ ViewRequest }/> 
         </div>
       </HashRouter>
     );

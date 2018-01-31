@@ -96,7 +96,7 @@ export default class Chat extends Component {
                     <h3>you are { userID===helperID ? username.helper : userID===creatorID ? username.creator : 'not logged in.' }  id:{userID}</h3>
                     <h3>helper: {username.helper} {helperID} | creator: {username.creator} {creatorID} </h3>
                 </div>
-                    <StayScrolled component="div" style={{height:"40vh", overflowWrap:"break-word",
+                    <StayScrolled component="div" style={{height:"28vh", overflowWrap:"break-word",
                         overflowY:"scroll", overflowX:"hidden"}}>
                         {
                             this.state.response.map((message, index)=>(
