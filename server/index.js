@@ -1,13 +1,14 @@
 const express = require('express')
-bodyParser = require('body-parser')
-cors = require('cors')
-session = require('express-session')
-controllers = require('./controllers')
-massive = require('massive')
-socketManager = require('./socketManager')
-socket=require('socket.io')
-chat_controller = require('./controllers/chat_controller')
-
+const http = require('http')
+const bodyParser = require('body-parser')
+const cors = require('cors')
+const session = require('express-session')
+const controllers = require('./controllers')
+const massive = require('massive')
+const socketManager = require('./socketManager')
+const socket=require('socket.io')
+const chat_controller = require('./controllers/chat_controller')
+const fs = require('fs');
 
 require('dotenv').config()
 
@@ -16,6 +17,13 @@ const maps_controller = require('./controllers/maps_controller.jsx')
 const request_controller = require('./controllers/request_controller.jsx')
 
 const app = express()
+// var options = {
+// 	key: fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/privkey1.pem'),
+// 	cert: fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/cert1.pem'),
+//     ca: fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/chain1.pem'),
+//     requestCert: false,
+//     rejectunauthorized: false
+// }
 app.use(bodyParser.json())
 app.use(cors())
 app.use(function(req, res, next){
@@ -34,12 +42,23 @@ app.use( session({
     saveUninitialized: true, 
     resave: false
 }))
+app.use( express.static( __dirname + '/../build' ))
 
-const io = socket(app.listen( process.env.SERVER_PORT, () => {
-    console.log('listening on port 3005')}) );
+var server = http.Server(app)   // options, app
+
+var io = socket(server)
+
+server.listen(process.env.SERVER_PORT, ()=>{console.log('running')})// socket.listen(server)
+
+// keys for secure connection //
+// var privateKey= fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/privkey1.pem').toString();
+// var certificate= fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/cert1.pem').toString();
+// var ca = fs.readFileSync('../../../etc/letsencrypt/archive/hifiveapp.com/chain1.pem').toString();
+////////////////////////////////////////////////////////////////////////
 
 
-// app.use( express.static( __dirname + '/../build' ))
+
+
 
 //***END POINTS***
 //maps

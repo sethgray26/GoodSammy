@@ -13,7 +13,7 @@ module.exports = {
                 conversationID = convo[0].id
                 let request = await db.get_request_by_id(requestID);
                 let sendMe = {}
-                sendMe.description = request[0].description.slice(0,28)+'...'
+                sendMe.description = request[0].description
                 sendMe.id = conversationID
                 res.status(200).json(sendMe)
             }
@@ -23,7 +23,7 @@ module.exports = {
                     conversationID = convo[0].id
                     let request = await db.get_request_by_id(requestID);
                     let sendMe = {}
-                    sendMe.description = request[0].description.slice(0,28)+'...'
+                    sendMe.description = request[0].description
                     sendMe.id = conversationID
                     res.status(200).json(sendMe)
                 })}

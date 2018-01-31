@@ -115,7 +115,8 @@ class ViewRequest extends Component {
         return this.state.request  ?
         (
             <div>
-                {this.state.request.user_id === this.props.clientID ?
+                
+                {this.state.request.user_id === this.state.clientID ?
 
                     <div className="view_wrapper">
                         {/* own view */}
@@ -201,11 +202,11 @@ class ViewRequest extends Component {
                                 lng ={+this.state.request.long}
                             />
                         </div>
-                        
+                        { this.state.request.help_id ? null : 
                         <div className="desc_wrapper">
                             <span>{this.state.request.description}</span>
                         </div>
-
+                        }
                         {/* if someone is already helping */}
 
                         {this.state.request.help_id !== this.state.clientID || this.state.request.help_id === null ?

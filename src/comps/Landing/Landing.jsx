@@ -24,8 +24,11 @@ class Landing extends Component {
             username: "",
             password: "",
             confirmPassword: "",
-            phone: ""
-            
+            phone: "",
+            error:{
+                username:null,
+                password:null
+            }            
         }
 
         this.createUser = this.createUser.bind(this)
@@ -81,9 +84,19 @@ class Landing extends Component {
     }
 
     login(  ) {
-        console.log('hit')
+        let errors = {username:null, password:null};
+        if(!this.state.username) {errors.username = "required field"}
+        if(!this.state.password) {errors.password = "required field"}
+        
+        if (errors.username || errors.password) {
+            console.log('got error')
+            console.log(errors)
+            this.setState({error:errors})
+            return
+        } 
         axios.put(`/checkLogin/${this.state.username}`, { txtPassword: this.state.password })
         .then(res => {
+            console.log('res==>',res)
             if (res.data.id) {
                 //redirect to dashboard
                 // put res.data.id on redux as client's userIDselese
@@ -93,7 +106,11 @@ class Landing extends Component {
             else {
                 //stay on log in p
                 //TODO make this an inline error instead of alert
-                alert('Incorrect username or password, please try again!')
+                //setstatewith error message
+                console.log('wrong pw or username')
+                this.setState({error :{username:"Incorrect username or password",
+                                    password:null}
+                                })
             }
         }).catch(error => {            
         });
@@ -134,6 +151,7 @@ class Landing extends Component {
 
                         <TextField
                             name='username'
+                            errorText={this.state.error.username}
                             value={this.state.username}
                             onChange={(e) => this.inputChange(e)}
                             fullWidth={false}
@@ -146,6 +164,7 @@ class Landing extends Component {
 
                         <TextField
                             name='password'
+                            errorText={this.state.error.password}
                             value={this.state.password}
                             onChange={(e) => this.inputChange(e)}
                             fullWidth={false}

@@ -45,10 +45,10 @@ class RequestList extends Component {
             })
         }
 
-        await axios.get('/userslist').then((res)=>{  // get list of usernames
-            let arr = res.data
-            this.setState({userNames: arr})
-        })
+        // await axios.get('/userslist').then((res)=>{  // get list of usernames
+        //     let arr = res.data
+        //     this.setState({userNames: arr})
+        // })
         
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
@@ -89,7 +89,7 @@ class RequestList extends Component {
             for (var j = 0; j < requestArr.length; j++) {
                 requestArr[j].distance = res[j].data.rows[0].elements[0].distance.text
             }
-            this.setState({requestArr})
+            this.setState({requestArr})  //store on props ? 
         })
     }
 

@@ -11,7 +11,7 @@ class RepeatedRequest extends Component {
                 creator:null,
                 helper:null
             },
-            subtitleString: ''
+            subtitleString: 'calculating . . .'
         }
     }
     componentDidMount(){
@@ -23,19 +23,22 @@ class RepeatedRequest extends Component {
     componentWillReceiveProps(nextprops){
         // console.log('props',nextprops)
         // has usernames array on this.props.userNames
-        let helperName=null
-        let creatorName=null
-        nextprops.userNames.map(item=>{
-            if(item.id===this.props.creatorID){
-                creatorName=item.username
-            } else if (item.id===this.props.helpID){
-                helperName=item.username
-            }
-        })
-        console.log('helperName, creatorName: ',helperName, creatorName)
-        let subtitleString = `${this.props.distance} from You. Creator: ${creatorName}`
-        if (helperName) subtitleString+=` | Helper: ${helperName}`;
-        this.setState({subtitleString:subtitleString})
+        // let helperName=null
+        // let creatorName=null
+        // nextprops.userNames.map(item=>{
+        //     if(item.id===this.props.creatorID){
+        //         creatorName=item.username
+        //     } else if (item.id===this.props.helpID){
+        //         helperName=item.username
+        //     }
+        // })
+        // console.log('helperName, creatorName: ',helperName, creatorName)
+        // let subtitleString = `${this.props.distance} from You. Creator: ${creatorName}`
+        // if (helperName) subtitleString+=` | Helper: ${helperName}`;
+        // this.setState({subtitleString:subtitleString})
+        if (this.props.distance){
+            this.setState({subtitleString: `${this.props.distance} from You.`})
+        }
     }
 
 
@@ -54,9 +57,9 @@ class RepeatedRequest extends Component {
                     />
                     <CardText expandable = {true} >
                         <p style={{marginBottom: 15, lineHeight: 1.2, textAlign: 'left', fontSize: 15 }}>
-                            Desc: {this.props.description}</p>
+                            Description: {this.props.description}</p>
                         <br/>
-                        <p style={{ marginBottom: 8, fontSize: 18, fontWeight: 300}}>Disance from you: {this.props.distance}</p>
+                        <p style={{ marginBottom: 8, fontSize: 18, fontWeight: 300}}>Distance from you: {this.props.distance}</p>
                     <CardActions>
                         <Link to={`/viewrequest/${this.props.requestID}`} >
                             <RaisedButton label="View Details" primary={true} />
