@@ -5,11 +5,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 
-// import Map from '../Map/Map';
 import RepeatedRequest from './../RepeatedList/repeatedList';
-import repeatedList from './../RepeatedList/repeatedList';
 import CircularProgress from 'material-ui/CircularProgress';
-// import repeatedList from './../RepeatedList/repeatedList';s
 import { setLocationState } from '../../ducks/reducers/maps';
 
 import blue_hand from './blueHand.png'
@@ -84,6 +81,7 @@ class RequestList extends Component {
             //newArr.push(axios.get(url))
             newArr.push(axios.put('/getDistance',{type:type, lat1: lat1, lon1: lon1, lat2:arr[i].lat, lon2: arr[i].long}))
         }
+        
       
         Promise.all(newArr).then(res => {
             let requestArr = this.state.requestArr
