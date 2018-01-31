@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Map from '../Map/Map'
 import Chat from '../Chat/Chat'
 import axios from 'axios'
@@ -7,7 +6,6 @@ import axios from 'axios'
 import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton  from 'material-ui/RaisedButton';  
 import FlatButton from 'material-ui/FlatButton';  
-import TextField from 'material-ui/TextField';
 import { lightGreen300 } from 'material-ui/styles/colors';
 import {lightGreen500} from 'material-ui/styles/colors';  
 import {Link} from 'react-router-dom';  
@@ -148,11 +146,11 @@ class ViewRequest extends Component {
                                 primary = {true} 
                             />
                             <RaisedButton 
-                            label ='Save!' 
-                            disabled={this.state.disable} 
-                            onClick={this.saveAndDisable} 
-                            secondary={true} 
-                            style={{marginLeft: 13}}
+                                label ='Save!' 
+                                disabled={this.state.disable} 
+                                onClick={this.saveAndDisable} 
+                                secondary={true} 
+                                style={{marginLeft: 13}}
                             />
                         </div>
 

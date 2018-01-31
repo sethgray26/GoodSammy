@@ -96,7 +96,6 @@ app.put('/removeHelp', controllers.remove_Help)
 
 // === POST REQUESTS === //
 // app.post('/createUser', users_controller.createUsers )
-// test #4 
 
 
 // === DELETE REQUESTS === //

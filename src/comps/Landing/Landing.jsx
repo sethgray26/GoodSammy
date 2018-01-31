@@ -12,7 +12,7 @@ import blue_hand from'./blueHandLogo.png'
 
 import { Dialog, TextField, RaisedButton } from 'material-ui'
 import { lightGreen500, blue500 } from 'material-ui/styles/colors';
-import { lightBlue500 } from 'material-ui/styles/colors';
+import { lightBlue500, white } from 'material-ui/styles/colors';
 // import Chat from './../Chat/Chat.jsx'
 
 
@@ -182,12 +182,16 @@ class Landing extends Component {
                     
                     <div className="login_button_wrapper">
 
-                        <RaisedButton label='LOGIN' 
+                        <RaisedButton 
+                            label='LOGIN' 
+                            labelStyle={{color: white}}
                             backgroundColor={ lightGreen500 } 
                             style={ styles.logandsign }
                             onClick={ (e) => this.login(e)}
                         />
-                        <RaisedButton label='SIGN UP' 
+                        <RaisedButton 
+                            label='SIGN UP' 
+                            labelStyle={{color: white}}
                             backgroundColor={ lightBlue500 } 
                             style={ styles.logandsign }
                             onClick={this.handleOpen}/>
