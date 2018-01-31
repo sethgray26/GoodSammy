@@ -64,6 +64,7 @@ class RequestList extends Component {
             //newArr.push(axios.get(url))
             newArr.push(axios.put('/getDistance',{type:type, lat1: lat1, lon1: lon1, lat2:arr[i].lat, lon2: arr[i].long}))
         }
+        
       
         Promise.all(newArr).then(res => {
             let requestArr = this.state.requestArr
