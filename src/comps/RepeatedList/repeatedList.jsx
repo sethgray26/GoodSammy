@@ -47,7 +47,7 @@ class RepeatedRequest extends Component {
                         className = 'repeated-request'
                         title = {this.props.category.toUpperCase() }
                         titleStyle = {{ float: 'left' }}
-                        subtitle = {`${this.props.distance} from you. Creator: ${this.state.username.creator} | Helper: ${this.state.username.helper}`} // here we want to display names instead of id's
+                        subtitle = {`${this.props.distance} from you.`}
                         subtitleStyle ={{ float: 'right', marginLeft: 20 }}
                         actAsExpander = {true}
                         showExpandableButton = {true}

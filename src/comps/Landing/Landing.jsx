@@ -4,10 +4,11 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 
 import './Landing.css'
+import Demo from './Demo'
 
 import { createUsers, updateUser } from '../../ducks/reducers/users.jsx'
 
-import blue_hand from'./blueHand.png'
+import blue_hand from'./blueHandLogo.png'
 
 import { Dialog, TextField, RaisedButton } from 'material-ui'
 import { lightGreen500, blue500 } from 'material-ui/styles/colors';
@@ -38,6 +39,16 @@ class Landing extends Component {
 
     handleClose = () => {
         this.setState({openSignUp: false});
+    };
+
+
+
+    handleDemoOpen = () => {
+        this.setState({openDemo: true});
+    };
+
+    handleDemoClose = () => {
+        this.setState({openDemo: false});
     };
 
 
@@ -108,6 +119,8 @@ class Landing extends Component {
             </div>
         ];
 
+        
+
         return(
             <div className="landing">
                 <div className="landing_header">
@@ -161,8 +174,12 @@ class Landing extends Component {
                             onClick={this.handleOpen}/>
 
                     </div>
-                    
 
+                    <div className="demo_wrapper">
+
+                        <Demo/>
+
+                    </div>
                     
                     <Dialog
                         title='SIGN UP!'
