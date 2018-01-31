@@ -10,32 +10,32 @@ class RepeatedRequest extends Component {
             username:{
                 creator:null,
                 helper:null
-            }
+            },
+            subtitleString: ''
         }
     }
     componentDidMount(){
         // get username for creator and helper from this.props.userNames
-        let helperName=null
-        let creatorName=null
-        this.props.userNames.map(item=>{
-            if(item.id===this.props.creatorID){
-                creatorName=item.username
-            } else if (item.id===this.props.helpID){
-                creatorName=item.username
-            }
-        })
-        this.setState({
-            username:{
-                creator:[creatorName],
-                helper:[helperName]
-            }
-        })
+        
 
     }
 
     componentWillReceiveProps(nextprops){
         // console.log('props',nextprops)
         // has usernames array on this.props.userNames
+        let helperName=null
+        let creatorName=null
+        nextprops.userNames.map(item=>{
+            if(item.id===this.props.creatorID){
+                creatorName=item.username
+            } else if (item.id===this.props.helpID){
+                helperName=item.username
+            }
+        })
+        console.log('helperName, creatorName: ',helperName, creatorName)
+        let subtitleString = `${this.props.distance} from You. Creator: ${creatorName}`
+        if (helperName) subtitleString+=` | Helper: ${helperName}`;
+        this.setState({subtitleString:subtitleString})
     }
 
 
@@ -47,7 +47,7 @@ class RepeatedRequest extends Component {
                         className = 'repeated-request'
                         title = {this.props.category.toUpperCase() }
                         titleStyle = {{ float: 'left' }}
-                        subtitle = {`${this.props.distance} from you.`}
+                        subtitle = {this.state.subtitleString}// here we want to display names instead of id's
                         subtitleStyle ={{ float: 'right', marginLeft: 20 }}
                         actAsExpander = {true}
                         showExpandableButton = {true}

@@ -24,7 +24,8 @@ class ViewRequest extends Component {
                 request: null,
                 disable: true,
                 open: false,
-                clientID: null
+                clientID: null,
+                urlParam: null
             }
             
     }
@@ -78,20 +79,23 @@ class ViewRequest extends Component {
         })
     }
 
-    componentDidMount(){
-        axios.get('auth/me').then((res)=>{ // get clientID from session
+    async componentDidMount(){
+        await axios.get('auth/me').then((res)=>{ // get clientID from session
             this.setState({clientID: res.data.user})
         })
-        axios.get(`/request/+${this.props.match.params.id}`).then((res) => {
+        await axios.get(`/request/+${this.props.match.params.id}`).then((res) => {
+            let urlParam=null;
+            if(this.state.clientID==res.data[0].user_id || this.state.clientID==res.data[0].help_id) {
+                urlParam = 'assigned'
+            } else {
+                urlParam = 'unassigned'
+            }
             this.setState({
-                request: res.data[0]
+                request: res.data[0],
+                urlParam: urlParam
             })            
         })
-        axios.get('auth/me').then((res)=>{
-            this.setState({
-                clientID: res.data.user
-            })
-        })
+        
     }
     render() {
         const actions = [
@@ -113,6 +117,8 @@ class ViewRequest extends Component {
         return this.state.request  ?
         (
             <div>
+                <button onClick={()=>this.props.history.push('/reqlist')}>back</button>
+                <p>clientID from state:{this.state.clientID}</p>
                 {this.state.request.user_id === this.state.clientID ?
 
                     <div className="view_wrapper">
@@ -169,6 +175,12 @@ class ViewRequest extends Component {
                                 style ={{ width:150 }}
                                 onClick={this.handleAmerica}
                             />
+                            <Link to={`/reqlist/${this.state.urlParam}`}>
+                            <RaisedButton 
+                                label ={`Return to List`} 
+                                backgroundColor={ lightGreen500 }
+                            />
+                            </Link>
                             <div>
                                 <Dialog
                                     title = "Are you sure want to close this request?"
@@ -206,8 +218,7 @@ class ViewRequest extends Component {
                                 <RaisedButton 
                                     label='Commit to help' 
                                     onClick ={this.handleCommit} 
-                                    primary={true}
-                                    // backgroundColor={ lightGreen300 } 
+                                    backgroundColor={ lightGreen300 } 
                                 />
                             </div>
                             
@@ -240,10 +251,10 @@ class ViewRequest extends Component {
                         </div>
                     }
 
-                        <Link to='/reqList'>
+                        <Link to={`/reqlist/${this.state.urlParam}`}>
                             <RaisedButton 
-                                label ='Return to List' 
-                                backgroundColor={ lightGreen300 }
+                                label ={`Return to List`} 
+                                backgroundColor={ lightGreen500 }
                             />
                         </Link>
 
