@@ -34,18 +34,18 @@ class RequestList extends Component {
         await axios.get('auth/me').then(res=>{  // get client ID
             this.setState({ clientID:res.data.user }) })
         {this.props.match.params.id === "unassigned" 
-        ? 
-        await axios.get(`/allrequests/${this.state.clientID}`).then((res) => { //get request array
-            this.setState({
-                requestArr: res.data
+        ?   // requests not pertaning to client
+            await axios.get(`/allrequests/${this.state.clientID}`).then((res) => { //get request array
+                this.setState({
+                    requestArr: res.data
+                })
             })
-        })
-        :
-        await axios.get(`/myrequests/${this.state.clientID}`).then((res) => { //get request array
-            this.setState({
-                requestArr: res.data
+        :   // requeests pertaining to client
+            await axios.get(`/myrequests/${this.state.clientID}`).then((res) => { //get request array
+                this.setState({
+                    requestArr: res.data
+                })
             })
-        })
         }
 
         await axios.get('/userslist').then((res)=>{  // get list of usernames
