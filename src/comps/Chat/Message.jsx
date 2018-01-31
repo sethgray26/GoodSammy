@@ -1,5 +1,5 @@
 // message.jsx
-import React, { Component, propTypes } from 'react';
+import React, { Component } from 'react';
 import { scrolled } from 'react-stay-scrolled';
 import PropTypes from 'prop-types';
  
@@ -10,7 +10,7 @@ class Message extends Component {
   }
  
   componentDidMount() {
-    const { stayScrolled, scrollBottom } = this.props;
+    const { stayScrolled } = this.props;
  
     // Make the parent StayScrolled component scroll down if it was already scrolled
     stayScrolled();

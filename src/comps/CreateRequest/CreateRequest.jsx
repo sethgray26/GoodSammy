@@ -4,14 +4,14 @@ import axios from 'axios'
 
 import './CreateRequest.css'
 import ConfirmDialog from '../Dialog/Dialog'
-// import blue_hand from './blueHand.png'
+import blue_hand from './blueHand.png'
 
 import { setLocationState } from '../../ducks/reducers/maps';
 import { createRequest } from '../../ducks/reducers/requests';
 import { connect } from 'react-redux';
 
 import{ SelectField, TextField, MenuItem, RaisedButton } from 'material-ui';
-import { blue500, lightGreen500, red400, lightBlue500 } from 'material-ui/styles/colors';
+import { blue500, blue400, lightGreen300, red400 } from 'material-ui/styles/colors';
 
 
 import Map from '../Map/Map';
@@ -113,12 +113,12 @@ class CreateRequest extends Component {
             
             <div className='create_req' >
                 
-                {/*<div className='create_req_header'>
+                <div className='create_req_header'>
                     <img src={blue_hand} alt='blue_hand'/>
-                </div>*/}
+                </div>
 
                 <div className='create_req_body'>
-                    <h1>Good Sammy's here to help!</h1>
+                    <h1>Need a Hi Five?</h1>
 
                     <div className='create_req_category'>
                         <SelectField
@@ -164,28 +164,27 @@ class CreateRequest extends Component {
 
                 </div>
                 <br />
-{/*                 
+                {/*                 
                 <div className="map">
                     <Map lat={this.state.lat} lng={this.state.lng}/>
                 </div> */}
 
                 <div className='buttons'>
-                    <button onClick={()=>console.log(this.state.description)}>console</button>
                     <RaisedButton label='Request Help' 
-                        backgroundColor={ blue500 } 
+                        backgroundColor={ blue400 } 
                         // primary={true}
                         style={ styles.logandsign }
                         onClick={ this.requestCreator }
                     />
 
                     <Link to='/Home'><RaisedButton label='Cancel' 
-                        backgroundColor={ red400 } 
+                        backgroundColor={ lightGreen300 } 
                         style={ styles.logandsign }
                         onClick={this.requestCreator}
                     /></Link>
                 </div>
                 <ConfirmDialog open={this.state.dialogToggle} toggleDialog={this.toggleDialog}/>
-                <p>client ID from state: {this.state.userData} </p>
+                {/* <p>client ID from state: {this.state.userData} </p> */}
             </div>
         );
     }

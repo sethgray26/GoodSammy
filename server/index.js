@@ -84,8 +84,10 @@ app.get('/logout',users_controller.logOut)
 
 // === GET REQUESTS === //
 // tests #3
-app.get('/request', controllers.get_Request )
+app.get('/allrequests/:id', controllers.get_Request_null_help )  // get requests with no assigned user, and client is not creator
+app.get('/myrequests/:id', controllers.get_my_Requests)  // get requests where client is creator or helper
 app.get('/request/:id', controllers.get_one_request)
+app.get('/userslist', users_controller.getNamesAndIDs)
 
 // === PUT REQUESTS === //
 app.put('/update', controllers.update_req_info)

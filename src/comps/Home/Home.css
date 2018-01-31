@@ -1,5 +1,9 @@
 .home {
     background-color: rgb(235, 240, 241);
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
 }
 .home_header {
     display: flex;
@@ -22,7 +26,12 @@
     display:flex;
     flex-direction: column;
     justify-content: center;
-    /* border: 2px solid green; */
+}
+
+.home_body #button{
+    height: 150px;
+    width: 250px;
+    border-radius: 25px;
 }
 
 

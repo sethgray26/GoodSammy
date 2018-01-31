@@ -9,6 +9,7 @@ import blue_hand from'./blueHand.png'
 
 import { RaisedButton } from 'material-ui'
 import { lightGreen500, blue500 } from 'material-ui/styles/colors';
+import { white } from 'material-ui/styles/colors';
 
 export default class Home extends Component {
     constructor(){
@@ -33,30 +34,50 @@ export default class Home extends Component {
                 </div>
 
                 <div className='home_body'>
-                    
-                    <Link to='/createReq'><RaisedButton 
-                        label='Need Help?' 
-                        primary={true} buttonStyle={{ borderRadius: 25 }} 
-                        style={ styles.needHelp } 
-                    /></Link>
 
-                    <Link to='/reqList'><RaisedButton 
-                        label='Help Someone' 
-                        backgroundColor={ lightGreen500 } 
-                        buttonStyle={{ borderRadius: 25 }} 
-                        style={ styles.helpsomeone }
-                    /></Link>
+                    <div> 
+                    <Link id='button' to='/createReq'>
+                        <RaisedButton 
+                            label='Need Help?' 
+                            primary={true} buttonStyle={{ borderRadius: 25 }} 
+                            style={ styles.needHelp } 
+                        />
+                    </Link>
+                    </div>
 
+                    <div>
+                    <Link id='button' to='/reqList/unassigned'>
+                        <RaisedButton 
+                            label='Help Someone' 
+                            labelStyle={{color: white}}
+                            backgroundColor={ lightGreen500 } 
+                            buttonStyle={{ borderRadius: 25 }} 
+                            style={ styles.helpsomeone }
+                        />
+                    </Link>
+                    </div>
+                    <div>
+                    <Link id='button' to='/reqList/assigned'>
+                        <RaisedButton 
+                            label='My Requests' 
+                            backgroundColor={ lightGreen500 } 
+                            buttonStyle={{ borderRadius: 25 }} 
+                            style={ styles.helpsomeone }
+                        />
+                    </Link>
+                    </div>
+
+                    <div>
                     <a href={process.env.REACT_APP_LOGOUT}>
-                            <RaisedButton label='LOGOUT' 
-                                backgroundColor={ lightGreen500 } 
-                                style={ styles.logandsign }
-                            />
-                    </a>
+                        <RaisedButton label='LOGOUT' 
+                            labelStyle={{color: white}}
+                            backgroundColor={ lightGreen500 } 
+                            style={ styles.logandsign }
+                    /></a>
+                    </div>
 
                 </div>
 
-                <p>ClientID on this comp's state: {this.state.clientID}</p>
             </div>
         )
     }
