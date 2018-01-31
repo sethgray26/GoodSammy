@@ -1,0 +1,1 @@
+select username, id from users;

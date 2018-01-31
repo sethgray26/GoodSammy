@@ -1,3 +1,5 @@
+// req.match.params.id = assigned || unassigned 
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
@@ -19,26 +21,42 @@ class RequestList extends Component {
         super(props)
         this.state = {
             requestArr: [],
-            clientID: null
+            clientID: null,
+            userNames: []
         }
     }
 
     //Get the Geolocation of the user
     async componentDidMount() {
-        await axios.get('/request').then((res) => { //get request array
-            this.setState({
-                requestArr: res.data
-            })
-        })
-        axios.get('auth/me').then(res=>{
-            this.setState({ clientID:res.data.user }) })
 
+        await axios.get('auth/me').then(res=>{  // get client ID
+            this.setState({ clientID:res.data.user }) })
+        {this.props.match.params.id === "unassigned" 
+        ?   // requests not pertaning to client
+            await axios.get(`/allrequests/${this.state.clientID}`).then((res) => { //get request array
+                this.setState({
+                    requestArr: res.data
+                })
+            })
+        :   // requeests pertaining to client
+            await axios.get(`/myrequests/${this.state.clientID}`).then((res) => { //get request array
+                this.setState({
+                    requestArr: res.data
+                })
+            })
+        }
+
+        await axios.get('/userslist').then((res)=>{  // get list of usernames
+            let arr = res.data
+            this.setState({userNames: arr})
+        })
         
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 const lat = position.coords.latitude;
                 const lng = position.coords.longitude;
                 this.props.setLocationState(lat, lng)
+                this.distance(lat, lng)
             })
         }
         else {
@@ -74,7 +92,6 @@ class RequestList extends Component {
             }
             this.setState({requestArr})
         })
-
     }
 
     render() {
@@ -85,10 +102,11 @@ class RequestList extends Component {
                     description={request.description}
                     category={request.cat_name}
                     distance={request.distance}
-                    username={request.username}
+                    username={request.username}  // does this exist ? there's no username on the request table in the DB...
                     requestID={request.id}
                     creatorID={request.user_id}
                     helpID={request.help_id}
+                    userNames={this.state.userNames}
                 />
             )
         })
@@ -101,14 +119,17 @@ class RequestList extends Component {
                 </div>
             :
             <div className='body-content' >
+            
                     <div className="list_header">
                         <img style={{height: 70, width: 70 }} src={blue_hand} alt='blue_hand'/>
                     </div>
 
                     {this.state.requestArr.length !== 0  ?
+
                     <div>
-                        <h3>Lend a hand today! | 
-                            clientID from state: {this.state.clientID}</h3>
+                        <h3>HI FIVE Sombody!</h3>
+
+                        <section>{request}</section>
 
                         <Link to='/Home'>
                             <RaisedButton 
@@ -116,9 +137,8 @@ class RequestList extends Component {
                                 backgroundColor={ lightBlue500 }
                                 // buttonStyle={{ borderRadius: 25 }} 
                                 style={ styles.logandsign } 
-                                />
+                            />
                         </Link>
-                                <section>{request}</section>
                     </div>                        
                     :
                     <div>Looks like no one needs help! </div>}
