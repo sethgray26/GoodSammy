@@ -1,3 +1,4 @@
+// this props.listType = 'assigned'  || 'unassigned'
 import React, { Component } from 'react';
 import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -10,8 +11,7 @@ class RepeatedRequest extends Component {
             username:{
                 creator:null,
                 helper:null
-            },
-            subtitleString: 'calculating . . .'
+            }
         }
     }
     componentDidMount(){
@@ -50,7 +50,7 @@ class RepeatedRequest extends Component {
                         className = 'repeated-request'
                         title = {this.props.category.toUpperCase() }
                         titleStyle = {{ float: 'left' }}
-                        subtitle = {`${this.props.distance} from You`}// here we want to display names instead of id's
+                        subtitle = {this.props.listType === "unassigned" ?  (`${this.props.distance} from you`) : this.props.listType === "assigned" && this.props.clientID === this.props.helpID ? (`${this.props.distance} from you`) : "Your request" }// here we want to display names instead of id's
                         subtitleStyle ={{ float: 'right', marginLeft: 20 }}
                         actAsExpander = {true}
                         showExpandableButton = {true}
