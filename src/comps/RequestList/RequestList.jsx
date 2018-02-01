@@ -14,6 +14,7 @@ import './RequestList.css'
 
 import { RaisedButton } from 'material-ui'
 import { lightBlue500 } from 'material-ui/styles/colors';
+import { white } from 'material-ui/styles/colors';
 
 class RequestList extends Component {
     constructor(props) {
@@ -21,7 +22,8 @@ class RequestList extends Component {
         this.state = {
             requestArr: [],
             clientID: null,
-            userNames: []
+            userNames: [],
+            isTop: true, 
         }
     }
 
@@ -62,6 +64,15 @@ class RequestList extends Component {
             console.log('not supported in browser')
         }
         
+    }
+
+    componentWillMount(){
+        document.addEventListener('scroll', () => {
+            const isTop = window.scrollY < 100;
+            if (isTop !== this.state.isTop) {
+                this.setState({ isTop })
+            }
+          });
     }
 
     componentWillReceiveProps(nextprops) {
@@ -153,39 +164,42 @@ class RequestList extends Component {
             )
         })
         return (
-            <div>
-            { this.state.requestArr.length === 0 ? 
-                <div>
-                    <br/><br/><br/> {/*  display loading circle until have request ARR */}
-                    <CircularProgress size={80} thickness={5}/>
-                </div>
-            :
-            <div className='body-content' >
-            
-                    <div className="list_header">
-                        <img style={{height: 70, width: 70 }} src={blue_hand} alt='blue_hand'/>
-                    </div>
-
-                    {this.state.requestArr.length !== 0  ?
-
+            <div className='page'>
+                { this.state.requestArr.length === 0 ? 
                     <div>
-                        <h3>HI FIVE Sombody!</h3>
+                        <br/><br/><br/> {/*  display loading circle until have request ARR */}
+                        <CircularProgress size={80} thickness={5}/>
+                    </div>
+                :
+                <div className='body-content' >
+                
+                        <div className="list_header">
+                            <img style={{height: 70, width: 70 }} src={blue_hand} alt='blue_hand'/>
+                        </div>
+                        
 
-                        <section>{request}</section>
+                        {this.state.requestArr.length !== 0  ?
 
-                        <Link to='/Home'>
-                            <RaisedButton 
-                                label='Home' 
-                                backgroundColor={ lightBlue500 }
-                                // buttonStyle={{ borderRadius: 25 }} 
-                                style={ styles.logandsign } 
-                            />
-                        </Link>
-                    </div>                        
-                    :
-                    <div>Looks like no one needs help! </div>}
-            </div>
-            }
+                        <div>
+                            <h3>HI FIVE Sombody!</h3>
+
+                                    <Link  to='/Home'>
+                                        <RaisedButton 
+                                            label='Home'
+                                            labelColor={white} 
+                                            backgroundColor={ lightBlue500 }
+                                            // buttonStyle={{ borderRadius: 25 }} 
+                                            style={ styles.logandsign } 
+                                        />
+                                    </Link>
+
+                                    <section>{request}</section>
+                                
+                        </div>                        
+                        :
+                        <div>Looks like no one needs help! </div>}
+                </div>
+                }
             </div>
         );
     }
@@ -193,8 +207,8 @@ class RequestList extends Component {
 
 const styles = {
     logandsign: {
-        margin: 12,
-        marginTop: 18
+        margin: 0,
+        marginTop: 0
     }
 }
 
