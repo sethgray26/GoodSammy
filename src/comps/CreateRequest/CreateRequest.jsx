@@ -138,7 +138,7 @@ class CreateRequest extends Component {
                             <MenuItem key={2} value={2} primaryText="Spiritual" />
                             <MenuItem key={3} value={3} primaryText="Life" />
                             <MenuItem key={4} value={4} primaryText="Errands" />
-                            <MenuItem key={5} value={5} primaryText="handyman" />
+                            <MenuItem key={5} value={5} primaryText="Handyman" />
 
                         </SelectField>
                     </div>
