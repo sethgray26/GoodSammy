@@ -14,34 +14,7 @@ class RepeatedRequest extends Component {
             }
         }
     }
-    componentDidMount(){
-        // get username for creator and helper from this.props.userNames
-        
-
-    }
-
-    componentWillReceiveProps(nextprops){
-        // console.log('props',nextprops)
-        // has usernames array on this.props.userNames
-        // let helperName=null
-        // let creatorName=null
-        // nextprops.userNames.map(item=>{
-        //     if(item.id===this.props.creatorID){
-        //         creatorName=item.username
-        //     } else if (item.id===this.props.helpID){
-        //         helperName=item.username
-        //     }
-        // })
-        // console.log('helperName, creatorName: ',helperName, creatorName)
-        // let subtitleString = `${this.props.distance} from You. Creator: ${creatorName}`
-        // if (helperName) subtitleString+=` | Helper: ${helperName}`;
-        // this.setState({subtitleString:subtitleString})
-        // if (this.props.distance){
-        //     this.setState({subtitleString: `${this.props.distance} from You.`})
-        // }
-    }
-
-
+ 
     render() {
         return (
             <div>
@@ -50,7 +23,7 @@ class RepeatedRequest extends Component {
                         className = 'repeated-request'
                         title = {this.props.category.toUpperCase() }
                         titleStyle = {{ float: 'left' }}
-                        subtitle = {this.props.listType === "unassigned" ?  (`${this.props.distance} from you`) : this.props.listType === "assigned" && this.props.clientID === this.props.helpID ? (`${this.props.distance} from you`) : "Your request" }// here we want to display names instead of id's
+                        subtitle = {this.props.listType === "unassigned" ?  (`${this.props.distance} from you`) : this.props.listType === "assigned" && this.props.clientID === this.props.helpID ? (`${this.props.distance} from you`) : this.props.helpID ? "Your request, someone is helping" : "Your request, looking for helpers" } // gnarliest of ternary strings *shrugs shoulders* hey, it works.
                         subtitleStyle ={{ float: 'right', marginLeft: 20 }}
                         actAsExpander = {true}
                         showExpandableButton = {true}
