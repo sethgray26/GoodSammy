@@ -1,7 +1,6 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
 
 export default class ConfirmDialog extends React.Component {
     state = {
@@ -32,7 +31,7 @@ render() {
     return ( 
         <div>
             <Dialog
-                title="Confirmation Dialog"
+                title="Got it!"
                 actions={actions}
                 modal={false}
                 open={this.props.open}

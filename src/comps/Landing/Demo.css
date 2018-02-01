@@ -1,0 +1,127 @@
+
+.Demo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.Demo h1 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+}
+
+.demo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.demo_button_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid red; */
+}
+
+.demo img {
+    height: 150px;
+    width: 200px;
+    justify-content: center;
+    /* border: 2px solid red; */
+}
+
+
+@-moz-keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      -moz-transform: translateY(0);
+      transform: translateY(0);
+    }
+    40% {
+      -moz-transform: translateY(-30px);
+      transform: translateY(-30px);
+    }
+    60% {
+      -moz-transform: translateY(-15px);
+      transform: translateY(-15px);
+    }
+  }
+  @-webkit-keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+    40% {
+      -webkit-transform: translateY(-30px);
+      transform: translateY(-30px);
+    }
+    60% {
+      -webkit-transform: translateY(-15px);
+      transform: translateY(-15px);
+    }
+  }
+  @keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      -moz-transform: translateY(0);
+      -ms-transform: translateY(0);
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+    40% {
+      -moz-transform: translateY(-20px);
+      -ms-transform: translateY(-20px);
+      -webkit-transform: translateY(-20px);
+      transform: translateY(-17px);
+    }
+    60% {
+      -moz-transform: translateY(-10px);
+      -ms-transform: translateY(-10px);
+      -webkit-transform: translateY(-10px);
+      transform: translateY(-10px);
+    }
+  }
+  /* body {
+    background: black;
+  } */
+
+  .arrow_wrapper {
+    /* border: 2px solid blue; */
+
+  }
+  
+  .arrow {
+    /* position: ; */
+    display: inline-flex;
+    bottom: 0;
+    left: 50%;
+    margin-left: -20px;
+    width: 40px;
+    height: 40px;
+    background-image: url(https://i.imgur.com/wEtixQX.png);
+    background-size: contain;
+    /* border: 2px solid blue; */
+  }
+  
+  .bounce {
+    -moz-animation: bounce 1s infinite;
+    -webkit-animation: bounce 1s infinite;
+    animation: bounce 1.5s infinite;
+    /* border: 2px solid red; */
+  }
+  

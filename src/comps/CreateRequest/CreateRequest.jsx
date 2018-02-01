@@ -4,18 +4,20 @@ import axios from 'axios'
 
 import './CreateRequest.css'
 import ConfirmDialog from '../Dialog/Dialog'
-// import blue_hand from './blueHand.png'
+import blue_hand from './blueHand.png'
+import green_hand from './greenHand.png'
+
 
 import { setLocationState } from '../../ducks/reducers/maps';
 import { createRequest } from '../../ducks/reducers/requests';
 import { connect } from 'react-redux';
 
-import{ SelectField, TextField, MenuItem, RaisedButton } from 'material-ui';
-import { blue500, lightGreen500, red400, lightBlue500 } from 'material-ui/styles/colors';
+import{ SelectField, TextField, MenuItem, RaisedButton, SvgIcon, FontIcon } from 'material-ui';
+import { blue500, blue400, lightGreen300, red400 } from 'material-ui/styles/colors';
 
 
-import Map from '../Map/Map';
 import './CreateRequest.css'
+import { white } from 'material-ui/styles/colors';
 
 class CreateRequest extends Component {
     constructor(props){
@@ -61,7 +63,6 @@ class CreateRequest extends Component {
     }
 
      componentDidMount() {
-        console.log('client ID from props\n ==============> ', this.props.clientID)
         if (navigator.geolocation) {
             // console.log('supported in browser')
             navigator.geolocation.getCurrentPosition((position) => {
@@ -81,7 +82,7 @@ class CreateRequest extends Component {
                 this.setState({
                     userData: res.data.user
                 })
-                console.log("user",res.data.user)
+                console.log("clientID",res.data.user)
             })
     }
 
@@ -95,7 +96,13 @@ class CreateRequest extends Component {
     requestCreator () {
         //Post request
         //User_id, cat_id, desc, long, lat
-        console.log('this.state.description: ',this.state.description)
+        //Ensure location coordinates on req object
+        if ( !this.props.lat || this.props.lat === ""){
+            console.log("Unable to callect location data!")
+            alert("Unable to collect location data for this device. This is required to submit a request.")
+            return;
+        }
+        console.log('generating request . . .')
         let generated = {
             user_id:this.state.userData,
             category_id: this.state.category,
@@ -114,12 +121,12 @@ class CreateRequest extends Component {
             
             <div className='create_req' >
                 
-                {/*<div className='create_req_header'>
+                <div className='create_req_header'>
                     <img src={blue_hand} alt='blue_hand'/>
-                </div>*/}
+                </div>
 
                 <div className='create_req_body'>
-                    <h1>Good Sammy's here to help!</h1>
+                    <h1>Need a Hi Five?</h1>
 
                     <div className='create_req_category'>
                         <SelectField
@@ -136,8 +143,8 @@ class CreateRequest extends Component {
                             <MenuItem key={1} value={1} primaryText="Automotive" />
                             <MenuItem key={2} value={2} primaryText="Spiritual" />
                             <MenuItem key={3} value={3} primaryText="Life" />
-                            <MenuItem key={4} value={4} primaryText="Errends" />
-                            <MenuItem key={5} value={5} primaryText="handyman" />
+                            <MenuItem key={4} value={4} primaryText="Errands" />
+                            <MenuItem key={5} value={5} primaryText="Handyman" />
 
                         </SelectField>
                     </div>
@@ -165,39 +172,50 @@ class CreateRequest extends Component {
 
                 </div>
                 <br />
-{/*                 
+                {/*                 
                 <div className="map">
                     <Map lat={this.state.lat} lng={this.state.lng}/>
                 </div> */}
 
                 <div className='buttons'>
-                    <button onClick={()=>console.log(this.state.description)}>console</button>
-                    <RaisedButton label='Request Help' 
-                        backgroundColor={ blue500 } 
+                    <RaisedButton 
+                        label='Request'
+                        labelStyle={{color: white }} 
+                        backgroundColor={ blue400 } 
                         // primary={true}
+                        overlayStyle={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}
+                        labelPosition='before'
                         style={ styles.logandsign }
-                        onClick={ this.requestCreator }
-                    />
+                        onClick={ this.requestCreator }>
 
-                    <Link to='/Home'><RaisedButton label='Cancel' 
-                        backgroundColor={ red400 } 
-                        style={ styles.logandsign }
-                        onClick={this.requestCreator}
-                    /></Link>
+                        <img className='button_img'
+                                    src={green_hand}/>
+                    </RaisedButton>
+
+                    <Link to='/Home'>
+                            <RaisedButton 
+                                label='Cancel' 
+                                labelStyle={{color: white }}
+                                backgroundColor={ lightGreen300 } 
+                                style={ styles.logandsign }
+                                overlayStyle={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}
+                                labelPosition='before'
+                                img={blue_hand}
+                                // onClick={this.requestCreator}
+                                >
+                                
+                                <img className='button_img'
+                                    src={blue_hand}/>
+                            </RaisedButton>
+                    </Link>
                 </div>
                 <ConfirmDialog open={this.state.dialogToggle} toggleDialog={this.toggleDialog}/>
+                {/* <p>client ID from state: {this.state.userData} </p> */}
             </div>
         );
     }
 }
 
-// const items = [
-//     <MenuItem key={1} value="1" primaryText="Automotive" />,
-//     <MenuItem key={2} value={2} primaryText="Spiritual" />,
-//     <MenuItem key={3} value={3} primaryText="Life" />,
-//     <MenuItem key={4} value={4} primaryText="Errends" />,
-//     <MenuItem key={5} value={5} primaryText="handyman" />,
-//   ];
 
   const styles = {
     needHelp: {
@@ -215,8 +233,9 @@ class CreateRequest extends Component {
     },
 
     logandsign: {
+        // height: 60,
         margin: 12,
-        marginTop: 13
+        marginTop: 13,
     },
     underlineStyle: {
         borderColor: blue500,
@@ -240,8 +259,7 @@ class CreateRequest extends Component {
 function mapStateToProps(state) {
     return {
         lat: state.maps.lat,
-        lng: state.maps.lng,
-        clientID: state.users.userID
+        lng: state.maps.lng
     };
   }
   
