@@ -21,7 +21,6 @@ export default class Home extends Component {
     }
     componentDidMount(){  // get client ID from session
         axios.get('auth/me').then((res)=>{
-            console.log('======>res.data.user (clientID)',res.data.user)
             this.setState({clientID: res.data.user})
         })
     }

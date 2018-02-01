@@ -28,6 +28,11 @@ module.exports = {
         console.log('check login', req.session)
         //Get hashed password for this username
         db.find_user(req.params.username).then( user => {
+            console.log('user===>',user)
+            if(!user[0]){
+                // no user by this name
+                resp.status(200).send(false)
+            }
             // console.log('userdata', user[0].password)
             // console.log('txtPassword', req.body.txtPassword, 'pw', user[0].password)
             bcrypt.compare(req.body.txtPassword, user[0].password, function (err, res) {
@@ -39,7 +44,7 @@ module.exports = {
                 }
                 else {
                     //password incorrect!
-                    console.log('password incorrect')
+                    console.log('password incorrect, res= ',res)
                     resp.status(200).send(res)
                 }
             });

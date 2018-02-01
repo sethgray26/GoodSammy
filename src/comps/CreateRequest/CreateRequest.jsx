@@ -16,7 +16,6 @@ import{ SelectField, TextField, MenuItem, RaisedButton, SvgIcon, FontIcon } from
 import { blue500, blue400, lightGreen300, red400 } from 'material-ui/styles/colors';
 
 
-import Map from '../Map/Map';
 import './CreateRequest.css'
 import { white } from 'material-ui/styles/colors';
 
