@@ -70,7 +70,7 @@ export default class Demo extends Component {
                     
                 <Dialog
                     className='demo'
-                    title='About Hi Five'
+                    title='About "HI FIVE"'
                     titleStyle={styles.title}
                     actions={ actions }
                     modal={true}
@@ -115,6 +115,8 @@ export default class Demo extends Component {
 
                         <p>Here the user can view and select "Hi Five" request from other users. The list also displays a realtime distance to other users current location. From here the user can select a request and choose to view it in detail where they can commit to helping another user. </p>
                         
+                        <br/>
+
                         <video autoPlay={true} loop={true} src={list_vid} />
                         
 
@@ -149,5 +151,7 @@ const styles = {
 
     title: {
         fontFamily: 'Gloria Hallelujah',
+        textAlign: 'center',
+        letterSpacing: 1.5
     }
 }
