@@ -96,7 +96,13 @@ class CreateRequest extends Component {
     requestCreator () {
         //Post request
         //User_id, cat_id, desc, long, lat
-        console.log('this.state.description: ',this.state.description)
+        //Ensure location coordinates on req object
+        if ( !this.props.lat || this.props.lat === ""){
+            console.log("Unable to callect location data!")
+            alert("Unable to collect location data for this device. This is required to submit a request.")
+            return;
+        }
+        console.log('generating request . . .')
         let generated = {
             user_id:this.state.userData,
             category_id: this.state.category,
