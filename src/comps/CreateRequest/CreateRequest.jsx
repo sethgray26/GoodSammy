@@ -201,7 +201,8 @@ class CreateRequest extends Component {
                                 overlayStyle={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}
                                 labelPosition='before'
                                 img={blue_hand}
-                                onClick={this.requestCreator}>
+                                // onClick={this.requestCreator}
+                                >
                                 
                                 <img className='button_img'
                                     src={blue_hand}/>
