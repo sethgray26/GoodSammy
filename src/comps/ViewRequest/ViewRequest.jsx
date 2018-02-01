@@ -112,7 +112,7 @@ class ViewRequest extends Component {
         return this.state.request  ?
         (
             <div>
-                {this.state.request.user_id !== this.props.clientID ?
+                {this.state.request.user_id === this.props.clientID ?
 
                     <div className="view_wrapper">
                         {/* own view */}
