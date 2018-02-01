@@ -1,22 +1,23 @@
-import renderer from 'react-test-renderer'
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Chat from './Chat'
 
+describe('Chat component tests', ()=>{
+    test('handle Change should hand off something to setState', ()=>{
+        const chat = new Chat();
+        chat.setState = (state)=>{
+            expect((state.messageInput ==="I get set")).toBeTruthy()
+        }
+        chat.handleChange({target:{value:"I get set"}});
+    })
 
-test('using renderer', ()=>{
-    // const component = renderer.create( <Router> <Home/> </Router> );
-    // let tree = component.toJSON();
-    // expect(1).toBeTruthy();
-
-    const home = new Chat();
-    home.setState = (state)=>{
-        console.log(state.messageInput ==="I get set")
-    }
-    home.handleChange({target:{value:"I get set"}});
-    // const div = document.createElement('div');
-    // ReactDOM.render(<Home />, div)
-    // ReactDOM.unmountComponentAtNode(div)
-    // let home = new Home();
-    // console.log(home);
-  })
+    test('handle Change passes in a string exactly', ()=> {
+        const chat = new Chat();
+        chat.setState = (state) => {
+            console.log(state.messageInput)
+            expect(state.messageInput).toEqual("my string")
+        }
+        chat.handleChange( {target:{value:"my string"}})        
+    })
+})

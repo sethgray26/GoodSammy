@@ -1,6 +1,5 @@
 
 import fn from './functions';
-import renderer from 'react-test-renderer'
 // import Chat from './../comps/Chat/Chat'
 // const Chat = require('./../comps/Chat/Chat');
 // const {setLocationState} = require('../ducks/reducers/maps')

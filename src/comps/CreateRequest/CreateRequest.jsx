@@ -262,5 +262,6 @@ function mapStateToProps(state) {
         lng: state.maps.lng
     };
   }
-  
+
+
 export default connect(mapStateToProps, { setLocationState, createRequest })(CreateRequest)
