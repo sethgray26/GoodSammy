@@ -7,8 +7,10 @@ import './Home.css'
 import blue_hand from './blueHand.png'
 
 
+
 import { RaisedButton } from 'material-ui'
 import { lightGreen500, blue500 } from 'material-ui/styles/colors';
+import { white } from 'material-ui/styles/colors';
 
 export default class Home extends Component {
     constructor(){
@@ -19,7 +21,6 @@ export default class Home extends Component {
     }
     componentDidMount(){  // get client ID from session
         axios.get('auth/me').then((res)=>{
-            console.log('======>res.data.user (clientID)',res.data.user)
             this.setState({clientID: res.data.user})
         })
     }
@@ -33,30 +34,53 @@ export default class Home extends Component {
                 </div>
 
                 <div className='home_body'>
-                    
-                    <Link to='/createReq'><RaisedButton 
-                        label='Need Help?' 
-                        primary={true} buttonStyle={{ borderRadius: 25 }} 
-                        style={ styles.needHelp } 
-                    /></Link>
 
-                    <Link to='/reqList'><RaisedButton 
-                        label='Help Someone' 
-                        backgroundColor={ lightGreen500 } 
-                        buttonStyle={{ borderRadius: 25 }} 
-                        style={ styles.helpsomeone }
-                    /></Link>
+                    <div> 
+                        <Link id='button' to='/createReq'>
+                            <RaisedButton 
+                                label='Need Help?' 
+                                primary={true} buttonStyle={{ borderRadius: 25 }} 
+                                style={ styles.needHelp } 
+                            />
+                        </Link>
+                    </div>
 
-                    <a href={process.env.REACT_APP_LOGOUT}>
+                    <div>
+                        <Link id='button' to='/reqList/unassigned'>
+                            <RaisedButton 
+                                label='Help Someone' 
+                                labelStyle={{color: white}}
+                                backgroundColor={ lightGreen500 } 
+                                buttonStyle={{ borderRadius: 25 }} 
+                                style={ styles.helpsomeone }
+                            />
+                        </Link>
+                    </div>
+
+                    <div>
+                        <Link id='button' to='/reqList/assigned'>
+                            <RaisedButton 
+                                label='My Requests' 
+                                labelStyle={{color: white}}
+                                primary={true}
+                                // backgroundColor={ lightGreen500 } 
+                                buttonStyle={{ borderRadius: 25 }} 
+                                style={ styles.helpsomeone }
+                            />
+                        </Link>
+                    </div>
+
+                    <div>
+                        <a href={process.env.REACT_APP_LOGOUT}>
                             <RaisedButton label='LOGOUT' 
+                                labelStyle={{color: white}}
                                 backgroundColor={ lightGreen500 } 
                                 style={ styles.logandsign }
-                            />
-                    </a>
+                        /></a>
+                    </div>
 
                 </div>
 
-                <p>ClientID on this comp's state: {this.state.clientID}</p>
             </div>
         )
     }
@@ -64,7 +88,7 @@ export default class Home extends Component {
 
 const styles = {
     needHelp: {
-        margin: 12,
+        margin: 5,
         marginTop: 30,
         height: 150,
         width: 250,
@@ -74,12 +98,13 @@ const styles = {
     helpsomeone: {
         height: 150,
         width: 250,
+        margin: 5,
         borderRadius: 25
     },
 
     logandsign: {
-        margin: 12,
-        marginTop: 18
+        margin: 8,
+        marginTop: 10
     },
     underlineStyle: {
         borderColor: blue500,

@@ -4,14 +4,15 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 
 import './Landing.css'
+import Demo from './Demo'
 
 import { createUsers, updateUser } from '../../ducks/reducers/users.jsx'
 
-import blue_hand from'./blueHand.png'
+import blue_hand from'./blueHandLogo.png'
 
 import { Dialog, TextField, RaisedButton } from 'material-ui'
 import { lightGreen500, blue500 } from 'material-ui/styles/colors';
-import { lightBlue500 } from 'material-ui/styles/colors';
+import { lightBlue500, white } from 'material-ui/styles/colors';
 // import Chat from './../Chat/Chat.jsx'
 
 
@@ -23,8 +24,11 @@ class Landing extends Component {
             username: "",
             password: "",
             confirmPassword: "",
-            phone: ""
-            
+            phone: "",
+            error:{
+                username:null,
+                password:null
+            }            
         }
 
         this.createUser = this.createUser.bind(this)
@@ -38,6 +42,16 @@ class Landing extends Component {
 
     handleClose = () => {
         this.setState({openSignUp: false});
+    };
+
+
+
+    handleDemoOpen = () => {
+        this.setState({openDemo: true});
+    };
+
+    handleDemoClose = () => {
+        this.setState({openDemo: false});
     };
 
 
@@ -70,7 +84,15 @@ class Landing extends Component {
     }
 
     login(  ) {
-        console.log('hit')
+        let errors = {username:null, password:null};
+        if(!this.state.username) {errors.username = "required field"}
+        if(!this.state.password) {errors.password = "required field"}
+        
+        if (errors.username || errors.password) {
+            
+            this.setState({error:errors})
+            return
+        } 
         axios.put(`/checkLogin/${this.state.username}`, { txtPassword: this.state.password })
         .then(res => {
             if (res.data.id) {
@@ -82,7 +104,10 @@ class Landing extends Component {
             else {
                 //stay on log in p
                 //TODO make this an inline error instead of alert
-                alert('Incorrect username or password, please try again!')
+                //setstatewith error message
+                this.setState({error :{username:"Incorrect username or password",
+                                    password:null}
+                                })
             }
         }).catch(error => {            
         });
@@ -108,6 +133,8 @@ class Landing extends Component {
             </div>
         ];
 
+        
+
         return(
             <div className="landing">
                 <div className="landing_header">
@@ -121,6 +148,7 @@ class Landing extends Component {
 
                         <TextField
                             name='username'
+                            errorText={this.state.error.username}
                             value={this.state.username}
                             onChange={(e) => this.inputChange(e)}
                             fullWidth={false}
@@ -133,6 +161,7 @@ class Landing extends Component {
 
                         <TextField
                             name='password'
+                            errorText={this.state.error.password}
                             value={this.state.password}
                             onChange={(e) => this.inputChange(e)}
                             fullWidth={false}
@@ -150,19 +179,27 @@ class Landing extends Component {
                     
                     <div className="login_button_wrapper">
 
-                        <RaisedButton label='LOGIN' 
+                        <RaisedButton 
+                            label='LOGIN' 
+                            labelStyle={{color: white}}
                             backgroundColor={ lightGreen500 } 
                             style={ styles.logandsign }
                             onClick={ (e) => this.login(e)}
                         />
-                        <RaisedButton label='SIGN UP' 
+                        <RaisedButton 
+                            label='SIGN UP' 
+                            labelStyle={{color: white}}
                             backgroundColor={ lightBlue500 } 
                             style={ styles.logandsign }
                             onClick={this.handleOpen}/>
 
                     </div>
-                    
 
+                    <div className="demo_wrapper">
+
+                        <Demo/>
+
+                    </div>
                     
                     <Dialog
                         title='SIGN UP!'

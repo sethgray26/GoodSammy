@@ -14,8 +14,8 @@ import fn from '../../utils/functions';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 
-const socketUrl = 'http://192.168.0.126:3005'; // server URL
-const socket = io(socketUrl);
+const socketUrl = 'https://hifiveapp.com'; // server URL
+const socket = io.connect(socketUrl, {secure: true});
 
 export default class Chat extends Component {    
     constructor(props) {
@@ -46,7 +46,7 @@ export default class Chat extends Component {
         
         socket.on('socket id', id=>{
             console.log('Connected.\nSocket ID: ', id)
-            const { socketID } = this.state
+            // const { socketID } = this.state
             const { userID, creatorID, helperID, requestID } = this.props
             axios.post('/chat/socketID', 
                 { socketID: id, userID, requestID, creatorID, helperID })
@@ -90,13 +90,13 @@ export default class Chat extends Component {
             <div className="chat-container" style={{ padding: "1px" }}>
                 
                 <Paper zDepth={1} style={{ padding: "20px",backgroundColor: "rgb(235, 240, 241)" }}>
-                <h3>Regarding Request: {requestDescription}</h3>
+                <h3>{requestDescription}</h3>
                 <div style={{fontSize:".8em", color:"gray"}}>
                     <h3>conversation ID: {this.state.conversationID}</h3>
                     <h3>you are { userID===helperID ? username.helper : userID===creatorID ? username.creator : 'not logged in.' }  id:{userID}</h3>
                     <h3>helper: {username.helper} {helperID} | creator: {username.creator} {creatorID} </h3>
                 </div>
-                    <StayScrolled component="div" style={{height:"40vh", overflowWrap:"break-word",
+                    <StayScrolled component="div" style={{height:"28vh", overflowWrap:"break-word",
                         overflowY:"scroll", overflowX:"hidden"}}>
                         {
                             this.state.response.map((message, index)=>(

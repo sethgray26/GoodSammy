@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Map from '../Map/Map'
 import Chat from '../Chat/Chat'
 import axios from 'axios'
@@ -7,7 +6,6 @@ import axios from 'axios'
 import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton  from 'material-ui/RaisedButton';  
 import FlatButton from 'material-ui/FlatButton';  
-import TextField from 'material-ui/TextField';
 import { lightGreen300 } from 'material-ui/styles/colors';
 import {lightGreen500} from 'material-ui/styles/colors';  
 import {Link} from 'react-router-dom';  
@@ -24,7 +22,8 @@ class ViewRequest extends Component {
                 request: null,
                 disable: true,
                 open: false,
-                clientID: null
+                clientID: null,
+                urlParam: null
             }
             
     }
@@ -78,20 +77,23 @@ class ViewRequest extends Component {
         })
     }
 
-    componentDidMount(){
-        axios.get('auth/me').then((res)=>{ // get clientID from session
+    async componentDidMount(){
+        await axios.get('auth/me').then((res)=>{ // get clientID from session
             this.setState({clientID: res.data.user})
         })
-        axios.get(`/request/+${this.props.match.params.id}`).then((res) => {
+        await axios.get(`/request/+${this.props.match.params.id}`).then((res) => {
+            let urlParam=null;
+            if(this.state.clientID==res.data[0].user_id || this.state.clientID==res.data[0].help_id) {
+                urlParam = 'assigned'
+            } else {
+                urlParam = 'unassigned'
+            }
             this.setState({
-                request: res.data[0]
+                request: res.data[0],
+                urlParam: urlParam
             })            
         })
-        axios.get('auth/me').then((res)=>{
-            this.setState({
-                clientID: res.data.user
-            })
-        })
+        
     }
     render() {
         const actions = [
@@ -113,8 +115,7 @@ class ViewRequest extends Component {
         return this.state.request  ?
         (
             <div>
-                <button onClick={()=>this.props.history.push('/reqlist')}>back</button>
-                <p>clientID from state:{this.state.clientID}</p>
+                
                 {this.state.request.user_id === this.state.clientID ?
 
                     <div className="view_wrapper">
@@ -145,11 +146,11 @@ class ViewRequest extends Component {
                                 primary = {true} 
                             />
                             <RaisedButton 
-                            label ='Save!' 
-                            disabled={this.state.disable} 
-                            onClick={this.saveAndDisable} 
-                            secondary={true} 
-                            style={{marginLeft: 13}}
+                                label ='Save!' 
+                                disabled={this.state.disable} 
+                                onClick={this.saveAndDisable} 
+                                secondary={true} 
+                                style={{marginLeft: 13}}
                             />
                         </div>
 
@@ -171,6 +172,12 @@ class ViewRequest extends Component {
                                 style ={{ width:150 }}
                                 onClick={this.handleAmerica}
                             />
+                            <Link to={`/reqlist/${this.state.urlParam}`}>
+                            <RaisedButton 
+                                label ={`Return to List`} 
+                                backgroundColor={ lightGreen500 }
+                            />
+                            </Link>
                             <div>
                                 <Dialog
                                     title = "Are you sure want to close this request?"
@@ -195,11 +202,11 @@ class ViewRequest extends Component {
                                 lng ={+this.state.request.long}
                             />
                         </div>
-                        
+                        { this.state.request.help_id ? null : 
                         <div className="desc_wrapper">
                             <span>{this.state.request.description}</span>
                         </div>
-
+                        }
                         {/* if someone is already helping */}
 
                         {this.state.request.help_id !== this.state.clientID || this.state.request.help_id === null ?
@@ -228,7 +235,7 @@ class ViewRequest extends Component {
                             </div>}
 
                             
-                                <Link to ='/reqList'>
+                                <Link to ={`/reqlist/${this.state.urlParam}`}>
                                     <RaisedButton 
                                         label = 'Stop helping' 
                                         style={{ marginBottom: 15 }}
@@ -241,9 +248,9 @@ class ViewRequest extends Component {
                         </div>
                     }
 
-                        <Link to='/reqList'>
+                        <Link to={`/reqlist/${this.state.urlParam}`}>
                             <RaisedButton 
-                                label ='Return to List' 
+                                label ={`Return to List`} 
                                 backgroundColor={ lightGreen500 }
                             />
                         </Link>
