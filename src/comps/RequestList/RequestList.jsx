@@ -185,7 +185,17 @@ class RequestList extends Component {
                         </Link>
                     </div>                        
                     :
-                    <div>Looks like no one needs help! </div>}
+                    <div>Looks like no one needs help! 
+                        <br/>
+                        <Link to='/Home'>
+                            <RaisedButton 
+                                label='Home' 
+                                backgroundColor={ lightBlue500 }
+                                // buttonStyle={{ borderRadius: 25 }} 
+                                style={ styles.logandsign } 
+                            />
+                        </Link>
+                    </div>}
             </div>
             }
             </div>
