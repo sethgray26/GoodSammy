@@ -92,9 +92,10 @@ export default class Chat extends Component {
                 <Paper zDepth={1} style={{ padding: "20px",backgroundColor: "rgb(235, 240, 241)" }}>
                 <h3>{requestDescription}</h3>
                 <div style={{fontSize:".8em", color:"gray"}}>
-                    <h3>conversation ID: {this.state.conversationID}</h3>
+                    {/* <h3>conversation ID: {this.state.conversationID}</h3>
                     <h3>you are { userID===helperID ? username.helper : userID===creatorID ? username.creator : 'not logged in.' }  id:{userID}</h3>
-                    <h3>helper: {username.helper} {helperID} | creator: {username.creator} {creatorID} </h3>
+                    <h3>helper: {username.helper} {helperID} | creator: {username.creator} {creatorID} </h3> */}
+                    <br/><br/><br/>
                 </div>
                     <StayScrolled component="div" style={{height:"28vh", overflowWrap:"break-word",
                         overflowY:"scroll", overflowX:"hidden"}}>

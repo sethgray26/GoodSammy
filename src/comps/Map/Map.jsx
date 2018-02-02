@@ -41,7 +41,7 @@ class Map extends Component {
       withGoogleMap
     )((props) =>
       <GoogleMap
-        defaultZoom={8}
+        defaultZoom={12}
         defaultCenter={{ lat: this.props.lat, lng: this.props.lng }}
       >
         {props.isMarkerShown && <Marker position={{ lat: this.props.lat, lng: this.props.lng }} onClick={props.onMarkerClick} />}
