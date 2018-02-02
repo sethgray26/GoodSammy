@@ -31,7 +31,7 @@ render() {
     return ( 
         <div>
             <Dialog
-                title="Confirmation Dialog"
+                title="Got it!"
                 actions={actions}
                 modal={false}
                 open={this.props.open}

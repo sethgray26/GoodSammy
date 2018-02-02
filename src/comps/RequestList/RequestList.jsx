@@ -159,7 +159,9 @@ class RequestList extends Component {
                     requestID={request.id}
                     creatorID={request.user_id}
                     helpID={request.help_id}
+                    clientID={this.state.clientID}
                     userNames={this.state.userNames}
+                    listType={this.props.match.params.id}
                 />
             )
         })

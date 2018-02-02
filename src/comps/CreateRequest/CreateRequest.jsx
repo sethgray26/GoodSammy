@@ -96,7 +96,13 @@ class CreateRequest extends Component {
     requestCreator () {
         //Post request
         //User_id, cat_id, desc, long, lat
-        console.log('this.state.description: ',this.state.description)
+        //Ensure location coordinates on req object
+        if ( !this.props.lat || this.props.lat === ""){
+            console.log("Unable to callect location data!")
+            alert("Unable to collect location data for this device. This is required to submit a request.")
+            return;
+        }
+        console.log('generating request . . .')
         let generated = {
             user_id:this.state.userData,
             category_id: this.state.category,
@@ -138,7 +144,7 @@ class CreateRequest extends Component {
                             <MenuItem key={2} value={2} primaryText="Spiritual" />
                             <MenuItem key={3} value={3} primaryText="Life" />
                             <MenuItem key={4} value={4} primaryText="Errands" />
-                            <MenuItem key={5} value={5} primaryText="handyman" />
+                            <MenuItem key={5} value={5} primaryText="Handyman" />
 
                         </SelectField>
                     </div>
@@ -189,7 +195,8 @@ class CreateRequest extends Component {
                                 backgroundColor={ lightGreen300 } 
                                 style={ styles.logandsign }
                                 img={blue_hand}
-                                onClick={this.requestCreator}>
+                                // onClick={this.requestCreator}
+                                >
                                 
                                
                             </RaisedButton>
