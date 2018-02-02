@@ -19,7 +19,7 @@ class RequestList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            requestArr: [],
+            requestArr: ['wait'],
             clientID: null,
             userNames: []
         }
@@ -156,7 +156,7 @@ class RequestList extends Component {
         })
         return (
             <div>
-            { this.state.requestArr.length === 0 ? 
+            { this.state.requestArr[0] === 'wait' ? 
                 <div>
                     <br/><br/><br/> {/*  display loading circle until have request ARR */}
                     <CircularProgress size={80} thickness={5}/>
