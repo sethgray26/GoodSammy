@@ -20,7 +20,7 @@ class RequestList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            requestArr: [],
+            requestArr: ['wait'],
             clientID: null,
             userNames: [],
             isTop: true, 
