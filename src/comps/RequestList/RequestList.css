@@ -1,7 +1,6 @@
 
 .body-content {
     height: 100vh;
-     
 }
 .list_header {
     /* border: 2px solid green; */
@@ -16,3 +15,24 @@
     letter-spacing: 2px;
     margin-bottom: 20px;
 }
+
+.sub_wrapper  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.home_wrapper {
+}
+
+.home_wrapper_scrolled {
+    position: fixed;
+    right: 10%;
+    bottom: 10%;
+}
+ 
+
+
+  
