@@ -13,6 +13,10 @@ import fn from '../../utils/functions';
 // import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
+import {grey50, grey200, white} from 'material-ui/styles/colors'
+import { grey100 } from 'material-ui/styles/colors';
+import { grey500 } from 'material-ui/styles/colors';
+import { grey400 } from 'material-ui/styles/colors';
 
 const socketUrl = 'https://hifiveapp.com'; // server URL
 const socket = io.connect(socketUrl, {secure: true});
@@ -87,17 +91,17 @@ export default class Chat extends Component {
         const { messageInput, socket, requestDescription, username } = this.state;
         const { userID, helperID, creatorID } = this.props;
         return (
-            <div className="chat-container" style={{ padding: "1px" }}>
+            <div className="chat-container" style={{ padding: "1px"}}>
                 
-                <Paper zDepth={1} style={{ padding: "20px",backgroundColor: "rgb(235, 240, 241)" }}>
-                <h3>{requestDescription}</h3>
-                <div style={{fontSize:".8em", color:"gray"}}>
+                <Paper zDepth={1} style={{ padding: "20px", backgroundColor: grey500}}>
+                <h3 style={{ color: white}}>{requestDescription}</h3>
+                <div style={{fontSize:".8em", color: white}}>
                     <h3>conversation ID: {this.state.conversationID}</h3>
                     <h3>you are { userID===helperID ? username.helper : userID===creatorID ? username.creator : 'not logged in.' }  id:{userID}</h3>
                     <h3>helper: {username.helper} {helperID} | creator: {username.creator} {creatorID} </h3>
                 </div>
-                    <StayScrolled component="div" style={{height:"28vh", overflowWrap:"break-word",
-                        overflowY:"scroll", overflowX:"hidden"}}>
+                    <StayScrolled component="div" style={{height:"23vh", overflowWrap:"break-word",
+                        overflowY:"scroll", overflowX:"hidden", backgroundColor: grey500}}>
                         {
                             this.state.response.map((message, index)=>(
                                 <div key={index} style={message.user_id === userID ? {textAlign:"right"} : {textAlign:"left"}} >
@@ -116,12 +120,16 @@ export default class Chat extends Component {
                                 <TextField
                                     multiLine={false}
                                     fullWidth={true}
+                                    inputStyle={{color: white}}
+                                    hintStyle={{color: white}}
+                                    underlineFocusStyle={{borderColor: white}}
+                                    underlineStyle={{ borderColor: white }}
                                     ref={(input) => { this.textInput = input }}
                                     type="text"
                                     id="message-input"
                                     value={messageInput}
                                     onChange={this.handleChange}
-                                    placeholder={"your message here"}
+                                    hintText="YOUR MESSAGE HERE"
                                 />
 
                             </label>

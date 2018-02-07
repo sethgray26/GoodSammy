@@ -4,13 +4,15 @@ import axios from 'axios'
 
 import './Home.css'
 
-import blue_hand from'./blueHand.png'
+import white_hand_logo from './white_hand_logo.png'
 
 
 
 import { RaisedButton } from 'material-ui'
-import { lightGreen500, blue500 } from 'material-ui/styles/colors';
-import { white } from 'material-ui/styles/colors';
+import { lightGreen500, blue500, transparent, white, grey200, grey50, white500, white400, white100, grey500, grey700 } from 'material-ui/styles/colors';
+import { grey100, fullWhite } from 'material-ui/styles/colors';
+import { black } from 'material-ui/styles/colors';
+import { grey800 } from 'material-ui/styles/colors';
 
 export default class Home extends Component {
     constructor(){
@@ -30,7 +32,7 @@ export default class Home extends Component {
         return (
             <div className='home'>
                 <div className="home_header">
-                    <img src={blue_hand} alt='blue_hand'/>
+                    <img src={white_hand_logo} alt='white_hand'/>
                 </div>
 
                 <div className='home_body'>
@@ -39,7 +41,10 @@ export default class Home extends Component {
                         <Link id='button' to='/createReq'>
                             <RaisedButton 
                                 label='Need Help?' 
-                                primary={true} buttonStyle={{ borderRadius: 25 }} 
+                                labelStyle={{color: white, fontWeight: 900, fontSize: 18, letterSpacing: 1.5}}
+                                backgroundColor={transparent}
+                                buttonStyle={{ borderRadius: 25, border: '2px', borderStyle: 'outset', color: white }}
+                                // overlayStyle={{border: 2, borderColor: white }}
                                 style={ styles.needHelp } 
                             />
                         </Link>
@@ -49,9 +54,9 @@ export default class Home extends Component {
                         <Link id='button' to='/reqList/unassigned'>
                             <RaisedButton 
                                 label='Help Someone' 
-                                labelStyle={{color: white}}
-                                backgroundColor={ lightGreen500 } 
-                                buttonStyle={{ borderRadius: 25 }} 
+                                labelStyle={{color: white, fontWeight: 900, fontSize: 18, letterSpacing: 1.5}}
+                                backgroundColor={ transparent } 
+                                buttonStyle={{ borderRadius: 25, border: '2px', borderStyle: 'outset', color: white }}
                                 style={ styles.helpsomeone }
                             />
                         </Link>
@@ -61,10 +66,9 @@ export default class Home extends Component {
                         <Link id='button' to='/reqList/assigned'>
                             <RaisedButton 
                                 label='My Requests' 
-                                labelStyle={{color: white}}
-                                primary={true}
-                                // backgroundColor={ lightGreen500 } 
-                                buttonStyle={{ borderRadius: 25 }} 
+                                labelStyle={{color: white, fontWeight: 900, fontSize: 18, letterSpacing: 1.5}}
+                                backgroundColor={transparent} 
+                                buttonStyle={{ borderRadius: 25, border: '2px', borderStyle: 'outset', color: white }} 
                                 style={ styles.helpsomeone }
                             />
                         </Link>
@@ -72,9 +76,10 @@ export default class Home extends Component {
 
                     <div>
                         <a href={process.env.REACT_APP_LOGOUT}>
-                            <RaisedButton label='LOGOUT' 
-                                labelStyle={{color: white}}
-                                backgroundColor={ lightGreen500 } 
+                            <RaisedButton 
+                                label='LOGOUT' 
+                                labelStyle={{fontWeight: 900, fontSize: 16, letterSpacing: 1.5}}
+                                backgroundColor={ white } 
                                 style={ styles.logandsign }
                         /></a>
                     </div>
@@ -92,19 +97,27 @@ const styles = {
         marginTop: 30,
         height: 150,
         width: 250,
-        borderRadius: 25
+        borderRadius: 25,
+        backgroundColor: transparent,
+        // bordercolor: black,
+        // opacity: 2.1,
         
     },
     helpsomeone: {
         height: 150,
         width: 250,
         margin: 5,
-        borderRadius: 25
+        borderRadius: 25,
+        // border: 0.1,
+        color: white,
+        backgroundColor: transparent,
+        background: transparent,
+        // opacity: 1.9,
     },
 
     logandsign: {
         margin: 8,
-        marginTop: 10
+        marginTop: 10,
     },
     underlineStyle: {
         borderColor: blue500,

@@ -6,11 +6,12 @@ import axios from 'axios'
 import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton  from 'material-ui/RaisedButton';  
 import FlatButton from 'material-ui/FlatButton';  
-import { lightGreen300, lightBlue500, white, lightGreen500 } from 'material-ui/styles/colors';
+import { lightGreen300, lightBlue500, white, lightGreen500, transparent, grey700, fullWhite } from 'material-ui/styles/colors';
 import {Link} from 'react-router-dom';  
 import Dialog from 'material-ui/Dialog'; 
 
 import './ViewRequest.css'
+import { grey500 } from 'material-ui/styles/colors';
 
 
 class ViewRequest extends Component {
@@ -95,16 +96,22 @@ class ViewRequest extends Component {
     }
     render() {
         const actions = [
-            <FlatButton 
+            <RaisedButton
             label = "Cancel"
-            primary={true}
-            keyboardFocused={true}
+            labelStyle={{color: white}}
+            style={{backgroundColor: transparent}}
+            buttonStyle={{backgroundColor: transparent,  border: '1px', borderStyle: 'outset', color: white,}}
+            backgroundColor={ transparent}
+            // keyboardFocused={true}
             onClick = {this.handleAmerica}
             />,
             <Link to ='/Home'>
-                <FlatButton 
+                <RaisedButton
                 label = "Delete"
-                primary={true}
+                labelStyle={{color: white}}
+                style={{backgroundColor: transparent}}
+                buttonStyle={{backgroundColor: transparent,  border: '1px', borderStyle: 'outset', color: white,}}
+                backgroundColor={ transparent}
                 onClick={this.deleteRequest}
                 />
             </Link>
@@ -140,14 +147,20 @@ class ViewRequest extends Component {
                         <div className="text_button_wrapper">
                             <RaisedButton 
                                 label ='Edit Information' 
+                                labelStyle={{color: white}}
+                                style={{backgroundColor: transparent, marginBottom: 10}}
+                                buttonStyle={{backgroundColor: transparent,  border: '1px', borderStyle: 'outset', color: white,}}
+                                backgroundColor={ transparent}
                                 onClick={this.enableStatus} 
                                 primary = {true} 
                             />
                             <RaisedButton 
                                 label ='Save!' 
+                                labelStyle={{color: white}}
+                                buttonStyle={ {border: '1px', borderStyle: 'outset', color: white}}
                                 disabled={this.state.disable} 
                                 onClick={this.saveAndDisable} 
-                                secondary={true} 
+                                backgroundColor={grey700}
                                 style={{marginLeft: 13}}
                             />
                         </div>
@@ -165,22 +178,29 @@ class ViewRequest extends Component {
                         <div className="close_wrapper">
                             <RaisedButton 
                                 label='Close Request'
-                                labelColor={white}
-                                backgroundColor={ lightGreen500 }
-                                style ={{ width:150, marginRight: 10 }}
+                                labelStyle={{color: white}}
+                                style={{backgroundColor: transparent}}
+                                buttonStyle={{ width: 150, marginRight: 10, backgroundColor: transparent,  border: '1px', borderStyle: 'outset', color: white,}}
+                                backgroundColor={ transparent}
                                 onClick={this.handleAmerica}
                             />
                             <Link to={`/reqlist/${this.state.urlParam}`}>
                             <RaisedButton 
                                 label ={`Return to List`} 
-                                labelColor={white}
-                                backgroundColor={ lightGreen500 }
+                                labelStyle={{color: white}}
+                                style={{backgroundColor: transparent}}
+                                buttonStyle={{backgroundColor: transparent,  border: '1px', borderStyle: 'outset', color: white,}}
+                                backgroundColor={ transparent}
                             />
                             </Link>
                             <div>
                                 <Dialog
                                     title = "Are you sure want to close this request?"
+                                    titleStyle={{color: white, backgroundColor: grey500 }}
+                                    contentStyle={{color: white}}
+                                    bodyStyle={{backgroundColor: grey500, color: white}}
                                     actions = {actions}
+                                    actionsContainerStyle={{backgroundColor: grey500}}
                                     modal={false}
                                     open={this.state.open}
                                     onRequestClose={this.handleAmerica}
@@ -214,7 +234,9 @@ class ViewRequest extends Component {
                                 <RaisedButton 
                                     label='Commit to help' 
                                     labelStyle={{color: white}}
-                                    backgroundColor={ lightBlue500 }
+                                    style={{backgroundColor: transparent, marginBottom: 15}}
+                                    buttonStyle={{backgroundColor: transparent,  border: '1px', borderStyle: 'outset', color: white,}}
+                                    backgroundColor={ transparent}
                                     onClick ={this.handleCommit} 
                                 />
                             </div>
@@ -236,10 +258,11 @@ class ViewRequest extends Component {
 
                             
                                 <Link to ={`/reqlist/${this.state.urlParam}`}>
-                                    <RaisedButton 
+                                    <RaisedButton  
                                         label = 'Stop helping' 
-                                        style={{ marginBottom: 15 }}
-                                        primary={true}
+                                        labelStyle={{color: white}}
+                                        style={{backgroundColor: transparent, marginBottom: 15}}
+                                        buttonStyle={{backgroundColor: transparent,  border: '1px', borderStyle: 'outset', color: white,}}
                                         onClick={this.removeHelper}
                                     />
                                 </Link>
@@ -252,7 +275,9 @@ class ViewRequest extends Component {
                             <RaisedButton 
                                 label ={`Return to List`} 
                                 labelStyle={{color: white}}
-                                backgroundColor={ lightGreen500 }
+                                backgroundColor={transparent}
+                                style={{backgroundColor: transparent, marginBottom: '13px'}}
+                                buttonStyle={{backgroundColor: transparent,  border: '1px', borderStyle: 'outset', color: white,}}
                             />
                         </Link>
 

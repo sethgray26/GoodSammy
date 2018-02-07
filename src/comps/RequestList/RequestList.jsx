@@ -9,12 +9,11 @@ import RepeatedRequest from './../RepeatedList/repeatedList';
 import CircularProgress from 'material-ui/CircularProgress';
 import { setLocationState, storeDistances } from '../../ducks/reducers/maps';
 
-import blue_hand from './blueHand.png'
+import white_hand_logo from '../Home/white_hand_logo.png'
 import './RequestList.css'
 
 import { RaisedButton } from 'material-ui'
-import { lightBlue500 } from 'material-ui/styles/colors';
-import { white } from 'material-ui/styles/colors';
+import { lightBlue500, transparent, white } from 'material-ui/styles/colors';
 
 class RequestList extends Component {
     constructor(props) {
@@ -170,13 +169,13 @@ class RequestList extends Component {
                 { this.state.requestArr.length === 0 ? 
                     <div>
                         <br/><br/><br/> {/*  display loading circle until have request ARR */}
-                        <CircularProgress size={80} thickness={5}/>
+                        <CircularProgress size={80} thickness={5} color={white}/>
                     </div>
                 :
                 <div className='body-content' >
                 
                         <div className="list_header">
-                            <img style={{height: 70, width: 70 }} src={blue_hand} alt='blue_hand'/>
+                            <img style={{height: 70, width: 175 }} src={white_hand_logo} alt='blue_hand'/>
                         </div>
                         
 
@@ -189,7 +188,8 @@ class RequestList extends Component {
                                         <RaisedButton 
                                             label='Home'
                                             labelColor={white} 
-                                            backgroundColor={ lightBlue500 }
+                                            backgroundColor={ transparent }
+                                            buttonStyle={{backgroundColor: transparent,  border: '1px', borderStyle: 'outset', color: white,}}
                                             // buttonStyle={{ borderRadius: 25 }} 
                                             style={ styles.logandsign } 
                                         />
@@ -210,7 +210,8 @@ class RequestList extends Component {
 const styles = {
     logandsign: {
         margin: 0,
-        marginTop: 0
+        marginTop: 0,
+        backgroundColor: transparent
     }
 }
 

@@ -4,8 +4,7 @@ import axios from 'axios'
 
 import './CreateRequest.css'
 import ConfirmDialog from '../Dialog/Dialog'
-import blue_hand from './blueHand.png'
-import green_hand from './greenHand.png'
+import white_hand_logo from './white_hand_logo.png'
 
 
 import { setLocationState } from '../../ducks/reducers/maps';
@@ -13,11 +12,10 @@ import { createRequest } from '../../ducks/reducers/requests';
 import { connect } from 'react-redux';
 
 import{ SelectField, TextField, MenuItem, RaisedButton, SvgIcon, FontIcon } from 'material-ui';
-import { blue500, blue400, lightGreen300, red400 } from 'material-ui/styles/colors';
+import { blue500, blue400, lightGreen300, red400, black, white, grey200, grey600, grey700, transparent } from 'material-ui/styles/colors';
 
 
 import './CreateRequest.css'
-import { white } from 'material-ui/styles/colors';
 
 class CreateRequest extends Component {
     constructor(props){
@@ -122,7 +120,7 @@ class CreateRequest extends Component {
             <div className='create_req' >
                 
                 <div className='create_req_header'>
-                    <img src={blue_hand} alt='blue_hand'/>
+                    <img src={white_hand_logo} alt='white_hand'/>
                 </div>
 
                 <div className='create_req_body'>
@@ -136,11 +134,16 @@ class CreateRequest extends Component {
                             value={this.state.value}
                             onChange={this.handleChange}
                             onClick={this.requestToState}
+                            menuItemStyle={{color: white}}
+                            listStyle={{backgroundColor: grey600}}
+                            labelStyle={{color: white}}
+                            selectedMenuItemStyle={{color: black}}
+                            // menuStyle={{}}
                             style={{margin: 5}}
                             floatingLabelText="Select a Category"
-                            floatingLabelStyle={{left: 10, color: blue500}}
+                            floatingLabelStyle={{left: 10, color: white}}
                         >
-                            <MenuItem key={1} value={1} primaryText="Automotive" />
+                            <MenuItem key={1} value={1} primaryText="Automotive"/>
                             <MenuItem key={2} value={2} primaryText="Spiritual" />
                             <MenuItem key={3} value={3} primaryText="Life" />
                             <MenuItem key={4} value={4} primaryText="Errands" />
@@ -156,13 +159,13 @@ class CreateRequest extends Component {
                             name="Request Description"
                             id="description"
                             ref='description'
-                            multiLine={ true }
+                            multiLine={true}
                             fullWidth={false}
-                            style={{ margin: 10, marginTop: -10 }}
+                            style={{ margin: 10, marginTop: -10}}
                             rows={ 1 }
                             floatingLabelStyle={styles.floatingLabelStyle}
                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                            // underlineStyle={styles.underlineStyle}
+                            textareaStyle={{ color: white}}
                             underlineFocusStyle={styles.underlineFocusStyle}
                             floatingLabelText="Give a brief Description"
                             onChange={this.requestToState}
@@ -181,8 +184,7 @@ class CreateRequest extends Component {
                     <RaisedButton 
                         label='Request Help'
                         labelStyle={{color: white}}
-                        backgroundColor={ blue400 } 
-                        labelPosition='before'
+                        backgroundColor={transparent} 
                         style={ styles.logandsign }
                         onClick={ this.requestCreator }>
 
@@ -192,13 +194,10 @@ class CreateRequest extends Component {
                             <RaisedButton 
                                 label='Cancel' 
                                 labelStyle={{color: white }}
-                                backgroundColor={ lightGreen300 } 
+                                backgroundColor={transparent} 
                                 style={ styles.logandsign }
-                                img={blue_hand}
                                 // onClick={this.requestCreator}
                                 >
-                                
-                               
                             </RaisedButton>
                     </Link>
                 </div>
@@ -229,23 +228,25 @@ class CreateRequest extends Component {
         // height: 60,
         margin: 12,
         marginTop: 13,
+        backgroundColor: transparent,
+        opacity: 0.9,
     },
     underlineStyle: {
-        borderColor: blue500,
+        borderColor: white,
         // left: 10,
       },
     underlineFocusStyle: {
-        borderColor: blue500,
+        borderColor: white,
         // margin: 10,
         // right: -15
     },
     floatingLabelStyle: {
-        color: blue500,
+        color: white,
         // marginTop: -30,
         left: 4
       },
     floatingLabelFocusStyle: {
-        color: blue500,
+        color: white,
       },
 }
 

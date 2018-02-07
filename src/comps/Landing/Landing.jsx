@@ -4,15 +4,18 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 
 import './Landing.css'
-import Demo from './Demo'
+import Demo from '../Demo/Demo.jsx'
 
 import { createUsers, updateUser } from '../../ducks/reducers/users.jsx'
 
-import blue_hand from'./blueHandLogo.png'
+import blue_hand from'./blueHand.png'
+import White_hand_logo from './white_hand_logo.png'
 
 import { Dialog, TextField, RaisedButton } from 'material-ui'
-import { lightGreen500, blue500 } from 'material-ui/styles/colors';
-import { lightBlue500, white } from 'material-ui/styles/colors';
+import { lightGreen500, blue500, white, lightBlue100, grey100, grey500 } from 'material-ui/styles/colors';
+import { lightBlue500 } from 'material-ui/styles/colors';
+import { transparent } from 'material-ui/styles/colors';
+import { fullWhite } from 'material-ui/styles/colors';
 // import Chat from './../Chat/Chat.jsx'
 
 
@@ -119,15 +122,17 @@ class Landing extends Component {
             <div className="dialog_button_wrapper">
                 <RaisedButton
                     label="Cancel"
-                    primary={true}
-                    style={{margin: 3}}
+                    labelColor={white}
+                    backgroundColor={transparent}
+                    style={styles.logandsign}
                     onClick={this.handleClose}
                 />
 
                 <RaisedButton
                     label="Submit"
-                    primary={true}
-                    style={{margin: 3}}
+                    labelColor={white}
+                    backgroundColor={transparent}
+                    style={styles.logandsign}
                     onClick={() => this.createUser()}
                 /> 
             </div>
@@ -138,7 +143,7 @@ class Landing extends Component {
         return(
             <div className="landing">
                 <div className="landing_header">
-                    <img src={blue_hand} alt='blue_hand'/>
+                    <img src={White_hand_logo} alt='blue_hand'/>
                 </div>
 
 
@@ -146,14 +151,14 @@ class Landing extends Component {
 
                     <div className="login_text_wrapper">
 
-                        <TextField
+                    <TextField
                             name='username'
-                            errorText={this.state.error.username}
                             value={this.state.username}
                             onChange={(e) => this.inputChange(e)}
                             fullWidth={false}
                             multiLine={false}
-                            floatingLabelText="Username"
+                            inputStyle={{color: white}}
+                            floatingLabelText="USERNAME"
                             underlineFocusStyle={styles.underlineStyle}
                             floatingLabelStyle={styles.floatingLabelStyle}
                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
@@ -161,13 +166,13 @@ class Landing extends Component {
 
                         <TextField
                             name='password'
-                            errorText={this.state.error.password}
                             value={this.state.password}
                             onChange={(e) => this.inputChange(e)}
                             fullWidth={false}
                             multiLine={false}
+                            inputStyle={{color: white}}
                             type='password'
-                            floatingLabelText="Password"
+                            floatingLabelText="PASSWORD"
                             underlineFocusStyle={styles.underlineStyle}
                             floatingLabelStyle={styles.floatingLabelStyle}
                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
@@ -179,18 +184,20 @@ class Landing extends Component {
                     
                     <div className="login_button_wrapper">
 
-                        <RaisedButton 
-                            label='LOGIN' 
-                            labelStyle={{color: white}}
-                            backgroundColor={ lightGreen500 } 
-                            style={ styles.logandsign }
-                            onClick={ (e) => this.login(e)}
+                    <RaisedButton 
+                            label='LOGIN'
+                            labelColor={white} 
+                            backgroundColor={transparent} 
+                            buttonStyle={{ border: '1px', borderStyle: 'outset', color: white }}
+                            style={styles.logandsign}
+                            onClick={(e) => this.login(e)}
                         />
                         <RaisedButton 
                             label='SIGN UP' 
-                            labelStyle={{color: white}}
-                            backgroundColor={ lightBlue500 } 
-                            style={ styles.logandsign }
+                            labelColor={white}
+                            backgroundColor={transparent}
+                            buttonStyle={{ border: '1px', borderStyle: 'outset', color: white }} 
+                            style={styles.logandsign}
                             onClick={this.handleOpen}/>
 
                     </div>
@@ -206,14 +213,17 @@ class Landing extends Component {
                         titleStyle={styles.title}
                         actions={ actions }
                         modal={true}
-                        open={this.state.openSignUp}>
+                        open={this.state.openSignUp}
+                        actionsContainerStyle={{backgroundColor: grey500}}
+                        bodyStyle={{backgroundColor: grey500}}>
 
                         <TextField
                             name='username'
                             value={this.state.username}
                             onChange={(e) => this.inputChange(e)}
                             fullWidth={true}
-                            multiLine={true}
+                            multiLine={false}
+                            inputStyle={{color: white}}
                             floatingLabelText="Create a Username"
                             underlineFocusStyle={styles.underlineStyle}
                             floatingLabelStyle={styles.floatingLabelStyle}                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
@@ -225,6 +235,8 @@ class Landing extends Component {
                             value={this.state.password}
                             onChange={(e) => this.inputChange(e)}
                             fullWidth={true}
+                            multiLine={false}
+                            inputStyle={{color: white}}
                             // multiLine={true}
                             floatingLabelText="Create a Password"
                             underlineFocusStyle={styles.underlineStyle}
@@ -238,6 +250,8 @@ class Landing extends Component {
                             value={this.state.confirmPassword}
                             onChange={(e) => this.inputChange(e)}
                             fullWidth={true}
+                            multiLine={false}
+                            inputStyle={{color: white}}
                             // multiLine={true}
                             floatingLabelText="Confirm Password"
                             underlineFocusStyle={styles.underlineStyle}
@@ -250,7 +264,8 @@ class Landing extends Component {
                             value={this.state.phone}
                             onChange={(e) => this.inputChange(e)}
                             fullWidth={true}
-                            multiLine={true}
+                            multiLine={false}
+                            inputStyle={{color: white}}
                             floatingLabelText="Phone Number"
                             underlineFocusStyle={styles.underlineStyle}
                             floatingLabelStyle={styles.floatingLabelStyle}
@@ -282,7 +297,8 @@ const styles = {
         marginTop: 30,
         height: 150,
         width: 250,
-        borderRadius: 25
+        borderRadius: 25,
+      
         
     },
     helpsomeone: {
@@ -293,23 +309,33 @@ const styles = {
 
     logandsign: {
         margin: 8,
-        marginTop: 13
+        marginTop: 13,
+        backgroundColor: transparent,
+        opacity: 0.9,
     },
     underlineStyle: {
-        borderColor: blue500,
+        color: white,
+        borderColor: white,
       },
     floatingLabelStyle: {
-        color: blue500,
-        fontFamily: 'Gloria Hallelujah',
+        color: white,
+        fontFamily: 'Roboto',
         fontSize: 20,
         letterSpacing: 2 
       },
     floatingLabelFocusStyle: {
-        color: blue500,
+        color: white,
+        fontFamily: 'Roboto',
       },
+    inputStyle: {
+        color: white,
+        fontFamily: 'Roboto',
+    },
 
     title: {
-        fontFamily: 'Gloria Hallelujah',
+        fontFamily: 'Roboto',
+        color: white,
+        backgroundColor: grey500
     }
 }
 
