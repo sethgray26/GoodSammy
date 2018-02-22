@@ -179,17 +179,13 @@ class CreateRequest extends Component {
 
                 <div className='buttons'>
                     <RaisedButton 
-                        label='Request'
-                        labelStyle={{color: white }} 
+                        label='Request Help'
+                        labelStyle={{color: white}}
                         backgroundColor={ blue400 } 
-                        // primary={true}
-                        overlayStyle={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}
                         labelPosition='before'
                         style={ styles.logandsign }
                         onClick={ this.requestCreator }>
 
-                        <img className='button_img'
-                                    src={green_hand}/>
                     </RaisedButton>
 
                     <Link to='/Home'>
@@ -198,14 +194,11 @@ class CreateRequest extends Component {
                                 labelStyle={{color: white }}
                                 backgroundColor={ lightGreen300 } 
                                 style={ styles.logandsign }
-                                overlayStyle={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}
-                                labelPosition='before'
                                 img={blue_hand}
                                 // onClick={this.requestCreator}
                                 >
                                 
-                                <img className='button_img'
-                                    src={blue_hand}/>
+                               
                             </RaisedButton>
                     </Link>
                 </div>

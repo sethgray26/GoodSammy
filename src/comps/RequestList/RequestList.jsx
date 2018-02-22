@@ -14,6 +14,7 @@ import './RequestList.css'
 
 import { RaisedButton } from 'material-ui'
 import { lightBlue500 } from 'material-ui/styles/colors';
+import { white } from 'material-ui/styles/colors';
 
 class RequestList extends Component {
     constructor(props) {
@@ -21,7 +22,8 @@ class RequestList extends Component {
         this.state = {
             requestArr: ['wait'],
             clientID: null,
-            userNames: []
+            userNames: [],
+            isTop: true, 
         }
     }
 
@@ -62,6 +64,15 @@ class RequestList extends Component {
             console.log('not supported in browser')
         }
         
+    }
+
+    componentWillMount(){
+        document.addEventListener('scroll', () => {
+            const isTop = window.scrollY < 100;
+            if (isTop !== this.state.isTop) {
+                this.setState({ isTop })
+            }
+          });
     }
 
     componentWillReceiveProps(nextprops) {
@@ -155,7 +166,7 @@ class RequestList extends Component {
             )
         })
         return (
-            <div>
+            <div className='page'>
             { this.state.requestArr[0] === 'wait' ? 
                 <div>
                     <br/><br/><br/> {/*  display loading circle until have request ARR */}
@@ -205,8 +216,8 @@ class RequestList extends Component {
 
 const styles = {
     logandsign: {
-        margin: 12,
-        marginTop: 18
+        margin: 0,
+        marginTop: 0
     }
 }
 

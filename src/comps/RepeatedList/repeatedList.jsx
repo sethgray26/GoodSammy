@@ -4,6 +4,8 @@ import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 import {Link} from 'react-router-dom'
 
+import { lightBlue500 } from 'material-ui/styles/colors';
+
 class RepeatedRequest extends Component {
     constructor(props){
         super(props)
@@ -35,7 +37,10 @@ class RepeatedRequest extends Component {
                         <p style={{ marginBottom: 8, fontSize: 18, fontWeight: 300}}>Distance from you: {this.props.distance}</p>
                     <CardActions>
                         <Link to={`/viewrequest/${this.props.requestID}`} >
-                            <RaisedButton label="View Details" primary={true} />
+                            <RaisedButton 
+                                label="View Details"
+                                backgroundColor={lightBlue500}
+                                />
                         </Link>
                     </CardActions>
                     </CardText>

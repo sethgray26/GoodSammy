@@ -6,13 +6,11 @@ import axios from 'axios'
 import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton  from 'material-ui/RaisedButton';  
 import FlatButton from 'material-ui/FlatButton';  
-import { lightGreen300 } from 'material-ui/styles/colors';
-import {lightGreen500} from 'material-ui/styles/colors';  
+import { lightGreen300, lightBlue500, white, lightGreen500 } from 'material-ui/styles/colors';
 import {Link} from 'react-router-dom';  
 import Dialog from 'material-ui/Dialog'; 
 
 import './ViewRequest.css'
-import { white } from 'material-ui/styles/colors';
 
 
 class ViewRequest extends Component {
@@ -168,13 +166,14 @@ class ViewRequest extends Component {
                             <RaisedButton 
                                 label='Close Request'
                                 labelColor={white}
-                                backgroundColor={ lightGreen300 }
-                                style ={{ width:150 }}
+                                backgroundColor={ lightGreen500 }
+                                style ={{ width:150, marginRight: 10 }}
                                 onClick={this.handleAmerica}
                             />
                             <Link to={`/reqlist/${this.state.urlParam}`}>
                             <RaisedButton 
                                 label ={`Return to List`} 
+                                labelColor={white}
                                 backgroundColor={ lightGreen500 }
                             />
                             </Link>
@@ -214,8 +213,9 @@ class ViewRequest extends Component {
                             <div className="commit_button_wrapper">
                                 <RaisedButton 
                                     label='Commit to help' 
+                                    labelStyle={{color: white}}
+                                    backgroundColor={ lightBlue500 }
                                     onClick ={this.handleCommit} 
-                                    backgroundColor={ lightGreen300 } 
                                 />
                             </div>
                             
@@ -251,6 +251,7 @@ class ViewRequest extends Component {
                         <Link to={`/reqlist/${this.state.urlParam}`}>
                             <RaisedButton 
                                 label ={`Return to List`} 
+                                labelStyle={{color: white}}
                                 backgroundColor={ lightGreen500 }
                             />
                         </Link>

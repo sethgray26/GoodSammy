@@ -39,7 +39,7 @@ export default class Demo extends Component {
             <div className="demo_button_wrapper">
                 <RaisedButton
                         label="Close Demo"
-                        primary={true}
+                        backgroundColor={ lightBlue500 }
                         style={{margin: 3}}
                         onClick={this.handleDemoClose}
                 />
