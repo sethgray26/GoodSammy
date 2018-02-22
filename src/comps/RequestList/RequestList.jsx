@@ -20,7 +20,7 @@ class RequestList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            requestArr: [],
+            requestArr: ['wait'],
             clientID: null,
             userNames: [],
             isTop: true, 
@@ -167,41 +167,48 @@ class RequestList extends Component {
         })
         return (
             <div className='page'>
-                { this.state.requestArr.length === 0 ? 
-                    <div>
-                        <br/><br/><br/> {/*  display loading circle until have request ARR */}
-                        <CircularProgress size={80} thickness={5}/>
-                    </div>
-                :
-                <div className='body-content' >
-                
-                        <div className="list_header">
-                            <img style={{height: 70, width: 70 }} src={blue_hand} alt='blue_hand'/>
-                        </div>
-                        
-
-                        {this.state.requestArr.length !== 0  ?
-
-                        <div>
-                            <h3>HI FIVE Sombody!</h3>
-
-                                    <Link  to='/Home'>
-                                        <RaisedButton 
-                                            label='Home'
-                                            labelColor={white} 
-                                            backgroundColor={ lightBlue500 }
-                                            // buttonStyle={{ borderRadius: 25 }} 
-                                            style={ styles.logandsign } 
-                                        />
-                                    </Link>
-
-                                    <section>{request}</section>
-                                
-                        </div>                        
-                        :
-                        <div>Looks like no one needs help! </div>}
+            { this.state.requestArr[0] === 'wait' ? 
+                <div>
+                    <br/><br/><br/> {/*  display loading circle until have request ARR */}
+                    <CircularProgress size={80} thickness={5}/>
                 </div>
-                }
+            :
+            <div className='body-content' >
+            
+                    <div className="list_header">
+                        <img style={{height: 70, width: 70 }} src={blue_hand} alt='blue_hand'/>
+                    </div>
+
+                    {this.state.requestArr.length !== 0  ?
+
+                    <div>
+                        <h3>HI FIVE Sombody!</h3>
+
+                        <section>{request}</section>
+
+                        <Link to='/Home'>
+                            <RaisedButton 
+                                label='Home' 
+                                backgroundColor={ lightBlue500 }
+                                // buttonStyle={{ borderRadius: 25 }} 
+                                style={ styles.logandsign } 
+                            />
+                        </Link>
+                    </div>                        
+                    :
+                    <div>Looks like no one needs help! 
+                        <br/>
+                        <Link to='/Home'>
+                            <RaisedButton 
+                                label='Home' 
+                                backgroundColor={ lightBlue500 }
+                                // buttonStyle={{ borderRadius: 25 }} 
+                                style={ styles.logandsign } 
+                            />
+                        </Link>
+                    </div>}
+            </div>
+            }
             </div>
         );
     }
