@@ -1,6 +1,7 @@
 
 .body-content {
     height: 100vh;
+    background-image: url('./girl_moving.jpg')
 }
 .list_header {
     /* border: 2px solid green; */
@@ -9,11 +10,16 @@
 
 .list_header > img {
     margin-top: 30px;
+    /* height: 80px;
+    width: 400px; */
+    /* border: 2px solid green; */
+    
 }
 
 .body-content h3 {
     letter-spacing: 2px;
     margin-bottom: 20px;
+    color: white;  
 }
 
 .sub_wrapper  {

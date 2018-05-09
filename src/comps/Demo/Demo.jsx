@@ -2,17 +2,18 @@ import React, { Component } from 'react'
 
 import './Demo.css'
 
-import blue_hand from'./blueHand.png'
+// import blue_hand from'./blueHand.png'
 import google_map from './Google-Maps.png'
-import login from './login.png'
+// import login from './login.png'
 import login_vid from './login_vid.mov'
 import home_vid from './home_vid.mov'
 import create_vid from './create_vid.mov'
 import list_vid from './list_vid.mov'
 
 import { Dialog, TextField, RaisedButton } from 'material-ui'
-import { lightGreen500, blue500 } from 'material-ui/styles/colors';
+import { lightGreen500, blue500, transparent, grey500 } from 'material-ui/styles/colors';
 import { lightBlue500, white } from 'material-ui/styles/colors';
+import { grey100 } from 'material-ui/styles/colors';
 
 
 export default class Demo extends Component {
@@ -39,7 +40,7 @@ export default class Demo extends Component {
             <div className="demo_button_wrapper">
                 <RaisedButton
                         label="Close Demo"
-                        backgroundColor={ lightBlue500 }
+                        backgroundColor={transparent}
                         style={{margin: 3}}
                         onClick={this.handleDemoClose}
                 />
@@ -61,7 +62,8 @@ export default class Demo extends Component {
                     <RaisedButton 
                         label='About this App' 
                         labelStyle={{color: white}}
-                        backgroundColor={ lightBlue500 } 
+                        backgroundColor={ transparent } 
+                        buttonStyle={{ border: '1px', borderStyle: 'outset', color: white }}
                         style={ styles.logandsign }
                         onClick={this.handleDemoOpen}
                     />
@@ -76,15 +78,23 @@ export default class Demo extends Component {
                     modal={true}
                     open={this.state.openDemo}
                     contentStyle={styles.customContentStyle}
+                    bodyStyle={{backgroundColor: grey100}}
+                    actionsContainerStyle={{backgroundColor: grey100}}
                     autoDetectWindowHeight={true}
                     autoScrollBodyContent={true}>
 
                     <div className='demo'>
+                        <br/>
+
                         <p>Hi Five is a React.js Application designed for mobile use, it utilized the Google Maps
                             API to generate real time locations of the users and distace to other users. 
                         </p>
 
+                        <br/>
+
                         <img src={google_map} alt="google"/>
+
+                        <br/>
 
                         <p>Logging in (or signing up) saves the users ID on the dadabase and 
                             takes the user to Hi Five's Home page. </p>
@@ -145,13 +155,18 @@ const styles = {
     logandsign: {
         margin: 4,
         marginTop: 4,
-        height: 55
+        height: 55,
+        backgroundColor: transparent,
+        opacity: 0.9,
     },
     
 
     title: {
-        fontFamily: 'Gloria Hallelujah',
+        fontFamily: 'Roboto',
+        // color: white,
+        backgroundColor: grey100,
+        // fontFamily: 'Gloria Hallelujah',
         textAlign: 'center',
-        letterSpacing: 1.5
+        // letterSpacing: 1.5
     }
 }

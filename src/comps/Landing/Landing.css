@@ -1,26 +1,26 @@
 .landing {
-    background-color: rgb(235, 240, 241);
+    /* background-color: rgb(235, 240, 241); */
+    background-image: url('./tire.jpg');
+        /* -webkit-filter: grayscale(100%);/* Safari 6.0 - 9.0 */
+        /* filter: grayscale(100%);  */
     display: flex;
     flex-direction: column;
     text-align: center;
 }
+
 .landing_header {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     /* border: solid 2px blue; */
-    /* margin-top: -50px; */
     width: 100%;
     height: 50vh;
 }
 
 .landing_header img {
-    height: 180px;
-    width: 275px;
-    margin-top: -65px;
-    /* border: solid 2px blue; */
-    
+    height: 100px;
+    width: 230px;
 }
 
 
@@ -28,7 +28,7 @@
     display: flex;
     flex-direction: column;
     height: 67vh;
-    margin-top: -75px;
+    margin-top: -100px;
     /* border: 2px solid red; */
 }
 
